@@ -14,11 +14,13 @@ import * as Sharing from "expo-sharing";
 import * as ImageManipulator from "expo-image-manipulator";
 import { RootSiblingParent } from "react-native-root-siblings";
 import Toast from "react-native-root-toast";
+import MainTitleContainer from "./src/features/main/title/Container";
+import MainContainer from "./src/features/main/Container";
 
 const IU_IMAGE =
   "https://pbs.twimg.com/profile_images/1374979417915547648/vKspl9Et_400x400.jpg";
 
-export default function App() {
+const App = () => {
   const [selectedImage, setSelectedImage] = useState(IU_IMAGE);
 
   const showToast = () => {
@@ -43,7 +45,9 @@ export default function App() {
 
   return (
     <RootSiblingParent>
-      <View style={styles.container}>
+      <StatusBar style={styles.statusbar} />
+      <MainContainer />
+      {/* <View style={styles.container}>
         <Image
           source={{
             uri: selectedImage,
@@ -61,26 +65,20 @@ export default function App() {
           <Text style={styles.buttonText}>Share this photo</Text>
         </TouchableOpacity>
 
-        <StatusBar style="auto" />
-      </View>
+        
+      </View> */}
     </RootSiblingParent>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  button: {
-    backgroundColor: "blue",
-    padding: 20,
-    borderRadius: 5,
-  },
-  buttonText: {
-    fontSize: 20,
-    color: "#fff",
+  statusbar: {
+    width: 375,
+    height: 47,
+    left: 0,
+    top: 0,
+    background: "#FFFFFF",
   },
 });
+
+export default App;
