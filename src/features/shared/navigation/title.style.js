@@ -15,9 +15,4 @@ export const titleContentStyle = {
   paddingTop: 0,
   paddingRight: 18,
   paddingLeft: 18,
-
-  flex: "none",
-  order: 0,
-  alignSelf: "stretch",
-  flexGrow: 0,
 };

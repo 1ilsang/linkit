@@ -1,5 +1,5 @@
 import { StyleSheet, Text } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import SearchButton from "../../shared/icons/SearchButton";
 
 import CommonTitleContainer from "../../shared/navigation/CommonContainer";
 
@@ -11,12 +11,7 @@ const MainTitleContainer = ({ navigation }) => {
   return (
     <CommonTitleContainer>
       <Text style={styles.title}>Linkit</Text>
-      <AntDesign
-        name="search1"
-        size={24}
-        color="#2D264B"
-        onPress={handleSearchClick}
-      />
+      <SearchButton onPress={handleSearchClick} />
     </CommonTitleContainer>
   );
 };
@@ -26,8 +21,6 @@ const styles = StyleSheet.create({
     width: 291,
     height: 41,
 
-    fontFamily: "System",
-    fontStyle: "normal",
     fontWeight: "700",
     fontSize: 34,
     lineHeight: 41,
@@ -35,10 +28,6 @@ const styles = StyleSheet.create({
     letterSpacing: "0.374",
 
     color: "#2D264B",
-
-    flex: "none",
-    order: 0,
-    flexGrow: 1,
   },
 });
 
