@@ -1,13 +1,20 @@
 import { StyleSheet, Text, View } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import { Foundation } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
-const navList = ["home", "adder", "setting"];
+const navList = ["홈", "추가", "설정"];
 
 const Item = ({ name }) => {
   return (
     <View style={styles.item}>
-      <AntDesign name="search1" size={24} color="#2D264B" />
-      <Text>{name}2</Text>
+      {name === "홈" && <Foundation name="home" size={24} color="#2D264B" />}
+      {name === "추가" && (
+        <Ionicons name="add-circle-outline" size={24} color="#2D264B" />
+      )}
+      {name === "설정" && (
+        <Ionicons name="settings-outline" size={24} color="#2D264B" />
+      )}
+      <Text style={styles.text}>{name}</Text>
     </View>
   );
 };
@@ -26,12 +33,14 @@ const styles = StyleSheet.create({
   container: {
     display: "flex",
     flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     alignItems: "flex-start",
     padding: 0,
 
     position: "absolute",
     width: 375,
-    height: 106,
+    height: 72,
     bottom: 0,
 
     backgroundColor: "#ffffff",
@@ -48,12 +57,39 @@ const styles = StyleSheet.create({
   },
   item: {
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "column",
+    justifyContent: "center",
     alignItems: "center",
-    paddingRight: 18,
-    gap: 24,
+
+    paddingTop: 4,
+    paddingRight: 4,
+    paddingBottom: 4,
+    paddingLeft: 4,
+
     width: 97,
     height: 72,
+  },
+  icon: {
+    display: "flex",
+    paddingTop: 10,
+    paddingBottom: 7,
+  },
+  text: {
+    display: "flex",
+    width: 42,
+    height: 18,
+
+    // fontFamily: "Spoqa Han Sans Neo",
+    fontStyle: "normal",
+    fontWeight: "500",
+    fontSize: 14,
+    lineHeight: 18,
+    /* identical to box height */
+
+    textAlign: "center",
+    letterSpacing: -0.01,
+
+    color: "#2D264B",
   },
 });
 
