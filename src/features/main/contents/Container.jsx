@@ -51,9 +51,8 @@ const MainContentsContainer = () => {
 
 const styles = StyleSheet.create({
   container: {
-    width: 339,
+    width: "100%",
     height: "88%",
-    left: 10,
   },
 });
 

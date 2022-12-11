@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import SearchButton from "../../shared/icons/SearchButton";
-import MoreButton from "../../shared/icons/SearchButton copy";
+import MoreButton from "../../shared/icons/MoreButton";
 import CommonTitleContainer from "../../shared/navigation/CommonContainer";
 
 import HeaderLeftButton from "../../shared/navigation/HeaderLeftButton";

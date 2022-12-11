@@ -79,12 +79,9 @@ const styles = StyleSheet.create({
     width: 42,
     height: 18,
 
-    // fontFamily: "Spoqa Han Sans Neo",
-    fontStyle: "normal",
     fontWeight: "500",
     fontSize: 14,
     lineHeight: 18,
-    /* identical to box height */
 
     textAlign: "center",
     letterSpacing: -0.01,
