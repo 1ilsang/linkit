@@ -1,5 +1,5 @@
-import { View } from "react-native";
 import MainContentsContainer from "./contents/Container";
+import Navbar from "./Navbar";
 import MainTitleContainer from "./title/Container";
 
 const MainContainer = () => {
@@ -7,6 +7,7 @@ const MainContainer = () => {
     <>
       <MainTitleContainer />
       <MainContentsContainer />
+      <Navbar />
     </>
   );
 };
