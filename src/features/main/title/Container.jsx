@@ -1,45 +1,27 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
-const MainTitleContainer = () => {
+import CommonTitleContainer from "../../shared/navigation/CommonContainer";
+
+const MainTitleContainer = ({ navigation }) => {
+  const handleSearchClick = () => {
+    navigation.push("Folder");
+  };
+
   return (
-    <View style={styles.container}>
-      <View style={styles.contents}>
-        <Text style={styles.title}>Linkit</Text>
-        <AntDesign name="search1" size={24} color="#2D264B" />
-      </View>
-    </View>
+    <CommonTitleContainer>
+      <Text style={styles.title}>Linkit</Text>
+      <AntDesign
+        name="search1"
+        size={24}
+        color="#2D264B"
+        onPress={handleSearchClick}
+      />
+    </CommonTitleContainer>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "flex-start",
-    padding: 0,
-    marginTop: 30,
-    width: 375,
-    height: 70,
-  },
-  contents: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    paddingTop: 0,
-    paddingRight: 18,
-    paddingBottom: 18,
-    paddingLeft: 18,
-
-    width: 375,
-    height: 41,
-
-    flex: "none",
-    order: 0,
-    alignSelf: "stretch",
-    flexGrow: 0,
-  },
   title: {
     width: 291,
     height: 41,

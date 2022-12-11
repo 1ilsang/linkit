@@ -52,7 +52,7 @@ const MainContentsContainer = () => {
 const styles = StyleSheet.create({
   container: {
     width: 339,
-    height: "83%",
+    height: "88%",
     left: 10,
   },
 });
