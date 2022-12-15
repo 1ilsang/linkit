@@ -1,20 +1,13 @@
 import { StyleSheet, Text } from "react-native";
 
-import SearchButton from "../../shared/icons/SearchButton";
-import MoreButton from "../../shared/icons/MoreButton";
 import CommonTitleContainer from "../../shared/navigation/CommonContainer";
 import HeaderLeftButton from "../../shared/navigation/HeaderLeftButton";
 
-const FolderTitleContainer = (props) => {
-  const handleSearchClick = () => {};
-  const handleMoreClick = () => {};
-
+const SearchTitleContainer = (props) => {
   return (
     <CommonTitleContainer>
       <HeaderLeftButton {...props} />
-      <Text style={styles.title}>{props.route.params.title}</Text>
-      <SearchButton style={styles.search} onPress={handleSearchClick} />
-      <MoreButton onPress={handleMoreClick} />
+      <Text style={styles.title}>검색</Text>
     </CommonTitleContainer>
   );
 };
@@ -35,4 +28,4 @@ const styles = StyleSheet.create({
   search: { paddingRight: 24 },
 });
 
-export default FolderTitleContainer;
+export default SearchTitleContainer;

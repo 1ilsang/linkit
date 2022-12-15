@@ -5,7 +5,7 @@ import CommonTitleContainer from "../../shared/navigation/CommonContainer";
 
 const MainTitleContainer = ({ navigation }) => {
   const handleSearchClick = () => {
-    navigation.push("Folder");
+    navigation.push("Search");
   };
 
   return (

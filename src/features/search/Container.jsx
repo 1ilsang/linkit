@@ -1,11 +1,11 @@
 import { Keyboard, Pressable, StyleSheet, View } from "react-native";
-import FolderContentContainer from "./contents/Container";
+import SearchContentContainer from "./contents/Container";
 
-const FolderContainer = (props) => {
+const SearchContainer = () => {
   return (
     <View style={styles.container}>
       <Pressable style={{ flex: 1 }} onPress={() => Keyboard.dismiss()}>
-        <FolderContentContainer {...props} />
+        <SearchContentContainer />
       </Pressable>
     </View>
   );
@@ -19,4 +19,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FolderContainer;
+export default SearchContainer;

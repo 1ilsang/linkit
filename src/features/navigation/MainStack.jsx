@@ -4,6 +4,8 @@ import FolderContainer from "../folder/Container";
 import FolderTitleContainer from "../folder/title/Container";
 import MainContainer from "../main/Container";
 import MainTitleContainer from "../main/title/Container";
+import SearchContainer from "../search/Container";
+import SearchTitleContainer from "../search/title/Container";
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +23,13 @@ const MainStack = () => {
           header: MainTitleContainer,
         }}
         component={MainContainer}
+      />
+      <Stack.Screen
+        name="Search"
+        options={{
+          header: SearchTitleContainer,
+        }}
+        component={SearchContainer}
       />
       <Stack.Screen
         name="Folder"

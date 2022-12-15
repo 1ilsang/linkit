@@ -1,16 +1,9 @@
-import { useState } from "react";
-import InputBox from "./InputBox";
+import { Text } from "react-native";
 
-const FolderContentContainer = () => {
-  const [inputText, setInputText] = useState("");
-
-  const handleInputChange = (e) => {
-    setInputText(e.target.value);
-  };
-
+const FolderContentContainer = (props) => {
   return (
     <>
-      <InputBox value={inputText} onChange={handleInputChange} />
+      <Text>Descriptions: {props.route.params.description}</Text>
     </>
   );
 };

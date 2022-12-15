@@ -1,10 +1,13 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Pressable } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 import MoreButton from "../../shared/icons/MoreButton";
 
 const ContentBox = ({ title, description, iconType = "heart" }) => {
+  const navigation = useNavigation();
+
   const Icon = () =>
     iconType === "heart" ? (
       <AntDesign name="hearto" size={16} color="black" />
@@ -33,16 +36,26 @@ const ContentBox = ({ title, description, iconType = "heart" }) => {
     return "#FFD130";
   })();
 
+  const handlePressClick = () =>
+    navigation.push("Folder", { title, description });
+
   return (
     <View style={{ ...styles.container, backgroundColor }}>
-      <View style={styles.top}>
-        <Icon />
-        <MoreButton size={16} onPress={() => {}} />
-      </View>
-      <View style={styles.contents}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.description}>{description}</Text>
-      </View>
+      <Pressable onPress={handlePressClick}>
+        <View style={styles.top}>
+          <Icon />
+          <MoreButton
+            size={16}
+            onPress={() => {
+              console.log("more");
+            }}
+          />
+        </View>
+        <View style={styles.contents}>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.description}>{description}</Text>
+        </View>
+      </Pressable>
     </View>
   );
 };
