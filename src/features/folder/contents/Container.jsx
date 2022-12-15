@@ -1,4 +1,18 @@
+import { useState } from "react";
+import InputBox from "./InputBox";
+
 const FolderContentContainer = () => {
-  // TODO: folder 해나가야함.
-  return <></>;
+  const [inputText, setInputText] = useState("");
+
+  const handleInputChange = (e) => {
+    setInputText(e.target.value);
+  };
+
+  return (
+    <>
+      <InputBox value={inputText} onChange={handleInputChange} />
+    </>
+  );
 };
+
+export default FolderContentContainer;
