@@ -18,7 +18,7 @@ const MainTitleContainer = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   title: {
-    width: 291,
+    width: 308,
     height: 41,
 
     fontWeight: "700",
