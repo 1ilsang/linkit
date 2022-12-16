@@ -5,7 +5,12 @@ import { useNavigation } from "@react-navigation/native";
 
 import MoreButton from "../../shared/icons/MoreButton";
 
-const ContentBox = ({ title, description, iconType = "heart" }) => {
+const ContentBox = ({
+  bottomSheetRef,
+  title,
+  description,
+  iconType = "heart",
+}) => {
   const navigation = useNavigation();
 
   const Icon = () =>
@@ -38,18 +43,14 @@ const ContentBox = ({ title, description, iconType = "heart" }) => {
 
   const handlePressClick = () =>
     navigation.push("Folder", { title, description });
+  const handleMoreClick = () => bottomSheetRef.current.open();
 
   return (
     <View style={{ ...styles.container, backgroundColor }}>
       <Pressable onPress={handlePressClick}>
         <View style={styles.top}>
           <Icon />
-          <MoreButton
-            size={16}
-            onPress={() => {
-              console.log("more");
-            }}
-          />
+          <MoreButton size={16} onPress={handleMoreClick} />
         </View>
         <View style={styles.contents}>
           <Text style={styles.title}>{title}</Text>

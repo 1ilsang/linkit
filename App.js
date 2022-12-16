@@ -2,6 +2,7 @@ import { SafeAreaView } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
+import { Host } from "react-native-portalize";
 
 import MainStack from "./src/features/stackNavigation/MainStack";
 
@@ -10,8 +11,10 @@ const App = () => {
     <ActionSheetProvider>
       <SafeAreaView style={{ flex: 1 }}>
         <NavigationContainer>
-          <StatusBar />
-          <MainStack />
+          <Host>
+            <StatusBar />
+            <MainStack />
+          </Host>
         </NavigationContainer>
       </SafeAreaView>
     </ActionSheetProvider>
