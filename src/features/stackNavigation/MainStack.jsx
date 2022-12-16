@@ -8,6 +8,8 @@ import MainContainer from "../main/Container";
 import MainTitleContainer from "../main/title/Container";
 import SearchContainer from "../search/Container";
 import SearchTitleContainer from "../search/title/Container";
+import SettingsContainer from "../settings/Container";
+import SettingsTitleContainer from "../settings/title/Container";
 
 const Stack = createNativeStackNavigator();
 
@@ -46,6 +48,13 @@ const MainStack = () => {
           header: FolderTitleContainer,
         }}
         component={FolderContainer}
+      />
+      <Stack.Screen
+        name="Settings"
+        options={{
+          header: SettingsTitleContainer,
+        }}
+        component={SettingsContainer}
       />
     </Stack.Navigator>
   );

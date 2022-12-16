@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 const Settings = () => {
   const navigation = useNavigation();
 
-  const handleSettingsClick = () => navigation.navigate("Main");
+  const handleSettingsClick = () => navigation.navigate("Settings");
 
   return (
     <Pressable onPress={handleSettingsClick}>
