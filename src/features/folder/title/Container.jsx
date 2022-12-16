@@ -20,7 +20,7 @@ const FolderTitleContainer = (props) => {
 
 const styles = StyleSheet.create({
   title: {
-    width: 288,
+    width: 305,
     height: 41,
 
     paddingLeft: 10,
