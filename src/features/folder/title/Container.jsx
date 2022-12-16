@@ -13,7 +13,6 @@ const FolderTitleContainer = (props) => {
     <CommonTitleContainer>
       <HeaderLeftButton {...props} />
       <Text style={styles.title}>{props.route.params.title}</Text>
-      <SearchButton style={styles.search} onPress={handleSearchClick} />
       <MoreButton onPress={handleMoreClick} />
     </CommonTitleContainer>
   );
@@ -21,7 +20,7 @@ const FolderTitleContainer = (props) => {
 
 const styles = StyleSheet.create({
   title: {
-    width: 245,
+    width: 288,
     height: 41,
 
     paddingLeft: 10,
@@ -32,7 +31,6 @@ const styles = StyleSheet.create({
 
     color: "#2D264B",
   },
-  search: { paddingRight: 24 },
 });
 
 export default FolderTitleContainer;

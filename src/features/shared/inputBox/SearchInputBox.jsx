@@ -1,11 +1,11 @@
 import { StyleSheet, TextInput, View } from "react-native";
 
-const InputBox = ({ value, onChange }) => {
+const SearchInputBox = ({ value, onChange, placeholder }) => {
   return (
-    <View style={styles.container}>
+    <View>
       <TextInput
         style={styles.input}
-        placeholder="링크 제목, URL을 검색해 주세요."
+        placeholder={placeholder}
         onChange={onChange}
         value={value}
       />
@@ -14,14 +14,14 @@ const InputBox = ({ value, onChange }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {},
   input: {
     paddingLeft: 42,
     height: 48,
-    color: "#B0B0B0",
+    color: "#2D264B",
+    placeholderTextColor: "#B0B0B0",
     backgroundColor: "#F5F5F5",
     borderRadius: 16,
   },
 });
 
-export default InputBox;
+export default SearchInputBox;

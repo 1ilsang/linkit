@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import InputBox from "./InputBox";
+import SearchInputBox from "../../shared/inputBox/SearchInputBox";
 
 const SearchContentContainer = () => {
   const [inputText, setInputText] = useState("");
@@ -11,7 +11,11 @@ const SearchContentContainer = () => {
 
   return (
     <>
-      <InputBox value={inputText} onChange={handleInputChange} />
+      <SearchInputBox
+        placeholder="링크 제목, URL을 검색해 주세요."
+        value={inputText}
+        onChange={handleInputChange}
+      />
     </>
   );
 };
