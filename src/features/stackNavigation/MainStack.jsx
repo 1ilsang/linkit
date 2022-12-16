@@ -2,6 +2,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import FolderContainer from "../folder/Container";
 import FolderTitleContainer from "../folder/title/Container";
+import FolderAdderContainer from "../folderAdder/Container";
+import FolderAdderTitleContainer from "../folderAdder/title/Container";
 import MainContainer from "../main/Container";
 import MainTitleContainer from "../main/title/Container";
 import SearchContainer from "../search/Container";
@@ -30,6 +32,13 @@ const MainStack = () => {
           header: SearchTitleContainer,
         }}
         component={SearchContainer}
+      />
+      <Stack.Screen
+        name="FolderAdder"
+        options={{
+          header: FolderAdderTitleContainer,
+        }}
+        component={FolderAdderContainer}
       />
       <Stack.Screen
         name="Folder"

@@ -1,11 +1,11 @@
 import MainContentsContainer from "./contents/Container";
-import Navbar from "./Navbar";
+import NavbarContainer from "./nav/Container";
 
 const MainContainer = () => {
   return (
     <>
       <MainContentsContainer />
-      <Navbar />
+      <NavbarContainer />
     </>
   );
 };

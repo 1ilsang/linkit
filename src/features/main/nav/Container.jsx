@@ -1,25 +1,22 @@
 import { StyleSheet, Text, View } from "react-native";
-import { Foundation } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
+import Home from "./Home";
+import Adder from "./Adder";
+import Settings from "./Settings";
 
 const navList = ["홈", "추가", "설정"];
 
 const Item = ({ name }) => {
   return (
     <View style={styles.item}>
-      {name === "홈" && <Foundation name="home" size={24} color="#2D264B" />}
-      {name === "추가" && (
-        <Ionicons name="add-circle-outline" size={24} color="#2D264B" />
-      )}
-      {name === "설정" && (
-        <Ionicons name="settings-outline" size={24} color="#2D264B" />
-      )}
+      {name === "홈" && <Home />}
+      {name === "추가" && <Adder />}
+      {name === "설정" && <Settings />}
       <Text style={styles.text}>{name}</Text>
     </View>
   );
 };
 
-const Navbar = () => {
+const NavbarContainer = () => {
   return (
     <View style={styles.container}>
       {navList.map((name) => (
@@ -90,4 +87,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Navbar;
+export default NavbarContainer;
