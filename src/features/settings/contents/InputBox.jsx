@@ -6,7 +6,7 @@ const InputBox = ({ value, onChange, placeholder }) => {
       <TextInput
         style={styles.input}
         placeholder={placeholder}
-        onChange={onChange}
+        onChangeText={onChange}
         value={value}
       />
     </View>

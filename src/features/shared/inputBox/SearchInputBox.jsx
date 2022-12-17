@@ -1,12 +1,13 @@
 import { StyleSheet, TextInput, View } from "react-native";
 
-const SearchInputBox = ({ value, onChange, placeholder }) => {
+const SearchInputBox = ({ value, onChange, onSubmitEditing, placeholder }) => {
   return (
     <View>
       <TextInput
         style={styles.input}
         placeholder={placeholder}
-        onChange={onChange}
+        onSubmitEditing={onSubmitEditing}
+        onChangeText={onChange}
         value={value}
       />
     </View>

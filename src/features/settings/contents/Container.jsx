@@ -6,8 +6,8 @@ import InputBox from "./InputBox";
 const SettingsContentContainer = () => {
   const [inputText, setInputText] = useState("");
 
-  const handleInputChange = (e) => {
-    setInputText(e.target.value);
+  const handleInputChange = (text) => {
+    setInputText(text);
   };
 
   return (
