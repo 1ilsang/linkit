@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import Home from "./Home";
 import Adder from "./Adder";
 import Settings from "./Settings";
@@ -11,7 +11,6 @@ const Item = ({ name }) => {
       {name === "홈" && <Home />}
       {name === "추가" && <Adder />}
       {name === "설정" && <Settings />}
-      <Text style={styles.text}>{name}</Text>
     </View>
   );
 };
@@ -50,39 +49,6 @@ const styles = StyleSheet.create({
       height: -1,
       width: 0,
     },
-  },
-  item: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-
-    paddingTop: 4,
-    paddingRight: 4,
-    paddingBottom: 4,
-    paddingLeft: 4,
-
-    width: 97,
-    height: 72,
-  },
-  icon: {
-    display: "flex",
-    paddingTop: 10,
-    paddingBottom: 7,
-  },
-  text: {
-    display: "flex",
-    width: 42,
-    height: 18,
-
-    fontWeight: "500",
-    fontSize: 14,
-    lineHeight: 18,
-
-    textAlign: "center",
-    letterSpacing: -0.01,
-
-    color: "#2D264B",
   },
 });
 
