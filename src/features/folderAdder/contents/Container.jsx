@@ -1,32 +1,32 @@
-import { useState } from "react";
-import { Text } from "react-native";
-
-import InputBox from "./InputBox";
+import { StyleSheet, Text, View } from "react-native";
+import SubmitButton from "../../shared/buttons/Submit";
+import FormInputBox from "../../shared/inputBox/FormInputBox";
 
 const FolderAdderContentContainer = () => {
-  const [inputText, setInputText] = useState("");
-
-  const handleInputChange = (e) => {
-    setInputText(e.target.value);
-  };
-
   return (
-    <>
-      <Text>이름</Text>
-      <InputBox
-        placeholder="폴더 입력해 주세요."
-        value={inputText}
-        onChange={handleInputChange}
+    <View style={styles.container}>
+      <FormInputBox
+        label="이름"
+        placeholder="폴더 이름을 입력해 주세요."
+        required
       />
-      <Text>설명</Text>
-      <InputBox
-        placeholder="설명을 입력해 주세요."
-        value={inputText}
-        onChange={handleInputChange}
-      />
+      <FormInputBox label="설명" placeholder="설명을 추가해 주세요." />
+
       <Text>아이콘</Text>
-    </>
+      <SubmitButton label="만들기" />
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    height: "100%",
+    paddingBottom: 36,
+  },
+});
 
 export default FolderAdderContentContainer;
