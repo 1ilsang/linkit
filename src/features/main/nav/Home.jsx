@@ -2,10 +2,13 @@ import { Pressable, StyleSheet, Text } from "react-native";
 import { Foundation } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
-const Home = () => {
+const Home = ({ scrollViewRef }) => {
   const navigation = useNavigation();
 
-  const handleHomeClick = () => navigation.navigate("Main");
+  const handleHomeClick = () => {
+    scrollViewRef.current.scrollTo({ top: 0 });
+    navigation.navigate("Main");
+  };
 
   return (
     <Pressable style={styles.item} onPress={handleHomeClick}>

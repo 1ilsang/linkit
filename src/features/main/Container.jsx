@@ -6,11 +6,15 @@ import NavbarContainer from "./nav/Container";
 
 const MainContainer = () => {
   const bottomSheetRef = useRef(null);
+  const scrollViewRef = useRef(null);
 
   return (
     <>
-      <MainContentsContainer bottomSheetRef={bottomSheetRef} />
-      <NavbarContainer />
+      <MainContentsContainer
+        bottomSheetRef={bottomSheetRef}
+        scrollViewRef={scrollViewRef}
+      />
+      <NavbarContainer scrollViewRef={scrollViewRef} />
       <BottomSheet ref={bottomSheetRef} />
     </>
   );

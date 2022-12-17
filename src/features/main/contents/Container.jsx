@@ -30,10 +30,11 @@ const dumpList = [
   { title: "stroke", description: "LE LE LE LE", iconType: "heart" },
 ];
 
-const MainContentsContainer = ({ bottomSheetRef }) => {
+const MainContentsContainer = ({ bottomSheetRef, scrollViewRef }) => {
   return (
     <View style={styles.container}>
       <ScrollView
+        ref={scrollViewRef}
         contentContainerStyle={{
           display: "flex",
           flexWrap: "wrap",
