@@ -1,9 +1,22 @@
 import { StyleSheet, View } from "react-native";
 
 const Toggle = ({ selected }) => {
+  const selectedColor = selected ? "#1DB191" : "#C1C7CD";
+
   return (
-    <View style={styles.container}>
-      <View style={{ ...styles.circle, left: selected ? "0%" : "43.75%" }} />
+    <View
+      style={{
+        ...styles.container,
+        backgroundColor: selectedColor,
+      }}
+    >
+      <View
+        style={{
+          ...styles.circle,
+          left: selected ? "43.75%" : "0%",
+          borderColor: selectedColor,
+        }}
+      />
     </View>
   );
 };
