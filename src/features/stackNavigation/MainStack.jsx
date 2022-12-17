@@ -4,6 +4,8 @@ import FolderContainer from "../folder/Container";
 import FolderTitleContainer from "../folder/title/Container";
 import FolderAdderContainer from "../folderAdder/Container";
 import FolderAdderTitleContainer from "../folderAdder/title/Container";
+import LinkAdderContainer from "../linkAdder/Container";
+import LinkAdderTitleContainer from "../linkAdder/title/Container";
 import MainContainer from "../main/Container";
 import MainTitleContainer from "../main/title/Container";
 import SearchContainer from "../search/Container";
@@ -41,6 +43,13 @@ const MainStack = () => {
           header: FolderAdderTitleContainer,
         }}
         component={FolderAdderContainer}
+      />
+      <Stack.Screen
+        name="LinkAdder"
+        options={{
+          header: LinkAdderTitleContainer,
+        }}
+        component={LinkAdderContainer}
       />
       <Stack.Screen
         name="Folder"

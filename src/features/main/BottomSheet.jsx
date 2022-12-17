@@ -12,6 +12,7 @@ const BottomSheet = forwardRef(({}, ref) => {
 
   const handleLinkAddClick = () => {
     ref.current.close();
+    navigation.push("LinkAdder");
   };
   const handleFolderAddClick = () => {
     ref.current.close();
