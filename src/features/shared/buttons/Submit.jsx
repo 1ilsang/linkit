@@ -1,10 +1,10 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text } from "react-native";
 
 const SubmitButton = ({ label, onPress }) => {
   return (
-    <View style={styles.container} onPress={onPress}>
+    <Pressable style={styles.container} onPress={onPress}>
       <Text style={styles.text}>{label}</Text>
-    </View>
+    </Pressable>
   );
 };
 

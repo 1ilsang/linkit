@@ -1,11 +1,21 @@
 import { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import Toast from "react-native-root-toast";
+
 import SubmitButton from "../../shared/buttons/Submit";
 import Toggle from "../../shared/icons/Toggle";
 import FormInputBox from "../../shared/inputBox/FormInputBox";
 
 const LinkAdderContentContainer = () => {
   const [autoLinkName, setAutoLinkName] = useState(true);
+
+  const handleSubmitPress = () => {
+    Toast.show("링크가 저장되었습니다.", {
+      duration: Toast.durations.SHORT,
+      position: 505,
+      shadow: false,
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -39,7 +49,7 @@ const LinkAdderContentContainer = () => {
           placeholder="내용을 입력해 주세요. (100자 이하)"
         />
       </View>
-      <SubmitButton label="저장하기" />
+      <SubmitButton onPress={handleSubmitPress} label="저장하기" />
     </View>
   );
 };
