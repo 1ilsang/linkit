@@ -14,7 +14,10 @@ const MainContainer = () => {
         bottomSheetRef={bottomSheetRef}
         scrollViewRef={scrollViewRef}
       />
-      <NavbarContainer scrollViewRef={scrollViewRef} />
+      <NavbarContainer
+        bottomSheetRef={bottomSheetRef}
+        scrollViewRef={scrollViewRef}
+      />
       <BottomSheet ref={bottomSheetRef} />
     </>
   );

@@ -5,21 +5,26 @@ import Settings from "./Settings";
 
 const navList = ["홈", "추가", "설정"];
 
-const Item = ({ name, scrollViewRef }) => {
+const Item = ({ name, scrollViewRef, bottomSheetRef }) => {
   return (
     <View style={styles.item}>
       {name === "홈" && <Home scrollViewRef={scrollViewRef} />}
-      {name === "추가" && <Adder />}
+      {name === "추가" && <Adder bottomSheetRef={bottomSheetRef} />}
       {name === "설정" && <Settings />}
     </View>
   );
 };
 
-const NavbarContainer = ({ scrollViewRef }) => {
+const NavbarContainer = ({ scrollViewRef, bottomSheetRef }) => {
   return (
     <View style={styles.container}>
       {navList.map((name) => (
-        <Item key={name} name={name} scrollViewRef={scrollViewRef} />
+        <Item
+          key={name}
+          name={name}
+          bottomSheetRef={bottomSheetRef}
+          scrollViewRef={scrollViewRef}
+        />
       ))}
     </View>
   );

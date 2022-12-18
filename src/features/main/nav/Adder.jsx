@@ -1,11 +1,8 @@
 import { Pressable, StyleSheet, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
 
-const Adder = () => {
-  const navigation = useNavigation();
-
-  const handleAdderClick = () => navigation.push("FolderAdder");
+const Adder = ({ bottomSheetRef }) => {
+  const handleAdderClick = () => bottomSheetRef.current.open();
 
   return (
     <Pressable style={styles.item} onPress={handleAdderClick}>
