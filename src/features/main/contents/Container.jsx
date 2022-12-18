@@ -24,10 +24,6 @@ const dumpList = [
   { title: "sang", description: "wow", iconType: "heart" },
   { title: "chul", description: "this is dump", iconType: "light" },
   { title: "wow", description: "dump dump", iconType: "heart" },
-  { title: "line", description: "IVE", iconType: "heart" },
-  { title: "blind", description: "LOVE DIVE", iconType: "light" },
-  { title: "smilegate", description: "AFTER LIKE", iconType: "heart" },
-  { title: "stroke", description: "LE LE LE LE", iconType: "heart" },
 ];
 
 const MainContentsContainer = ({ bottomSheetRef, scrollViewRef }) => {
@@ -57,7 +53,7 @@ const MainContentsContainer = ({ bottomSheetRef, scrollViewRef }) => {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    height: "88%",
+    height: "90%",
   },
 });
 

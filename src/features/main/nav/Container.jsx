@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     padding: 0,
 
     position: "absolute",
-    width: 375,
+    width: "100%",
     height: 72,
     bottom: 0,
 

@@ -1,6 +1,6 @@
 import { useRef } from "react";
-import BottomSheet from "./BottomSheet";
 
+import BottomSheet from "./BottomSheet";
 import MainContentsContainer from "./contents/Container";
 import NavbarContainer from "./nav/Container";
 
