@@ -1,24 +1,38 @@
+import { useNavigation } from "@react-navigation/native";
 import { useRef } from "react";
 
-import BottomSheet from "./BottomSheet";
+import BottomSheet from "../shared/BottomSheet";
 import MainContentsContainer from "./contents/Container";
 import NavbarContainer from "./nav/Container";
 
 const MainContainer = () => {
-  const bottomSheetRef = useRef(null);
+  const adderSheetRef = useRef(null);
+  const folderMoreSheetRef = useRef(null);
   const scrollViewRef = useRef(null);
+
+  const navigation = useNavigation();
+
+  const adderSheet = [
+    { name: "링크 추가", onPress: () => navigation.push("LinkAdder") },
+    { name: "폴더 생성", onPress: () => navigation.push("FolderAdder") },
+  ];
+  const folderMoreSheet = [
+    { name: "폴더 편집", onPress: () => navigation.push("FolderEdit") },
+    { name: "폴더 삭제", onPress: () => navigation.push("FolderAdder") },
+  ];
 
   return (
     <>
       <MainContentsContainer
-        bottomSheetRef={bottomSheetRef}
+        adderSheetRef={adderSheetRef}
         scrollViewRef={scrollViewRef}
       />
       <NavbarContainer
-        bottomSheetRef={bottomSheetRef}
+        folderMoreSheetRef={folderMoreSheetRef}
         scrollViewRef={scrollViewRef}
       />
-      <BottomSheet ref={bottomSheetRef} />
+      <BottomSheet ref={adderSheetRef} list={adderSheet} />
+      <BottomSheet ref={folderMoreSheetRef} list={folderMoreSheet} />
     </>
   );
 };

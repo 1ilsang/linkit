@@ -6,7 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import MoreButton from "../../shared/icons/MoreButton";
 
 const ContentBox = ({
-  bottomSheetRef,
+  adderSheetRef,
   title,
   description,
   iconType = "heart",
@@ -43,7 +43,7 @@ const ContentBox = ({
 
   const handlePressClick = () =>
     navigation.push("Folder", { title, description });
-  const handleMoreClick = () => bottomSheetRef.current.open();
+  const handleMoreClick = () => adderSheetRef.current.open();
 
   return (
     <View style={{ ...styles.container, backgroundColor }}>

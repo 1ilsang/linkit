@@ -1,8 +1,8 @@
 import { Pressable, StyleSheet, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-const Adder = ({ bottomSheetRef }) => {
-  const handleAdderClick = () => bottomSheetRef.current.open();
+const Adder = ({ folderMoreSheetRef }) => {
+  const handleAdderClick = () => folderMoreSheetRef.current.open();
 
   return (
     <Pressable style={styles.item} onPress={handleAdderClick}>
