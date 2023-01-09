@@ -26,7 +26,7 @@ const dumpList = [
   { title: "wow", description: "dump dump", iconType: "heart" },
 ];
 
-const MainContentsContainer = ({ adderSheetRef, scrollViewRef }) => {
+const MainContentsContainer = ({ folderMoreSheetRef, scrollViewRef }) => {
   return (
     <View style={styles.container}>
       <ScrollView
@@ -40,7 +40,7 @@ const MainContentsContainer = ({ adderSheetRef, scrollViewRef }) => {
       >
         {dumpList.map((item) => (
           <ContentBox
-            adderSheetRef={adderSheetRef}
+            folderMoreSheetRef={folderMoreSheetRef}
             key={item.title}
             {...item}
           />

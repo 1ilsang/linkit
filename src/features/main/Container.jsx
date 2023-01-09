@@ -13,9 +13,18 @@ const MainContainer = () => {
   const navigation = useNavigation();
 
   const adderSheet = [
-    { name: "링크 추가", onPress: () => navigation.push("LinkAdder") },
-    { name: "폴더 생성", onPress: () => navigation.push("FolderAdder") },
+    {
+      name: "링크 추가",
+      onPress: () => navigation.push("LinkAdder"),
+      icon: "Link",
+    },
+    {
+      name: "폴더 생성",
+      onPress: () => navigation.push("FolderAdder"),
+      icon: "FolderSimplePlus",
+    },
   ];
+  // FIXME: 바텀시트가 아님 이거
   const folderMoreSheet = [
     { name: "폴더 편집", onPress: () => navigation.push("FolderEdit") },
     { name: "폴더 삭제", onPress: () => navigation.push("FolderAdder") },
@@ -24,15 +33,15 @@ const MainContainer = () => {
   return (
     <>
       <MainContentsContainer
-        adderSheetRef={adderSheetRef}
-        scrollViewRef={scrollViewRef}
-      />
-      <NavbarContainer
         folderMoreSheetRef={folderMoreSheetRef}
         scrollViewRef={scrollViewRef}
       />
-      <BottomSheet ref={adderSheetRef} list={adderSheet} />
+      <NavbarContainer
+        adderSheetRef={adderSheetRef}
+        scrollViewRef={scrollViewRef}
+      />
       <BottomSheet ref={folderMoreSheetRef} list={folderMoreSheet} />
+      <BottomSheet ref={adderSheetRef} list={adderSheet} />
     </>
   );
 };

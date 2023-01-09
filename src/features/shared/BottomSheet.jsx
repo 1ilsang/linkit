@@ -2,27 +2,29 @@ import { forwardRef } from "react";
 import { Text, View, StyleSheet, Pressable } from "react-native";
 import { Modalize } from "react-native-modalize";
 import { Portal } from "react-native-portalize";
-
-import LinkButton from "./icons/LinkButton";
+import IconFactory from "./icons/IconFactory";
 
 const BottomSheet = forwardRef(({ list }, ref) => {
   return (
     <Portal>
       <Modalize ref={ref} snapPoint={184} handlePosition="inside">
         <View style={styles.container}>
-          {list.map(({ name, onPress }) => (
-            <Pressable
-              key={name}
-              style={styles.content}
-              onPress={() => {
-                ref.current.close();
-                onPress();
-              }}
-            >
-              <LinkButton style={styles.icon} />
-              <Text>{name}</Text>
-            </Pressable>
-          ))}
+          {list.map(({ name, onPress, icon }) => {
+            const Icon = IconFactory[icon];
+            return (
+              <Pressable
+                key={name}
+                style={styles.content}
+                onPress={() => {
+                  ref.current.close();
+                  onPress();
+                }}
+              >
+                <View style={styles.icon}>{Icon}</View>
+                <Text>{name}</Text>
+              </Pressable>
+            );
+          })}
         </View>
       </Modalize>
     </Portal>
