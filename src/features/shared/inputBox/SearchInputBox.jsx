@@ -1,28 +1,66 @@
-import { StyleSheet, TextInput, View } from "react-native";
+import { StyleSheet, TextInput, View, Pressable } from "react-native";
+import IconFactory from "../icons/IconFactory";
 
-const SearchInputBox = ({ value, onChange, onSubmitEditing, placeholder }) => {
+const SearchInputBox = ({
+  value,
+  onChangeText,
+  onSubmitEditing,
+  placeholder,
+}) => {
+  const MagnifyingGlass = IconFactory["MagnifyingGlass"];
+  const XCircle = IconFactory["XCircle"];
+
+  const handleClearPress = () => {
+    onChangeText("");
+  };
+
   return (
-    <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        placeholder={placeholder}
-        onSubmitEditing={onSubmitEditing}
-        onChangeText={onChange}
-        value={value}
-      />
+    <View style={styles.wrapper}>
+      <View style={styles.container}>
+        <View style={styles.glass}>{MagnifyingGlass}</View>
+        <TextInput
+          style={styles.input}
+          placeholder={placeholder}
+          onSubmitEditing={onSubmitEditing}
+          onChangeText={onChangeText}
+          value={value}
+        />
+        <Pressable
+          style={{ ...styles.xCircle, opacity: value.length > 0 ? 1 : 0 }}
+          onPress={handleClearPress}
+        >
+          {XCircle}
+        </Pressable>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: { paddingLeft: 18, paddingRight: 18 },
-  input: {
-    paddingLeft: 42,
-    height: 48,
-    color: "#2D264B",
-    placeholderTextColor: "#B0B0B0",
+  wrapper: {
+    paddingLeft: 18,
+    paddingRight: 18,
+  },
+  container: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
     backgroundColor: "#F5F5F5",
     borderRadius: 16,
+    height: 48,
+  },
+  glass: {
+    paddingTop: 14,
+    paddingLeft: 17,
+  },
+  input: {
+    color: "#2D264B",
+    width: 240,
+    placeholderTextColor: "#B0B0B0",
+  },
+  xCircle: {
+    paddingTop: 13,
+    paddingRight: 12,
   },
 });
 

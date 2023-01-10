@@ -37,8 +37,12 @@ import Train from "../../../../assets/icon/train.svg";
 import FolderSimplePlus from "../../../../assets/icon/folder-simple-plus.svg";
 import Link from "../../../../assets/icon/link.svg";
 import Check from "../../../../assets/icon/check.svg";
+import MagnifyingGlass from "../../../../assets/icon/magnifying-glass.svg";
+import XCircle from "../../../../assets/icon/x-circle.svg";
 
 const IconFactory = {
+  XCircle: <XCircle />,
+  MagnifyingGlass: <MagnifyingGlass />,
   Check: <Check />,
   FolderSimplePlus: <FolderSimplePlus />,
   Link: <Link />,

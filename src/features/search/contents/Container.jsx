@@ -31,7 +31,7 @@ const SearchContentContainer = () => {
         placeholder="링크 제목, URL을 검색해 주세요."
         value={inputText}
         onSubmitEditing={handleInputSubmit}
-        onChange={handleInputChange}
+        onChangeText={handleInputChange}
       />
       {!inputText && <RecentSearchArea list={dummyList} />}
       {inputText && !searched && <EmptyImage />}
