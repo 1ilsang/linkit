@@ -2,20 +2,29 @@ import { Image, StyleSheet, View } from "react-native";
 
 const EmptyImage = () => {
   return (
-    <View style={styles.image}>
-      <Image source={require("../../../../assets/pana.png")} />
+    <View style={styles.container}>
+      <Image
+        style={styles.image}
+        resizeMode="cover"
+        source={require("../../../../assets/pana.png")}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  image: {
+  container: {
     width: "100%",
     paddingTop: 104,
     display: "flex",
     flexDirection: "row",
     alignContent: "center",
     justifyContent: "center",
+  },
+  image: {
+    width: 114,
+    height: 184,
+    resizeMode: "contain",
   },
 });
 

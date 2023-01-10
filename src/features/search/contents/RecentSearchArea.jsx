@@ -26,7 +26,10 @@ const RecentSearchArea = ({ list }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    paddingLeft: 18,
+    paddingRight: 18,
+  },
   titleContainer: {
     display: "flex",
     flexDirection: "row",
