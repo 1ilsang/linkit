@@ -23,3 +23,12 @@ export const load = async (key) => {
     Alert.alert("데이터 로드 실패");
   }
 };
+
+export const remove = async (key) => {
+  try {
+    await AsyncStorage.removeItem(key);
+  } catch (e) {
+    console.error(e);
+    Alert.alert("데이터 삭제 실패");
+  }
+};

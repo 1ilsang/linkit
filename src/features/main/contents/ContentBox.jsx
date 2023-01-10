@@ -1,42 +1,20 @@
 import { useState } from "react";
 import { StyleSheet, Text, View, Pressable } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
 import MoreButton from "../../../shared/icons/MoreButton";
+import IconFactory from "../../../shared/icons/IconFactory";
 
-const ContentBox = ({ title, description, iconType = "heart" }) => {
+const ContentBox = ({
+  title,
+  description,
+  backgroundColor,
+  iconType = "Heart",
+}) => {
   const navigation = useNavigation();
   const [moreOpen, setMoreOpen] = useState(false);
 
-  const Icon = () =>
-    iconType === "heart" ? (
-      <AntDesign name="hearto" size={16} color="black" />
-    ) : (
-      <FontAwesome name="lightbulb-o" size={16} color="black" />
-    );
-
-  const backgroundColor = (() => {
-    const selected = Math.floor((Math.random() * 10) % 7);
-    switch (selected) {
-      case 0:
-        return "#FFD130";
-      case 1:
-        return "#4ED187";
-      case 2:
-        return "#FF8437";
-      case 3:
-        return "#7187FF";
-      case 4:
-        return "#FF97CA";
-      case 5:
-        return "#FF5C5D";
-      case 6:
-        return "#8CC6FF";
-    }
-    return "#FFD130";
-  })();
+  const Icon = IconFactory[iconType];
 
   const moreList = [
     {
@@ -59,7 +37,7 @@ const ContentBox = ({ title, description, iconType = "heart" }) => {
       onPress={handlePressClick}
     >
       <View style={styles.top}>
-        <Icon />
+        {Icon}
         <MoreButton
           size={16}
           open={moreOpen}

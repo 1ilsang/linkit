@@ -10,6 +10,7 @@ import MainStack from "./src/features/stackNavigation/MainStack";
 import { useLayoutEffect } from "react";
 import { folderListAtom } from "./src/shared/atoms";
 import { load, LOCAL_STORAGE_KEY, save } from "./src/shared/utils/localStorage";
+import { colorSets } from "./src/shared/constants/colors";
 
 const App = () => {
   const [, setFolderList] = useAtom(folderListAtom);
@@ -17,11 +18,14 @@ const App = () => {
   useLayoutEffect(() => {
     const loadLocalStorage = async () => {
       const data = await load(LOCAL_STORAGE_KEY.folderList);
+      const selectedIndex = Math.floor((Math.random() * 10) % 7);
       const initData = data || [
         {
+          no: Number(new Date()),
           title: "기본 폴더",
           description: "기본 폴더에요.",
-          iconType: "heart",
+          iconType: "Heart",
+          backgroundColor: colorSets[selectedIndex],
         },
       ];
       setFolderList(initData);

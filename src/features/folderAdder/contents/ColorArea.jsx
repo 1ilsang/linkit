@@ -1,16 +1,7 @@
 import { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import { colorSets } from "../../../shared/constants/colors";
 import IconFactory from "../../../shared/icons/IconFactory";
-
-const colorSets = [
-  "#FFD130",
-  "#4ED187",
-  "#FF8437",
-  "#7187FF",
-  "#FF97CA",
-  "#FF5C5D",
-  "#8CC6FF",
-];
 
 const ColorItem = ({ color, checked, onPress }) => {
   const checkIcon = IconFactory["Check"];
