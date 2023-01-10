@@ -39,8 +39,12 @@ import Link from "../../../../assets/icon/link.svg";
 import Check from "../../../../assets/icon/check.svg";
 import MagnifyingGlass from "../../../../assets/icon/magnifying-glass.svg";
 import XCircle from "../../../../assets/icon/x-circle.svg";
+import PencilSimple from "../../../../assets/icon/pencil-simple.svg";
+import Trash from "../../../../assets/icon/trash.svg";
 
 const IconFactory = {
+  Trash: <Trash />,
+  PencilSimple: <PencilSimple />,
   XCircle: <XCircle />,
   MagnifyingGlass: <MagnifyingGlass />,
   Check: <Check />,

@@ -1,16 +1,82 @@
 import { Feather } from "@expo/vector-icons";
-import { Pressable } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import IconFactory from "./IconFactory";
 
-const MoreButton = ({ onPress, style = {}, size = 22 }) => {
+const MoreButton = ({ onPress, open, list, style = {}, size = 22 }) => {
+  const getBottomBorderStyle = (index) => {
+    if (index === list.length - 1) return {};
+    return {
+      borderBottomColor: "black",
+      borderBottomWidth: StyleSheet.hairlineWidth,
+    };
+  };
+
   return (
-    <Pressable onPress={onPress} hitSlop={10}>
+    <Pressable style={styles.container} onPress={onPress} hitSlop={10}>
       <Feather
         style={{ color: "#2D264B", ...style }}
         name="more-vertical"
         size={size}
       />
+      {open && (
+        <View style={styles.modalContainer}>
+          {list.map(({ name, onPress, icon }, index) => {
+            const Icon = IconFactory[icon];
+
+            return (
+              <Pressable
+                style={{
+                  ...styles.modalItem,
+                  ...getBottomBorderStyle(index),
+                }}
+                onPress={onPress}
+              >
+                <Text>{name}</Text>
+                <View style={styles.icon}>{Icon}</View>
+              </Pressable>
+            );
+          })}
+        </View>
+      )}
     </Pressable>
   );
 };
+
+const styles = StyleSheet.create({
+  modalContainer: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+
+    position: "absolute",
+    width: 125,
+    top: 22,
+    left: -100,
+    borderRadius: 8,
+    borderColor: "#F4F4F4",
+    backgroundColor: "#ffffff",
+
+    shadowColor: "rgb(50, 50, 50)",
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    shadowOffset: {
+      height: 6,
+      width: 0,
+    },
+  },
+  modalItem: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+
+    width: "100%",
+    paddingTop: 14,
+    paddingLeft: 12,
+    paddingBottom: 14,
+  },
+  icon: {
+    paddingRight: 13,
+  },
+});
 
 export default MoreButton;

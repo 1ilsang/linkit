@@ -4,14 +4,11 @@ import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
 import MoreButton from "../../shared/icons/MoreButton";
+import { useState } from "react";
 
-const ContentBox = ({
-  folderMoreSheetRef,
-  title,
-  description,
-  iconType = "heart",
-}) => {
+const ContentBox = ({ title, description, iconType = "heart" }) => {
   const navigation = useNavigation();
+  const [moreOpen, setMoreOpen] = useState(false);
 
   const Icon = () =>
     iconType === "heart" ? (
@@ -41,23 +38,40 @@ const ContentBox = ({
     return "#FFD130";
   })();
 
+  const moreList = [
+    {
+      name: "폴더 편집",
+      onPress: () => navigation.push("FolderEdit"),
+      icon: "PencilSimple",
+    },
+    { name: "폴더 삭제", onPress: () => {}, icon: "Trash" },
+  ];
+
   const handlePressClick = () =>
     navigation.push("Folder", { title, description });
-  const handleMoreClick = () => folderMoreSheetRef.current.open();
+  const handleMoreClick = () => {
+    setMoreOpen(!moreOpen);
+  };
 
   return (
-    <View style={{ ...styles.container, backgroundColor }}>
-      <Pressable onPress={handlePressClick}>
-        <View style={styles.top}>
-          <Icon />
-          <MoreButton size={16} onPress={handleMoreClick} />
-        </View>
-        <View style={styles.contents}>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.description}>{description}</Text>
-        </View>
-      </Pressable>
-    </View>
+    <Pressable
+      style={{ ...styles.container, backgroundColor }}
+      onPress={handlePressClick}
+    >
+      <View style={styles.top}>
+        <Icon />
+        <MoreButton
+          size={16}
+          open={moreOpen}
+          list={moreList}
+          onPress={handleMoreClick}
+        />
+      </View>
+      <View style={styles.contents}>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.description}>{description}</Text>
+      </View>
+    </Pressable>
   );
 };
 
@@ -84,7 +98,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingBottom: 10,
-
+    zIndex: 300,
     width: 120,
     height: 24,
   },
@@ -111,7 +125,6 @@ const styles = StyleSheet.create({
     width: 120,
     height: 14,
 
-    fontWeight: "400",
     fontSize: 12,
     lineHeight: 14,
 

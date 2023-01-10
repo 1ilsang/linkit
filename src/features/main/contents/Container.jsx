@@ -8,7 +8,7 @@ const dumpList = [
     iconType: "heart",
   },
   {
-    title: "링크",
+    title: "링크링크링크",
     description: "더미데이터 만들기 짱나요2",
     iconType: "light",
   },
@@ -26,7 +26,7 @@ const dumpList = [
   { title: "wow", description: "dump dump", iconType: "heart" },
 ];
 
-const MainContentsContainer = ({ folderMoreSheetRef, scrollViewRef }) => {
+const MainContentsContainer = ({ scrollViewRef }) => {
   return (
     <View style={styles.container}>
       <ScrollView
@@ -39,11 +39,7 @@ const MainContentsContainer = ({ folderMoreSheetRef, scrollViewRef }) => {
         }}
       >
         {dumpList.map((item) => (
-          <ContentBox
-            folderMoreSheetRef={folderMoreSheetRef}
-            key={item.title}
-            {...item}
-          />
+          <ContentBox key={item.title} {...item} />
         ))}
       </ScrollView>
     </View>

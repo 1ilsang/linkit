@@ -32,7 +32,10 @@ const dummyList = [
 const FolderContentContainer = (props) => {
   return (
     <>
-      <SearchInputBox placeholder={"링크 제목, URL을 검색해 주세요."} />
+      <SearchInputBox
+        value="dump"
+        placeholder={"링크 제목, URL을 검색해 주세요."}
+      />
       <FilterArea />
       <ScrollView>
         {dummyList.map((item) => (
