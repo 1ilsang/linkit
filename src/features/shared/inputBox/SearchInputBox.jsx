@@ -2,7 +2,7 @@ import { StyleSheet, TextInput, View } from "react-native";
 
 const SearchInputBox = ({ value, onChange, onSubmitEditing, placeholder }) => {
   return (
-    <View>
+    <View style={styles.container}>
       <TextInput
         style={styles.input}
         placeholder={placeholder}
@@ -15,6 +15,7 @@ const SearchInputBox = ({ value, onChange, onSubmitEditing, placeholder }) => {
 };
 
 const styles = StyleSheet.create({
+  container: { paddingLeft: 18, paddingRight: 18 },
   input: {
     paddingLeft: 42,
     height: 48,

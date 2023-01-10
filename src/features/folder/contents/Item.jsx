@@ -27,6 +27,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingTop: 8,
     paddingBottom: 8,
+    paddingLeft: 18,
+    paddingRight: 18,
   },
   contentContainer: {
     display: "flex",
