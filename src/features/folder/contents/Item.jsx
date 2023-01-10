@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import MoreButton from "../../shared/icons/MoreButton";
-import NoImage from "../../shared/icons/NonImage";
+import MoreButton from "../../../shared/icons/MoreButton";
+import NoImage from "../../../shared/icons/NonImage";
 
 const FolderContentItem = ({ name, url }) => {
   return (

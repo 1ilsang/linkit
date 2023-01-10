@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, Text } from "react-native";
-import SubmitButton from "../../shared/buttons/Submit";
-import FormInputBox from "../../shared/inputBox/FormInputBox";
+import SubmitButton from "../../../shared/buttons/Submit";
+import FormInputBox from "../../../shared/inputBox/FormInputBox";
 import ColorArea from "./ColorArea";
 import IconArea from "./IconArea";
 

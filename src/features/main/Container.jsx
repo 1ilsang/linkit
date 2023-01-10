@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { useRef } from "react";
 
-import BottomSheet from "../shared/BottomSheet";
+import BottomSheet from "../../shared/BottomSheet";
 import MainContentsContainer from "./contents/Container";
 import NavbarContainer from "./nav/Container";
 

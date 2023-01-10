@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View } from "react-native";
 
-import MoreButton from "../../shared/icons/MoreButton";
-import CommonTitleContainer from "../../shared/navigation/CommonContainer";
-import HeaderLeftButton from "../../shared/navigation/HeaderLeftButton";
+import MoreButton from "../../../shared/icons/MoreButton";
+import CommonTitleContainer from "../../../shared/navigation/CommonContainer";
+import HeaderLeftButton from "../../../shared/navigation/HeaderLeftButton";
 
 const FolderTitleContainer = (props) => {
   const handleMoreClick = () => {};

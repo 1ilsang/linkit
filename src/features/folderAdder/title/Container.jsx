@@ -1,7 +1,7 @@
 import { StyleSheet, Text } from "react-native";
 
-import CommonTitleContainer from "../../shared/navigation/CommonContainer";
-import HeaderLeftButton from "../../shared/navigation/HeaderLeftButton";
+import CommonTitleContainer from "../../../shared/navigation/CommonContainer";
+import HeaderLeftButton from "../../../shared/navigation/HeaderLeftButton";
 
 const FolderAdderTitleContainer = (props) => {
   return (

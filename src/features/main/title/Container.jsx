@@ -1,7 +1,6 @@
 import { StyleSheet, Text } from "react-native";
-import SearchButton from "../../shared/icons/SearchButton";
-
-import CommonTitleContainer from "../../shared/navigation/CommonContainer";
+import SearchButton from "../../../shared/icons/SearchButton";
+import CommonTitleContainer from "../../../shared/navigation/CommonContainer";
 
 const MainTitleContainer = ({ navigation }) => {
   const handleSearchClick = () => {

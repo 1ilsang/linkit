@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import IconFactory from "../../shared/icons/IconFactory";
+import IconFactory from "../../../shared/icons/IconFactory";
 
 const colorSets = [
   "#FFD130",

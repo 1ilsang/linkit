@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import SearchInputBox from "../../shared/inputBox/SearchInputBox";
+import SearchInputBox from "../../../shared/inputBox/SearchInputBox";
 import EmptyImage from "./EmptyImage";
 import RecentSearchArea from "./RecentSearchArea";
 

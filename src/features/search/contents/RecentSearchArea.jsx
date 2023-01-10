@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import DeleteIcon from "../../shared/icons/Delete";
+import DeleteIcon from "../../../shared/icons/Delete";
 
 const Item = ({ name }) => {
   return (

@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import Toast from "react-native-root-toast";
 
-import SubmitButton from "../../shared/buttons/Submit";
-import Toggle from "../../shared/icons/Toggle";
-import FormInputBox from "../../shared/inputBox/FormInputBox";
+import SubmitButton from "../../../shared/buttons/Submit";
+import Toggle from "../../../shared/icons/Toggle";
+import FormInputBox from "../../../shared/inputBox/FormInputBox";
 
 const LinkAdderContentContainer = () => {
   const [autoLinkName, setAutoLinkName] = useState(true);

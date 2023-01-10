@@ -1,10 +1,10 @@
+import { useState } from "react";
 import { StyleSheet, Text, View, Pressable } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
-import MoreButton from "../../shared/icons/MoreButton";
-import { useState } from "react";
+import MoreButton from "../../../shared/icons/MoreButton";
 
 const ContentBox = ({ title, description, iconType = "heart" }) => {
   const navigation = useNavigation();

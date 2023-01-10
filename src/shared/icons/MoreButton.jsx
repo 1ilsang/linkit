@@ -25,6 +25,7 @@ const MoreButton = ({ onPress, open, list, style = {}, size = 22 }) => {
 
             return (
               <Pressable
+                key={name}
                 style={{
                   ...styles.modalItem,
                   ...getBottomBorderStyle(index),

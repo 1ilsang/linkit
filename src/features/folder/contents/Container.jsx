@@ -1,5 +1,5 @@
 import { ScrollView } from "react-native";
-import SearchInputBox from "../../shared/inputBox/SearchInputBox";
+import SearchInputBox from "../../../shared/inputBox/SearchInputBox";
 import FilterArea from "./filter/FilterArea";
 import FolderContentItem from "./Item";
 

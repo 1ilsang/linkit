@@ -1,7 +1,7 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 
-import FilterButton from "../../../shared/icons/FilterButton";
+import FilterButton from "../../../../shared/icons/FilterButton";
 
 const actionSheetOptions = {
   title: "링크 정렬",
