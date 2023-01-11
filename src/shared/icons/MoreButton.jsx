@@ -14,7 +14,7 @@ const MoreButton = ({ onPress, open, list, style = {}, size = 22 }) => {
   return (
     <Pressable style={styles.container} onPress={onPress} hitSlop={10}>
       <Feather
-        style={{ color: "#2D264B", ...style }}
+        style={{ color: "#ffffff", ...style }}
         name="more-vertical"
         size={size}
       />
