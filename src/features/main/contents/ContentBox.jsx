@@ -8,26 +8,31 @@ const ContentBox = ({
   id,
   title,
   description,
-  backgroundColor,
+  color,
   moreOpen,
   setMoreOpen,
-  iconType = "Heart",
+  icon = "Heart",
 }) => {
   const navigation = useNavigation();
 
-  const Icon = IconFactory[iconType];
+  const IconComponent = IconFactory[icon];
 
   const moreList = [
     {
       name: "폴더 편집",
-      onPress: () => navigation.push("FolderCreateEdit", { type: "edit", id }),
+      onPress: () => {
+        setMoreOpen(undefined);
+        navigation.push("FolderCreateEdit", { type: "edit", id });
+      },
       icon: "PencilSimple",
     },
     { name: "폴더 삭제", onPress: () => {}, icon: "Trash" },
   ];
 
-  const handlePressClick = () =>
+  const handlePressClick = () => {
+    setMoreOpen(undefined);
     navigation.push("Folder", { title, description });
+  };
   const handleMoreClick = () => {
     if (!moreOpen || (moreOpen && moreOpen !== id)) {
       setMoreOpen(id);
@@ -38,11 +43,11 @@ const ContentBox = ({
 
   return (
     <Pressable
-      style={{ ...styles.container, backgroundColor }}
+      style={{ ...styles.container, backgroundColor: color }}
       onPress={handlePressClick}
     >
       <View style={styles.top}>
-        {Icon}
+        {IconComponent}
         <MoreButton
           size={16}
           open={id === moreOpen}

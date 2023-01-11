@@ -9,7 +9,12 @@ import { RootSiblingParent } from "react-native-root-siblings";
 import MainStack from "./src/features/stackNavigation/MainStack";
 import { useLayoutEffect } from "react";
 import { folderListAtom } from "./src/shared/atoms";
-import { load, LOCAL_STORAGE_KEY, save } from "./src/shared/utils/localStorage";
+import {
+  load,
+  LOCAL_STORAGE_KEY,
+  remove,
+  save,
+} from "./src/shared/utils/localStorage";
 import { colorSets } from "./src/shared/constants/colors";
 
 const App = () => {
@@ -24,8 +29,8 @@ const App = () => {
           id: Number(new Date()),
           title: "기본 폴더",
           description: "기본 폴더에요.",
-          iconType: "Heart",
-          backgroundColor: colorSets[selectedIndex],
+          icon: "Heart",
+          color: colorSets[selectedIndex],
         },
       ];
       setFolderList(initData);

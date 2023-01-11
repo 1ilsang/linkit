@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useAtom } from "jotai";
 import { Pressable, StyleSheet, View } from "react-native";
 import IconFactory from "../../../shared/icons/IconFactory";
+import { createEditAtom } from "../atoms";
 
 const labelList = [
   ["Heart", "Star", "Moon", "Smiley", "SmileyMeh", "SmileyXEyes"],
@@ -37,9 +38,11 @@ const IconRow = ({ labels, onPress, checkedLabel }) => {
 };
 
 const IconArea = () => {
-  const [checkedIcon, setCheckedIcon] = useState();
+  const [createEdit, setCreateEdit] = useAtom(createEditAtom);
 
-  const handleIconPress = (icon) => setCheckedIcon(icon);
+  const handleIconPress = (icon) => {
+    setCreateEdit((prev) => ({ ...prev, icon }));
+  };
 
   return (
     <View style={styles.container}>
@@ -47,7 +50,7 @@ const IconArea = () => {
         <IconRow
           key={labels[0]}
           labels={labels}
-          checkedLabel={checkedIcon}
+          checkedLabel={createEdit.icon}
           onPress={handleIconPress}
         />
       ))}

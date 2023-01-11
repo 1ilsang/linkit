@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useAtom } from "jotai";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { colorSets } from "../../../shared/constants/colors";
 import IconFactory from "../../../shared/icons/IconFactory";
+import { createEditAtom } from "../atoms";
 
 const ColorItem = ({ color, checked, onPress }) => {
   const checkIcon = IconFactory["Check"];
@@ -16,10 +17,10 @@ const ColorItem = ({ color, checked, onPress }) => {
 };
 
 const ColorArea = () => {
-  const [checkedColor, setCheckedColor] = useState(colorSets[0]);
+  const [createEdit, setCreateEdit] = useAtom(createEditAtom);
 
   const handleColorPress = (color) => {
-    setCheckedColor(color);
+    setCreateEdit((prev) => ({ ...prev, color }));
   };
 
   return (
@@ -30,7 +31,7 @@ const ColorArea = () => {
           <ColorItem
             key={color}
             color={color}
-            checked={checkedColor === color}
+            checked={createEdit.color === color}
             onPress={handleColorPress}
           />
         ))}
@@ -42,7 +43,6 @@ const ColorArea = () => {
 const styles = StyleSheet.create({
   label: {
     height: 17,
-    fontWeight: "400",
     fontSize: 14,
     lineHeight: 17,
     letterSpacing: -0.5,

@@ -4,7 +4,7 @@ const FormInputBox = ({
   placeholder,
   label,
   value,
-  onChange,
+  onChangeText,
   required = false,
 }) => {
   return (
@@ -16,7 +16,7 @@ const FormInputBox = ({
       <TextInput
         style={styles.input}
         placeholder={placeholder}
-        onChange={onChange}
+        onChangeText={onChangeText}
         value={value}
       />
     </View>
