@@ -1,17 +1,27 @@
-import { StyleSheet, Text } from "react-native";
+import { useAtom } from "jotai";
+import { Pressable, StyleSheet, Text } from "react-native";
 import SearchButton from "../../../shared/icons/SearchButton";
 import CommonTitleContainer from "../../../shared/navigation/CommonContainer";
+import { mainAtom } from "../atoms";
 
 const MainTitleContainer = ({ navigation }) => {
+  const [, setMain] = useAtom(mainAtom);
+
   const handleSearchClick = () => {
+    setMain((prev) => ({ ...prev, moreOpen: undefined }));
     navigation.push("Search");
+  };
+  const handleTitleContainerPress = () => {
+    setMain((prev) => ({ ...prev, moreOpen: undefined }));
   };
 
   return (
-    <CommonTitleContainer>
-      <Text style={styles.title}>Linkit</Text>
-      <SearchButton onPress={handleSearchClick} />
-    </CommonTitleContainer>
+    <Pressable onPress={handleTitleContainerPress}>
+      <CommonTitleContainer>
+        <Text style={styles.title}>Linkit</Text>
+        <SearchButton onPress={handleSearchClick} />
+      </CommonTitleContainer>
+    </Pressable>
   );
 };
 

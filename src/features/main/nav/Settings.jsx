@@ -1,11 +1,18 @@
 import { Pressable, StyleSheet, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { useAtom } from "jotai";
+import { mainAtom } from "../atoms";
 
 const Settings = () => {
   const navigation = useNavigation();
 
-  const handleSettingsClick = () => navigation.navigate("Settings");
+  const [, setMain] = useAtom(mainAtom);
+
+  const handleSettingsClick = () => {
+    setMain((prev) => ({ ...prev, moreOpen: undefined }));
+    navigation.navigate("Settings");
+  };
 
   return (
     <Pressable style={styles.item} onPress={handleSettingsClick}>

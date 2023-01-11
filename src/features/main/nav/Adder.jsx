@@ -1,8 +1,14 @@
 import { Pressable, StyleSheet, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useAtom } from "jotai";
+import { mainAtom } from "../atoms";
 
 const Adder = ({ adderSheetRef }) => {
-  const handleAdderClick = () => adderSheetRef.current.open();
+  const [, setMain] = useAtom(mainAtom);
+  const handleAdderClick = () => {
+    setMain((prev) => ({ ...prev, moreOpen: undefined }));
+    adderSheetRef.current.open();
+  };
 
   return (
     <Pressable style={styles.item} onPress={handleAdderClick}>

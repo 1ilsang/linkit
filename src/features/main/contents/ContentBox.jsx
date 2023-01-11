@@ -3,17 +3,14 @@ import { useNavigation } from "@react-navigation/native";
 
 import MoreButton from "../../../shared/icons/MoreButton";
 import IconFactory from "../../../shared/icons/IconFactory";
+import { useAtom } from "jotai";
+import { mainAtom } from "../atoms";
 
-const ContentBox = ({
-  id,
-  title,
-  description,
-  color,
-  moreOpen,
-  setMoreOpen,
-  icon = "Heart",
-}) => {
+const ContentBox = ({ id, title, description, color, icon = "Heart" }) => {
   const navigation = useNavigation();
+
+  const [main, setMain] = useAtom(mainAtom);
+  const { moreOpen } = main;
 
   const IconComponent = IconFactory[icon];
 
@@ -21,7 +18,7 @@ const ContentBox = ({
     {
       name: "폴더 편집",
       onPress: () => {
-        setMoreOpen(undefined);
+        setMain((prev) => ({ ...prev, moreOpen: undefined }));
         navigation.push("FolderCreateEdit", { type: "edit", id });
       },
       icon: "PencilSimple",
@@ -30,15 +27,15 @@ const ContentBox = ({
   ];
 
   const handlePressClick = () => {
-    setMoreOpen(undefined);
+    setMain((prev) => ({ ...prev, moreOpen: undefined }));
     navigation.push("Folder", { title, description });
   };
   const handleMoreClick = () => {
     if (!moreOpen || (moreOpen && moreOpen !== id)) {
-      setMoreOpen(id);
+      setMain((prev) => ({ ...prev, moreOpen: id }));
       return;
     }
-    setMoreOpen(undefined);
+    setMain((prev) => ({ ...prev, moreOpen: undefined }));
   };
 
   return (

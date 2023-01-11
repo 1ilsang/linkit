@@ -1,11 +1,16 @@
 import { Pressable, StyleSheet, Text } from "react-native";
 import { Foundation } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { useAtom } from "jotai";
+import { mainAtom } from "../atoms";
 
 const Home = ({ scrollViewRef }) => {
   const navigation = useNavigation();
 
+  const [, setMain] = useAtom(mainAtom);
+
   const handleHomeClick = () => {
+    setMain((prev) => ({ ...prev, moreOpen: undefined }));
     scrollViewRef.current.scrollTo({ top: 0 });
     navigation.navigate("Main");
   };
