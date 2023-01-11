@@ -5,13 +5,16 @@ import MoreButton from "../../../shared/icons/MoreButton";
 import IconFactory from "../../../shared/icons/IconFactory";
 import { useAtom } from "jotai";
 import { mainAtom } from "../atoms";
+import { folderListAtom } from "../../../shared/atoms";
+import { LOCAL_STORAGE_KEY, save } from "../../../shared/utils/localStorage";
 
 const ContentBox = ({ id, title, description, color, icon = "Heart" }) => {
   const navigation = useNavigation();
 
   const [main, setMain] = useAtom(mainAtom);
-  const { moreOpen } = main;
+  const [, setFolderList] = useAtom(folderListAtom);
 
+  const { moreOpen } = main;
   const IconComponent = IconFactory[icon];
 
   const moreList = [
@@ -23,7 +26,18 @@ const ContentBox = ({ id, title, description, color, icon = "Heart" }) => {
       },
       icon: "PencilSimple",
     },
-    { name: "폴더 삭제", onPress: () => {}, icon: "Trash" },
+    {
+      name: "폴더 삭제",
+      onPress: () => {
+        setMain((prev) => ({ ...prev, moreOpen: undefined }));
+        setFolderList((prev) => {
+          const next = prev.filter((item) => item.id !== id);
+          save(LOCAL_STORAGE_KEY.folderList, next);
+          return next;
+        });
+      },
+      icon: "Trash",
+    },
   ];
 
   const handlePressClick = () => {

@@ -28,7 +28,7 @@ const FolderCreateEditContentContainer = () => {
         prev.push(saveFolderData);
       }
       const next = [...prev];
-      save(LOCAL_STORAGE_KEY.folderList, JSON.stringify(next));
+      save(LOCAL_STORAGE_KEY.folderList, next);
       return next;
     });
     navigation.navigate("Main");

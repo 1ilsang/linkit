@@ -2,6 +2,7 @@ import { useAtom } from "jotai";
 import { Pressable, ScrollView, StyleSheet } from "react-native";
 import { folderListAtom } from "../../../shared/atoms";
 import { mainAtom } from "../atoms";
+import EmptyImage from "../EmptyImage";
 import ContentBox from "./ContentBox";
 
 const MainContentsContainer = ({ scrollViewRef }) => {
@@ -24,9 +25,11 @@ const MainContentsContainer = ({ scrollViewRef }) => {
           paddingLeft: 18,
         }}
       >
-        {folderList.map((item) => (
-          <ContentBox key={item.id} {...item} />
-        ))}
+        {folderList.length === 0 ? (
+          <EmptyImage />
+        ) : (
+          folderList.map((item) => <ContentBox key={item.id} {...item} />)
+        )}
       </ScrollView>
     </Pressable>
   );
