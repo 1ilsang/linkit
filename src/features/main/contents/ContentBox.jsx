@@ -62,7 +62,7 @@ const ContentBox = ({ id, title, description, color, icon = "Heart" }) => {
 
   const handlePressClick = () => {
     setMain((prev) => ({ ...prev, moreOpen: undefined }));
-    navigation.push("Folder", { title, description });
+    navigation.push("Folder", { id, title, description, color, icon });
   };
   const handleMoreClick = () => {
     if (!moreOpen || (moreOpen && moreOpen !== id)) {

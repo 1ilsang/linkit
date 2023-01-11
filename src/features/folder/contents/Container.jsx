@@ -1,5 +1,8 @@
+import { useAtom } from "jotai";
+import { useLayoutEffect } from "react";
 import { ScrollView } from "react-native";
 import SearchInputBox from "../../../shared/inputBox/SearchInputBox";
+import { folderDetailAtom, initialFolderDetail } from "../atoms";
 import FilterArea from "./filter/FilterArea";
 import FolderContentItem from "./Item";
 
@@ -30,11 +33,26 @@ const dummyList = [
 ];
 
 const FolderContentContainer = (props) => {
+  const [folderDetail, setFolderDetail] = useAtom(folderDetailAtom);
+
+  useLayoutEffect(() => {
+    const id = props.route.params.id;
+    setFolderDetail((prev) => ({ ...prev, id }));
+    return () => {
+      setFolderDetail({ ...initialFolderDetail });
+    };
+  }, [props.route.params.id]);
+
+  const handleSearchChange = (search) => {
+    setFolderDetail((prev) => ({ ...prev, search }));
+  };
+
   return (
     <>
       <SearchInputBox
-        value="dump"
         placeholder={"링크 제목, URL을 검색해 주세요."}
+        value={folderDetail.search}
+        onChangeText={handleSearchChange}
       />
       <FilterArea />
       <ScrollView>
