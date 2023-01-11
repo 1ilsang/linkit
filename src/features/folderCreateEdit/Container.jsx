@@ -6,14 +6,14 @@ import {
   View,
 } from "react-native";
 
-import FolderAdderContentContainer from "./contents/Container";
+import FolderCreateEditContentContainer from "./contents/Container";
 
-const FolderAdderContainer = () => {
+const FolderCreateEditContainer = () => {
   return (
     <ScrollView>
       <View style={styles.container}>
         <Pressable style={{ flex: 1 }} onPress={() => Keyboard.dismiss()}>
-          <FolderAdderContentContainer />
+          <FolderCreateEditContentContainer />
         </Pressable>
       </View>
     </ScrollView>
@@ -28,4 +28,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FolderAdderContainer;
+export default FolderCreateEditContainer;

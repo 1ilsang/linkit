@@ -19,7 +19,7 @@ const MainContainer = () => {
     },
     {
       name: "폴더 생성",
-      onPress: () => navigation.push("FolderAdder"),
+      onPress: () => navigation.push("FolderCreateEdit", { type: "create" }),
       icon: "FolderSimplePlus",
     },
   ];

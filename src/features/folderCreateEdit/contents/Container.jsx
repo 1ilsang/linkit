@@ -4,7 +4,7 @@ import FormInputBox from "../../../shared/inputBox/FormInputBox";
 import ColorArea from "./ColorArea";
 import IconArea from "./IconArea";
 
-const FolderAdderContentContainer = () => {
+const FolderCreateEditContentContainer = () => {
   return (
     <Pressable style={styles.container}>
       <FormInputBox
@@ -42,4 +42,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FolderAdderContentContainer;
+export default FolderCreateEditContentContainer;

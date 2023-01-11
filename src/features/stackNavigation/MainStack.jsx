@@ -2,8 +2,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import FolderContainer from "../folder/Container";
 import FolderTitleContainer from "../folder/title/Container";
-import FolderAdderContainer from "../folderAdder/Container";
-import FolderAdderTitleContainer from "../folderAdder/title/Container";
+import FolderCreateEditContainer from "../folderCreateEdit/Container";
+import FolderCreateEditTitleContainer from "../folderCreateEdit/title/Container";
 import LinkAdderContainer from "../linkAdder/Container";
 import LinkAdderTitleContainer from "../linkAdder/title/Container";
 import MainContainer from "../main/Container";
@@ -38,11 +38,11 @@ const MainStack = () => {
         component={SearchContainer}
       />
       <Stack.Screen
-        name="FolderAdder"
+        name="FolderCreateEdit"
         options={{
-          header: FolderAdderTitleContainer,
+          header: FolderCreateEditTitleContainer,
         }}
-        component={FolderAdderContainer}
+        component={FolderCreateEditContainer}
       />
       <Stack.Screen
         name="LinkAdder"

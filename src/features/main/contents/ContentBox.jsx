@@ -19,7 +19,7 @@ const ContentBox = ({
   const moreList = [
     {
       name: "폴더 편집",
-      onPress: () => navigation.push("FolderEdit"),
+      onPress: () => navigation.push("FolderCreateEdit", { type: "edit" }),
       icon: "PencilSimple",
     },
     { name: "폴더 삭제", onPress: () => {}, icon: "Trash" },
