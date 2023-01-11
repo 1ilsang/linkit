@@ -8,6 +8,8 @@ import { createEditAtom, initialCreateEdit } from "../atoms";
 import ColorArea from "./ColorArea";
 import IconArea from "./IconArea";
 import { useNavigation } from "@react-navigation/native";
+import Toast from "react-native-root-toast";
+import { DEFAULT_SHORT_TOAST } from "../../../shared/constants/toast";
 
 const FolderCreateEditContentContainer = () => {
   const navigation = useNavigation();
@@ -32,6 +34,7 @@ const FolderCreateEditContentContainer = () => {
       return next;
     });
     navigation.navigate("Main");
+    Toast.show("저장되었어요.", DEFAULT_SHORT_TOAST);
   };
   const handleTitleChange = (title) => {
     setCreateEdit((prev) => ({ ...prev, title }));
