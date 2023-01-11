@@ -6,7 +6,7 @@ const MoreButton = ({ onPress, open, list, style = {}, size = 22 }) => {
   const getBottomBorderStyle = (index) => {
     if (index === list.length - 1) return {};
     return {
-      borderBottomColor: "black",
+      borderBottomColor: "#F4F4F4",
       borderBottomWidth: StyleSheet.hairlineWidth,
     };
   };
