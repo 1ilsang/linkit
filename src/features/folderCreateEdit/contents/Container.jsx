@@ -27,6 +27,7 @@ const FolderCreateEditContentContainer = () => {
         existPrevData.icon = saveFolderData.icon;
         existPrevData.color = saveFolderData.color;
       } else {
+        saveFolderData.id = Number(new Date());
         prev.push(saveFolderData);
       }
       const next = [...prev];
