@@ -2,7 +2,14 @@ import { Feather } from "@expo/vector-icons";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import IconFactory from "./IconFactory";
 
-const MoreButton = ({ onPress, open, list, style = {}, size = 22 }) => {
+const MoreButton = ({
+  onPress,
+  defaultFolder,
+  open,
+  list,
+  style = {},
+  size = 22,
+}) => {
   const getBottomBorderStyle = (index) => {
     if (index === list.length - 1) return {};
     return {
@@ -22,6 +29,10 @@ const MoreButton = ({ onPress, open, list, style = {}, size = 22 }) => {
         <View style={styles.modalContainer}>
           {list.map(({ name, onPress, icon }, index) => {
             const Icon = IconFactory[icon];
+
+            if (defaultFolder && icon === "Trash") {
+              return null;
+            }
 
             return (
               <Pressable

@@ -10,7 +10,7 @@ import { folderListAtom } from "../../../shared/atoms";
 import { DEFAULT_SHORT_TOAST } from "../../../shared/constants/toast.js";
 import { LOCAL_STORAGE_KEY, save } from "../../../shared/utils/localStorage";
 
-const ContentBox = ({ id, title, description, color, icon = "Heart" }) => {
+const ContentBox = ({ id, title, description, defaultFolder, color, icon }) => {
   const navigation = useNavigation();
 
   const [main, setMain] = useAtom(mainAtom);
@@ -84,6 +84,7 @@ const ContentBox = ({ id, title, description, color, icon = "Heart" }) => {
           open={id === moreOpen}
           list={moreList}
           onPress={handleMoreClick}
+          defaultFolder={defaultFolder}
         />
       </View>
       <View style={styles.contents}>

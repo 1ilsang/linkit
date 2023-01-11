@@ -4,6 +4,7 @@ export const initialCreateEdit = {
   id: undefined,
   title: "",
   description: "",
+  defaultFolder: false,
   icon: undefined,
   color: undefined,
 };
