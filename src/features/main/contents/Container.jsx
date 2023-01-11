@@ -1,13 +1,15 @@
 import { useAtom } from "jotai";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { useState } from "react";
+import { Pressable, ScrollView, StyleSheet } from "react-native";
 import { folderListAtom } from "../../../shared/atoms";
 import ContentBox from "./ContentBox";
 
 const MainContentsContainer = ({ scrollViewRef }) => {
   const [folderList] = useAtom(folderListAtom);
+  const [moreOpen, setMoreOpen] = useState();
 
   return (
-    <View style={styles.container}>
+    <Pressable style={styles.container} onPress={() => setMoreOpen(undefined)}>
       <ScrollView
         ref={scrollViewRef}
         contentContainerStyle={{
@@ -20,10 +22,15 @@ const MainContentsContainer = ({ scrollViewRef }) => {
         }}
       >
         {folderList.map((item) => (
-          <ContentBox key={item.title} {...item} />
+          <ContentBox
+            key={item.id}
+            {...item}
+            moreOpen={moreOpen}
+            setMoreOpen={setMoreOpen}
+          />
         ))}
       </ScrollView>
-    </View>
+    </Pressable>
   );
 };
 

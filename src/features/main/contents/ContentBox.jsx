@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { StyleSheet, Text, View, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -6,20 +5,22 @@ import MoreButton from "../../../shared/icons/MoreButton";
 import IconFactory from "../../../shared/icons/IconFactory";
 
 const ContentBox = ({
+  id,
   title,
   description,
   backgroundColor,
+  moreOpen,
+  setMoreOpen,
   iconType = "Heart",
 }) => {
   const navigation = useNavigation();
-  const [moreOpen, setMoreOpen] = useState(false);
 
   const Icon = IconFactory[iconType];
 
   const moreList = [
     {
       name: "폴더 편집",
-      onPress: () => navigation.push("FolderCreateEdit", { type: "edit" }),
+      onPress: () => navigation.push("FolderCreateEdit", { type: "edit", id }),
       icon: "PencilSimple",
     },
     { name: "폴더 삭제", onPress: () => {}, icon: "Trash" },
@@ -28,7 +29,11 @@ const ContentBox = ({
   const handlePressClick = () =>
     navigation.push("Folder", { title, description });
   const handleMoreClick = () => {
-    setMoreOpen(!moreOpen);
+    if (!moreOpen || (moreOpen && moreOpen !== id)) {
+      setMoreOpen(id);
+      return;
+    }
+    setMoreOpen(undefined);
   };
 
   return (
@@ -40,7 +45,7 @@ const ContentBox = ({
         {Icon}
         <MoreButton
           size={16}
-          open={moreOpen}
+          open={id === moreOpen}
           list={moreList}
           onPress={handleMoreClick}
         />

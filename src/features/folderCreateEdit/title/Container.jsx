@@ -4,10 +4,13 @@ import CommonTitleContainer from "../../../shared/navigation/CommonContainer";
 import HeaderLeftButton from "../../../shared/navigation/HeaderLeftButton";
 
 const FolderAdderTitleContainer = (props) => {
+  const title =
+    props.route.params.type === "create" ? "폴더 생성" : "폴더 편집";
+
   return (
     <CommonTitleContainer>
       <HeaderLeftButton {...props} />
-      <Text style={styles.title}>폴더 생성</Text>
+      <Text style={styles.title}>{title}</Text>
     </CommonTitleContainer>
   );
 };

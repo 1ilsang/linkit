@@ -21,7 +21,7 @@ const App = () => {
       const selectedIndex = Math.floor((Math.random() * 10) % 7);
       const initData = data || [
         {
-          no: Number(new Date()),
+          id: Number(new Date()),
           title: "기본 폴더",
           description: "기본 폴더에요.",
           iconType: "Heart",

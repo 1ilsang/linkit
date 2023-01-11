@@ -8,12 +8,12 @@ import {
 
 import FolderCreateEditContentContainer from "./contents/Container";
 
-const FolderCreateEditContainer = () => {
+const FolderCreateEditContainer = (props) => {
   return (
     <ScrollView>
       <View style={styles.container}>
         <Pressable style={{ flex: 1 }} onPress={() => Keyboard.dismiss()}>
-          <FolderCreateEditContentContainer />
+          <FolderCreateEditContentContainer {...props} />
         </Pressable>
       </View>
     </ScrollView>
