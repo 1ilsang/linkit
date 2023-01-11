@@ -19,15 +19,18 @@ const App = () => {
     const loadLocalStorage = async () => {
       const data = await load(LOCAL_STORAGE_KEY.folderList);
       const selectedIndex = Math.floor((Math.random() * 10) % 7);
-      const initData = data || [
-        {
-          id: Number(new Date()),
-          title: "기본 폴더",
-          description: "기본 폴더에요.",
-          icon: "Heart",
-          color: colorSets[selectedIndex],
-        },
-      ];
+      const initData =
+        data && data.length > 0
+          ? data
+          : [
+              {
+                id: Number(new Date()),
+                title: "기본 폴더",
+                description: "기본 폴더에요.",
+                icon: "Heart",
+                color: colorSets[selectedIndex],
+              },
+            ];
       setFolderList(initData);
       await save(LOCAL_STORAGE_KEY.folderList, initData);
     };
