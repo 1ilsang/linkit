@@ -1,12 +1,13 @@
 import { StyleSheet, Text, View, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useActionSheet } from "@expo/react-native-action-sheet";
-
+import Toast from "react-native-root-toast";
 import MoreButton from "../../../shared/icons/MoreButton";
 import IconFactory from "../../../shared/icons/IconFactory";
 import { useAtom } from "jotai";
 import { mainAtom } from "../atoms";
 import { folderListAtom } from "../../../shared/atoms";
+import { DEFAULT_SHORT_TOAST } from "../../../shared/constants/toast.js";
 import { LOCAL_STORAGE_KEY, save } from "../../../shared/utils/localStorage";
 
 const ContentBox = ({ id, title, description, color, icon = "Heart" }) => {
@@ -34,6 +35,7 @@ const ContentBox = ({ id, title, description, color, icon = "Heart" }) => {
       save(LOCAL_STORAGE_KEY.folderList, next);
       return next;
     });
+    Toast.show("폴더가 삭제되었어요.", DEFAULT_SHORT_TOAST);
   };
 
   const moreList = [
