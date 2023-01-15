@@ -4,13 +4,14 @@ import { useResetAtom } from "jotai/utils";
 import MoreButton from "../../../shared/icons/MoreButton";
 import CommonTitleContainer from "../../../shared/navigation/CommonContainer";
 import HeaderLeftButton from "../../../shared/navigation/HeaderLeftButton";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, StackActions } from "@react-navigation/native";
 import { useState } from "react";
 import { useAtom } from "jotai";
 import { folderListAtom } from "../../../shared/atoms";
 import { LOCAL_STORAGE_KEY, save } from "../../../shared/utils/localStorage";
 import Toast from "react-native-root-toast";
 import { DEFAULT_SHORT_TOAST } from "../../../shared/constants/toast";
+import { folderDetailAtom } from "../atoms";
 
 const FolderTitleContainer = (props) => {
   const { title, id } = props.route.params;
@@ -57,7 +58,11 @@ const FolderTitleContainer = (props) => {
       name: "폴더 편집",
       onPress: () => {
         setMoreOpen(false);
-        navigation.push("FolderCreateEdit", { type: "edit", id });
+        const pushAction = StackActions.push("FolderCreateEdit", {
+          type: "edit",
+          id,
+        });
+        navigation.dispatch(pushAction);
       },
       icon: "PencilSimple",
     },
