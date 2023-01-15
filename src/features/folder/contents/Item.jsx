@@ -13,7 +13,7 @@ const FolderContentItem = ({ name, url }) => {
           <Text style={styles.name}>{name}</Text>
           <Text style={styles.url}>{url}</Text>
         </View>
-        <MoreButton />
+        <MoreButton style={{ color: "#262424" }} />
       </View>
     </Pressable>
   );

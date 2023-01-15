@@ -35,6 +35,7 @@ import World from "../../../assets/icon/world.svg";
 import Map from "../../../assets/icon/map.svg";
 import Train from "../../../assets/icon/train.svg";
 import FolderSimplePlus from "../../../assets/icon/folder-simple-plus.svg";
+import FolderSimpleDotted from "../../../assets/icon/folder-simple-dotted.svg";
 import Link from "../../../assets/icon/link.svg";
 import Check from "../../../assets/icon/check.svg";
 import MagnifyingGlass from "../../../assets/icon/magnifying-glass.svg";
@@ -43,6 +44,7 @@ import PencilSimple from "../../../assets/icon/pencil-simple.svg";
 import Trash from "../../../assets/icon/trash.svg";
 
 const IconFactory = {
+  FolderSimpleDotted: <FolderSimpleDotted />,
   Trash: <Trash />,
   PencilSimple: <PencilSimple />,
   XCircle: <XCircle />,

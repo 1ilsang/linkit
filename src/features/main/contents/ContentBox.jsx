@@ -5,10 +5,12 @@ import Toast from "react-native-root-toast";
 import MoreButton from "../../../shared/icons/MoreButton";
 import IconFactory from "../../../shared/icons/IconFactory";
 import { useAtom } from "jotai";
+import { useResetAtom } from "jotai/utils";
 import { mainAtom } from "../atoms";
 import { folderListAtom } from "../../../shared/atoms";
 import { DEFAULT_SHORT_TOAST } from "../../../shared/constants/toast.js";
 import { LOCAL_STORAGE_KEY, save } from "../../../shared/utils/localStorage";
+import { folderDetailAtom } from "../../folder/atoms";
 
 const ContentBox = ({ id, title, description, defaultFolder, color, icon }) => {
   const navigation = useNavigation();
@@ -17,6 +19,7 @@ const ContentBox = ({ id, title, description, defaultFolder, color, icon }) => {
   const [, setFolderList] = useAtom(folderListAtom);
 
   const { showActionSheetWithOptions } = useActionSheet();
+  const resetFolderDetail = useResetAtom(folderDetailAtom);
 
   const { moreOpen } = main;
   const IconComponent = IconFactory[icon];
@@ -35,6 +38,8 @@ const ContentBox = ({ id, title, description, defaultFolder, color, icon }) => {
       save(LOCAL_STORAGE_KEY.folderList, next);
       return next;
     });
+    // TODO: delete links
+    resetFolderDetail();
     Toast.show("폴더가 삭제되었어요.", DEFAULT_SHORT_TOAST);
   };
 

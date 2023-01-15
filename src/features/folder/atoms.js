@@ -1,9 +1,10 @@
-import { atom } from "jotai";
+import { atomWithReset } from "jotai/utils";
 
 export const initialFolderDetail = {
   id: undefined,
+  mode: "normal",
   search: "",
   linkList: [],
 };
 
-export const folderDetailAtom = atom(initialFolderDetail);
+export const folderDetailAtom = atomWithReset(initialFolderDetail);
