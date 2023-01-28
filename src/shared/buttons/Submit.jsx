@@ -1,8 +1,15 @@
 import { Pressable, StyleSheet, Text } from "react-native";
 
-const SubmitButton = ({ label, onPress }) => {
+const SubmitButton = ({ label, onPress, disabled }) => {
   return (
-    <Pressable style={styles.container} onPress={onPress}>
+    <Pressable
+      disabled={disabled}
+      style={{
+        ...styles.container,
+        backgroundColor: disabled ? "#CFCFCF" : "#241E17",
+      }}
+      onPress={onPress}
+    >
       <Text style={styles.text}>{label}</Text>
     </Pressable>
   );

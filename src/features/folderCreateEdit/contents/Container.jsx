@@ -16,6 +16,8 @@ const FolderCreateEditContentContainer = () => {
   const [createEdit, setCreateEdit] = useAtom(createEditAtom);
   const [, setFolderList] = useAtom(folderListAtom);
 
+  const validSubmit = createEdit.color && createEdit.icon && createEdit.title;
+
   const handleSubmitPress = async () => {
     const saveFolderData = { ...createEdit };
     setCreateEdit({ ...initialCreateEdit });
@@ -64,7 +66,11 @@ const FolderCreateEditContentContainer = () => {
       <IconArea />
 
       <ColorArea />
-      <SubmitButton label="저장하기" onPress={handleSubmitPress} />
+      <SubmitButton
+        label="저장하기"
+        onPress={handleSubmitPress}
+        disabled={!validSubmit}
+      />
     </Pressable>
   );
 };
