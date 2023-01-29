@@ -30,6 +30,7 @@ const App = () => {
                 defaultFolder: true,
                 icon: "Heart",
                 color: colorSets[selectedIndex],
+                linkList: [],
               },
             ];
       setFolderList(initData);

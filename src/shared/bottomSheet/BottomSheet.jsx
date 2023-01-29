@@ -2,7 +2,7 @@ import { forwardRef } from "react";
 import { Text, View, StyleSheet, Pressable } from "react-native";
 import { Modalize } from "react-native-modalize";
 import { Portal } from "react-native-portalize";
-import IconFactory from "./icons/IconFactory";
+import IconFactory from "../icons/IconFactory";
 
 const BottomSheet = forwardRef(({ list }, ref) => {
   return (

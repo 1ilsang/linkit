@@ -5,6 +5,8 @@ const FormInputBox = ({
   label,
   value,
   onChangeText,
+  onInputPress,
+  editable = true,
   required = false,
 }) => {
   return (
@@ -14,10 +16,12 @@ const FormInputBox = ({
         {required && <Text style={styles.required}>*</Text>}
       </View>
       <TextInput
+        onPressIn={onInputPress}
         style={styles.input}
         placeholder={placeholder}
         onChangeText={onChangeText}
         value={value}
+        editable={editable}
       />
     </View>
   );
