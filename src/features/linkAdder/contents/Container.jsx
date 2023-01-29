@@ -13,7 +13,11 @@ const LinkAdderContentContainer = () => {
   const [linkAdder, setLinkAdder] = useAtom(linkAdderAtom);
   const { autoLinkName, linkName, url, targetFolder, memo } = linkAdder;
 
-  const validSubmit = url.length > 0 && linkName.length > 0;
+  const validSubmit =
+    url.length > 0 &&
+    linkName.length > 0 &&
+    targetFolder.title.length > 0 &&
+    targetFolder.id;
 
   const handleAutoLinkToggle = () => {
     setLinkAdder((prev) => ({ ...prev, autoLinkName: !prev.autoLinkName }));
