@@ -77,16 +77,19 @@ const LinkAdderContentContainer = () => {
       const next = [...prev];
       save(LOCAL_STORAGE_KEY.folderList, next);
       // TODO: Toast text 색 및 배치 수정 필요
-      Toast.show("링크가 저장되었어요!        저장 폴더로 이동", {
-        ...DEFAULT_LONG_TOAST,
-        hideOnPress: true,
-        onPress: (e) => {
-          navigation.navigate("Folder", {
-            id: targetFolder.id,
-            title: targetFolder.title,
-          });
-        },
-      });
+      Toast.show(
+        "링크가 저장되었어요!                       저장 폴더로 이동",
+        {
+          ...DEFAULT_LONG_TOAST,
+          hideOnPress: true,
+          onPress: (e) => {
+            navigation.navigate("Folder", {
+              id: targetFolder.id,
+              title: targetFolder.title,
+            });
+          },
+        }
+      );
       navigation.navigate("Main");
       return next;
     });
