@@ -7,17 +7,24 @@ import { DEFAULT_SHORT_TOAST } from "../../../shared/constants/toast";
 import Toggle from "../../../shared/icons/Toggle";
 import FormInputBox from "../../../shared/inputBox/FormInputBox";
 import { linkAdderAtom } from "../atoms";
+import { folderListAtom } from "../../../shared/atoms";
+import { LOCAL_STORAGE_KEY, save } from "../../../shared/utils/localStorage";
+import { useNavigation } from "@react-navigation/native";
 
 const LinkAdderContentContainer = () => {
+  const navigation = useNavigation();
+
   const [, setMain] = useAtom(mainAtom);
+  const [, setFolderList] = useAtom(folderListAtom);
   const [linkAdder, setLinkAdder] = useAtom(linkAdderAtom);
   const { autoLinkName, linkName, url, targetFolder, memo } = linkAdder;
 
-  const validSubmit =
+  const validSubmit = !!(
     url.length > 0 &&
     linkName.length > 0 &&
     targetFolder.title.length > 0 &&
-    targetFolder.id;
+    targetFolder.id
+  );
 
   const handleAutoLinkToggle = () => {
     setLinkAdder((prev) => ({ ...prev, autoLinkName: !prev.autoLinkName }));
@@ -35,8 +42,23 @@ const LinkAdderContentContainer = () => {
     setMain((prev) => ({ ...prev, folderPickerOpen: true }));
   };
   const handleSubmitPress = () => {
-    // TODO: folderList > linkList 저장 + localStorage 저장
-    Toast.show("링크가 저장되었습니다.", DEFAULT_SHORT_TOAST);
+    if (!validSubmit) return;
+    setFolderList((prev) => {
+      const existPrevData = prev.find((item) => item.id === targetFolder.id);
+      if (!existPrevData) {
+        Toast.show(
+          "해당 폴더가 존재하지 않습니다. 에러가 계속해서 발생한다면 고객센터에 문의해주세요.",
+          DEFAULT_SHORT_TOAST
+        );
+        return prev;
+      }
+      existPrevData.linkList.push(linkAdder);
+      const next = [...prev];
+      save(LOCAL_STORAGE_KEY.folderList, next);
+      Toast.show("링크가 저장되었습니다.", DEFAULT_SHORT_TOAST);
+      navigation.navigate("Main");
+      return next;
+    });
   };
 
   return (

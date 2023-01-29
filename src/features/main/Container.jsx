@@ -49,7 +49,7 @@ const MainContainer = () => {
     if (!target) return;
     setLinkAdder((prev) => ({
       ...prev,
-      targetFolder: { id: target.id, title: target.label },
+      targetFolder: { id: target.value, title: target.label },
     }));
     setMain((prev) => ({ ...prev, folderPickerOpen: false }));
   };

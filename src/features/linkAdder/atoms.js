@@ -1,6 +1,7 @@
 import { atomWithReset } from "jotai/utils";
 
 const initialLinkAdder = {
+  id: Number(new Date()),
   autoLinkName: true,
   linkName: "",
   url: "",
