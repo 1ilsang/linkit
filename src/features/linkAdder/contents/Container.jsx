@@ -1,5 +1,5 @@
 import { useAtom } from "jotai";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View, Keyboard } from "react-native";
 import Toast from "react-native-root-toast";
 import { mainAtom } from "../../main/atoms";
 import SubmitButton from "../../../shared/buttons/Submit";
@@ -27,7 +27,22 @@ const LinkAdderContentContainer = () => {
   );
 
   const handleAutoLinkToggle = () => {
-    setLinkAdder((prev) => ({ ...prev, autoLinkName: !prev.autoLinkName }));
+    setLinkAdder((prev) => {
+      const linkName = (() => {
+        if (prev.autoLinkName) return "";
+        // TODO: Enhancement. og tag 추출
+        const linkList = url.replace(/https?:\/\/(www\.)?/, "").split("/");
+        if (linkList.length < 2) {
+          return linkList[0];
+        }
+        return linkList.slice(0, 2).join("의 ");
+      })();
+      return {
+        ...prev,
+        autoLinkName: !prev.autoLinkName,
+        linkName,
+      };
+    });
   };
   const handleLinkTextChange = (linkName) => {
     setLinkAdder((prev) => ({ ...prev, linkName }));
@@ -39,6 +54,7 @@ const LinkAdderContentContainer = () => {
     setLinkAdder((prev) => ({ ...prev, memo }));
   };
   const handleFolderPress = () => {
+    Keyboard.dismiss();
     setMain((prev) => ({ ...prev, folderPickerOpen: true }));
   };
   const handleSubmitPress = () => {
@@ -107,6 +123,7 @@ const LinkAdderContentContainer = () => {
         onPress={handleSubmitPress}
         disabled={!validSubmit}
       />
+      {/* TODO: 키보드에 가려지는 부분이 있으므로 밀어주는 작업 해야함. */}
     </View>
   );
 };

@@ -7,6 +7,7 @@ export const initialCreateEdit = {
   defaultFolder: false,
   icon: undefined,
   color: undefined,
+  linkList: [],
 };
 
 export const createEditAtom = atom(initialCreateEdit);
