@@ -2,7 +2,7 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import MoreButton from "../../../shared/icons/MoreButton";
 import NoImage from "../../../shared/icons/NonImage";
 
-const FolderContentItem = ({ name, url }) => {
+const FolderContentItem = ({ linkName, url }) => {
   return (
     <Pressable style={styles.container}>
       <View style={styles.contentContainer}>
@@ -10,7 +10,7 @@ const FolderContentItem = ({ name, url }) => {
           <NoImage size={40} />
         </View>
         <View style={styles.content}>
-          <Text style={styles.name}>{name}</Text>
+          <Text style={styles.linkName}>{linkName}</Text>
           <Text style={styles.url}>{url}</Text>
         </View>
         <MoreButton style={{ color: "#262424" }} />
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     height: 54,
     marginRight: 16,
   },
-  name: {
+  linkName: {
     height: 19,
     fontWeight: "400",
     fontSize: 16,

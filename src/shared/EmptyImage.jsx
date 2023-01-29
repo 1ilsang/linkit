@@ -6,7 +6,7 @@ const EmptyImage = () => {
       <Image
         style={styles.image}
         resizeMode="cover"
-        source={require("../../../assets/empty.png")}
+        source={require("../../assets/empty.png")}
       />
     </View>
   );

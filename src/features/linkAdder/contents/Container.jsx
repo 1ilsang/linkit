@@ -3,7 +3,10 @@ import { Pressable, StyleSheet, Text, View, Keyboard } from "react-native";
 import Toast from "react-native-root-toast";
 import { mainAtom } from "../../main/atoms";
 import SubmitButton from "../../../shared/buttons/Submit";
-import { DEFAULT_SHORT_TOAST } from "../../../shared/constants/toast";
+import {
+  DEFAULT_LONG_TOAST,
+  DEFAULT_SHORT_TOAST,
+} from "../../../shared/constants/toast";
 import Toggle from "../../../shared/icons/Toggle";
 import FormInputBox from "../../../shared/inputBox/FormInputBox";
 import { linkAdderAtom } from "../atoms";
@@ -31,7 +34,9 @@ const LinkAdderContentContainer = () => {
       const linkName = (() => {
         if (prev.autoLinkName) return "";
         // TODO: Enhancement. og tag 추출
-        const linkList = url.replace(/https?:\/\/(www\.)?/, "").split("/");
+        const linkList = url
+          .replace(/https?:\/\/(www\.)?|.com/g, "")
+          .split("/");
         if (linkList.length < 2) {
           return linkList[0];
         }
@@ -68,10 +73,20 @@ const LinkAdderContentContainer = () => {
         );
         return prev;
       }
-      existPrevData.linkList.push(linkAdder);
+      existPrevData.linkList.push({ ...linkAdder, id: Number(new Date()) });
       const next = [...prev];
       save(LOCAL_STORAGE_KEY.folderList, next);
-      Toast.show("링크가 저장되었습니다.", DEFAULT_SHORT_TOAST);
+      // TODO: Toast text 색 및 배치 수정 필요
+      Toast.show("링크가 저장되었어요!        저장 폴더로 이동", {
+        ...DEFAULT_LONG_TOAST,
+        hideOnPress: true,
+        onPress: (e) => {
+          navigation.navigate("Folder", {
+            id: targetFolder.id,
+            title: targetFolder.title,
+          });
+        },
+      });
       navigation.navigate("Main");
       return next;
     });

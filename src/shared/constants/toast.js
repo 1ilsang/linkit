@@ -9,3 +9,13 @@ export const DEFAULT_SHORT_TOAST = {
     padding: 10,
   },
 };
+
+export const DEFAULT_LONG_TOAST = {
+  duration: Toast.durations.LONG,
+  position: 505,
+  shadow: false,
+  containerStyle: {
+    width: "95%",
+    padding: 10,
+  },
+};

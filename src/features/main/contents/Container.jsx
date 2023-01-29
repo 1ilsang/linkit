@@ -1,8 +1,8 @@
 import { useAtom } from "jotai";
 import { Pressable, ScrollView, StyleSheet } from "react-native";
 import { folderListAtom } from "../../../shared/atoms";
+import EmptyImage from "../../../shared/EmptyImage";
 import { mainAtom } from "../atoms";
-import EmptyImage from "../EmptyImage";
 import ContentBox from "./ContentBox";
 
 const MainContentsContainer = ({ scrollViewRef }) => {
