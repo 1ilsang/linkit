@@ -22,32 +22,26 @@ const LinkAdderContentContainer = () => {
   const [linkAdder, setLinkAdder] = useAtom(linkAdderAtom);
   const { autoLinkName, linkName, url, targetFolder, memo } = linkAdder;
 
-  const validSubmit = !!(
-    url.length > 0 &&
-    linkName.length > 0 &&
-    targetFolder.title.length > 0 &&
-    targetFolder.id
-  );
+  const validSubmit = !!(url.length > 0 &&
+  targetFolder.title.length > 0 &&
+  targetFolder.id &&
+  autoLinkName
+    ? true
+    : linkName.length > 0);
 
+  const getAutoLinkName = () => {
+    // TODO: Enhancement. og tag 추출
+    const linkList = url.replace(/https?:\/\/(www\.)?|.com/g, "").split("/");
+    if (linkList.length < 2) {
+      return linkList[0];
+    }
+    return linkList.slice(0, 2).join("의 ");
+  };
   const handleAutoLinkToggle = () => {
-    setLinkAdder((prev) => {
-      const linkName = (() => {
-        if (prev.autoLinkName) return "";
-        // TODO: Enhancement. og tag 추출
-        const linkList = url
-          .replace(/https?:\/\/(www\.)?|.com/g, "")
-          .split("/");
-        if (linkList.length < 2) {
-          return linkList[0];
-        }
-        return linkList.slice(0, 2).join("의 ");
-      })();
-      return {
-        ...prev,
-        autoLinkName: !prev.autoLinkName,
-        linkName,
-      };
-    });
+    setLinkAdder((prev) => ({
+      ...prev,
+      autoLinkName: !prev.autoLinkName,
+    }));
   };
   const handleLinkTextChange = (linkName) => {
     setLinkAdder((prev) => ({ ...prev, linkName }));
@@ -73,7 +67,11 @@ const LinkAdderContentContainer = () => {
         );
         return prev;
       }
-      existPrevData.linkList.push({ ...linkAdder, id: Number(new Date()) });
+      const submitLink = { ...linkAdder, id: Number(new Date()) };
+      if (submitLink.autoLinkName) {
+        submitLink.linkName = getAutoLinkName();
+      }
+      existPrevData.linkList.push(submitLink);
       const next = [...prev];
       save(LOCAL_STORAGE_KEY.folderList, next);
       // TODO: Toast text 색 및 배치 수정 필요
