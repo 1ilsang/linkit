@@ -1,10 +1,12 @@
 import { useNavigation } from "@react-navigation/native";
 import { useAtom } from "jotai";
 import { useRef } from "react";
+import Toast from "react-native-root-toast";
 import { folderListAtom } from "../../shared/atoms";
 
 import BottomSheet from "../../shared/bottomSheet/BottomSheet";
 import PickerBottomSheet from "../../shared/bottomSheet/Picker";
+import { DEFAULT_SHORT_TOAST } from "../../shared/constants/toast";
 import { linkAdderAtom } from "../linkAdder/atoms";
 import { mainAtom } from "./atoms";
 import MainContentsContainer from "./contents/Container";
@@ -32,6 +34,13 @@ const MainContainer = () => {
     {
       name: "폴더 생성",
       onPress: () => {
+        if (folderList.length === 10) {
+          Toast.show(
+            "폴더는 최대 10개까지 생성할 수 있어요.",
+            DEFAULT_SHORT_TOAST
+          );
+          return;
+        }
         setMain((prev) => ({ ...prev, moreOpen: undefined }));
         navigation.push("FolderCreateEdit", { type: "create" });
       },
