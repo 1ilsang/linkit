@@ -1,13 +1,13 @@
 import { Pressable, StyleSheet, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useAtom } from "jotai";
-import { mainAtom } from "../atoms";
+import { mainAtom } from "../../main/atoms";
 
-const Adder = ({ adderSheetRef }) => {
-  const [, setMain] = useAtom(mainAtom);
+const Adder = () => {
+  const [main, setMain] = useAtom(mainAtom);
   const handleAdderClick = () => {
-    setMain((prev) => ({ ...prev, moreOpen: undefined }));
-    adderSheetRef.current.open();
+    setMain((prev) => ({ ...prev, moreOpen: undefined, adderSheetOpen: true }));
+    main.adderSheetRef?.current?.open();
   };
 
   return (

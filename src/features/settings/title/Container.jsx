@@ -1,12 +1,10 @@
 import { StyleSheet, Text } from "react-native";
 
 import CommonTitleContainer from "../../../shared/navigation/CommonContainer";
-import HeaderLeftButton from "../../../shared/navigation/HeaderLeftButton";
 
 const SettingsTitleContainer = (props) => {
   return (
     <CommonTitleContainer>
-      <HeaderLeftButton {...props} />
       <Text style={styles.title}>설정</Text>
     </CommonTitleContainer>
   );

@@ -6,29 +6,24 @@ import FolderCreateEditContainer from "../folderCreateEdit/Container";
 import FolderCreateEditTitleContainer from "../folderCreateEdit/title/Container";
 import LinkAdderContainer from "../linkAdder/Container";
 import LinkAdderTitleContainer from "../linkAdder/title/Container";
-import MainContainer from "../main/Container";
-import MainTitleContainer from "../main/title/Container";
 import SearchContainer from "../search/Container";
 import SearchTitleContainer from "../search/title/Container";
-import SettingsContainer from "../settings/Container";
-import SettingsTitleContainer from "../settings/title/Container";
+import BottomTabNavigator from "./BottomTabNavigator";
 
 const Stack = createNativeStackNavigator();
 
 const MainStack = () => {
   return (
     <Stack.Navigator
-      initialRouteName="Main"
+      initialRouteName="Root"
       screenOptions={{
         contentStyle: { backgroundColor: "#ffffff" },
       }}
     >
       <Stack.Screen
-        name="Main"
-        options={{
-          header: MainTitleContainer,
-        }}
-        component={MainContainer}
+        name="Root"
+        component={BottomTabNavigator}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="Search"
@@ -57,13 +52,6 @@ const MainStack = () => {
           header: FolderTitleContainer,
         }}
         component={FolderContainer}
-      />
-      <Stack.Screen
-        name="Settings"
-        options={{
-          header: SettingsTitleContainer,
-        }}
-        component={SettingsContainer}
       />
     </Stack.Navigator>
   );

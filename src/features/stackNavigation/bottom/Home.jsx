@@ -1,23 +1,24 @@
 import { Pressable, StyleSheet, Text } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { Foundation } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { useAtom } from "jotai";
-import { mainAtom } from "../atoms";
+import { mainAtom } from "../../main/atoms";
 
-const Settings = () => {
+const Home = () => {
   const navigation = useNavigation();
 
-  const [, setMain] = useAtom(mainAtom);
+  const [main, setMain] = useAtom(mainAtom);
 
-  const handleSettingsClick = () => {
+  const handleHomeClick = () => {
     setMain((prev) => ({ ...prev, moreOpen: undefined }));
-    navigation.navigate("Settings");
+    main.scrollViewRef.current.scrollTo({ top: 0 });
+    navigation.navigate("Main");
   };
 
   return (
-    <Pressable style={styles.item} onPress={handleSettingsClick}>
-      <Ionicons name="settings-outline" size={24} color="#2D264B" />
-      <Text style={styles.text}>설정</Text>
+    <Pressable style={styles.item} onPress={handleHomeClick}>
+      <Foundation name="home" size={24} color="#2D264B" />
+      <Text style={styles.text}>홈</Text>
     </Pressable>
   );
 };
@@ -53,4 +54,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Settings;
+export default Home;
