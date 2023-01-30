@@ -1,12 +1,17 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Pressable, Keyboard } from "react-native";
 
 import { titleContainerStyle, titleContentStyle } from "./title.style";
 
-const CommonTitleContainer = ({ children }) => {
+const CommonTitleContainer = ({ children, onPress }) => {
+  const handleTitleContainerPress = () => {
+    Keyboard.dismiss();
+    onPress?.();
+  };
+
   return (
-    <View style={styles.container}>
+    <Pressable style={styles.container} onPress={handleTitleContainerPress}>
       <View style={styles.content}>{children}</View>
-    </View>
+    </Pressable>
   );
 };
 

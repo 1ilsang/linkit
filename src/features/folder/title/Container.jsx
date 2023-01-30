@@ -5,7 +5,6 @@ import MoreButton from "../../../shared/icons/MoreButton";
 import CommonTitleContainer from "../../../shared/navigation/CommonContainer";
 import HeaderLeftButton from "../../../shared/navigation/HeaderLeftButton";
 import { useNavigation, StackActions } from "@react-navigation/native";
-import { useState } from "react";
 import { useAtom } from "jotai";
 import { folderListAtom } from "../../../shared/atoms";
 import { LOCAL_STORAGE_KEY, save } from "../../../shared/utils/localStorage";
@@ -14,16 +13,23 @@ import { DEFAULT_SHORT_TOAST } from "../../../shared/constants/toast";
 import { folderDetailAtom } from "../atoms";
 
 const FolderTitleContainer = (props) => {
-  const { title, id } = props.route.params;
+  const { title, id, defaultFolder } = props.route.params;
 
   const [, setFolderList] = useAtom(folderListAtom);
-  const [moreOpen, setMoreOpen] = useState(false);
+  const [folderDetail, setFolderDetail] = useAtom(folderDetailAtom);
+  const { titleMoreOpen } = folderDetail;
 
   const navigation = useNavigation();
   const { showActionSheetWithOptions } = useActionSheet();
   const resetFolderDetail = useResetAtom(folderDetailAtom);
 
-  const handleMoreClick = () => setMoreOpen(!moreOpen);
+  const handleMoreClick = () => {
+    setFolderDetail((prev) => ({
+      ...prev,
+      titleMoreOpen: !prev.titleMoreOpen,
+      itemMoreOpen: undefined,
+    }));
+  };
 
   const deleteActionSheetOptions = {
     title: `${title} 폴더를 삭제하시겠어요? 폴더 내 링크도 함께 삭제되며, 삭제 후엔 복구할 수 없어요.`,
@@ -39,7 +45,6 @@ const FolderTitleContainer = (props) => {
       save(LOCAL_STORAGE_KEY.folderList, next);
       return next;
     });
-    // TODO: delete links
     resetFolderDetail();
     Toast.show("폴더가 삭제되었어요.", DEFAULT_SHORT_TOAST);
     navigation.navigate("Main");
@@ -49,15 +54,22 @@ const FolderTitleContainer = (props) => {
     {
       name: "목록 편집",
       onPress: () => {
-        setMoreOpen(false);
-        // navigation.push("FolderCreateEdit", { type: "edit", id });
+        setFolderDetail((prev) => ({
+          ...prev,
+          titleMoreOpen: undefined,
+          itemMoreOpen: undefined,
+        }));
       },
       icon: "FolderSimpleDotted",
     },
     {
       name: "폴더 편집",
       onPress: () => {
-        setMoreOpen(false);
+        setFolderDetail((prev) => ({
+          ...prev,
+          titleMoreOpen: undefined,
+          itemMoreOpen: undefined,
+        }));
         const pushAction = StackActions.push("FolderCreateEdit", {
           type: "edit",
           id,
@@ -69,7 +81,11 @@ const FolderTitleContainer = (props) => {
     {
       name: "폴더 삭제",
       onPress: () => {
-        setMoreOpen(false);
+        setFolderDetail((prev) => ({
+          ...prev,
+          titleMoreOpen: undefined,
+          itemMoreOpen: undefined,
+        }));
         showActionSheetWithOptions(
           deleteActionSheetOptions,
           handleActionSheetClick
@@ -79,17 +95,26 @@ const FolderTitleContainer = (props) => {
     },
   ];
 
+  const handleTitleAreaPress = () => {
+    setFolderDetail((prev) => ({
+      ...prev,
+      titleMoreOpen: undefined,
+      itemMoreOpen: undefined,
+    }));
+  };
+
   return (
-    <CommonTitleContainer>
+    <CommonTitleContainer onPress={handleTitleAreaPress}>
       <View style={styles.container}>
         <HeaderLeftButton {...props} />
         <View style={styles.content}>
           <Text style={styles.title}>{title}</Text>
           <MoreButton
             style={{ color: "#262424" }}
-            open={moreOpen}
+            open={titleMoreOpen}
             list={moreList}
             onPress={handleMoreClick}
+            defaultFolder={defaultFolder}
           />
         </View>
       </View>

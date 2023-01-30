@@ -1,6 +1,6 @@
 import { useAtom } from "jotai";
 import { useLayoutEffect } from "react";
-import { ScrollView } from "react-native";
+import { Pressable, ScrollView } from "react-native";
 import { folderListAtom } from "../../../shared/atoms";
 import EmptyImage from "../../../shared/EmptyImage";
 import SearchInputBox from "../../../shared/inputBox/SearchInputBox";
@@ -24,9 +24,16 @@ const FolderContentContainer = (props) => {
   const handleSearchChange = (search) => {
     setFolderDetail((prev) => ({ ...prev, search }));
   };
+  const handleContainerPress = () => {
+    setFolderDetail((prev) => ({
+      ...prev,
+      titleMoreOpen: undefined,
+      itemMoreOpen: undefined,
+    }));
+  };
 
   return (
-    <>
+    <Pressable onPress={handleContainerPress}>
       <SearchInputBox
         placeholder={"링크 제목, URL을 검색해 주세요."}
         value={folderDetail.search}
@@ -42,7 +49,7 @@ const FolderContentContainer = (props) => {
           ))
         )}
       </ScrollView>
-    </>
+    </Pressable>
   );
 };
 

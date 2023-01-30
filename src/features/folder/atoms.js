@@ -10,6 +10,8 @@ export const initialFolderDetail = {
   mode: "normal",
   search: "",
   linkList: [],
+  titleMoreOpen: undefined,
+  itemMoreOpen: undefined,
 };
 
 export const folderDetailAtom = atomWithReset(initialFolderDetail);
