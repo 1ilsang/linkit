@@ -1,7 +1,8 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import MoreButton from "../../../../shared/icons/MoreButton";
 import CommonTitleContainer from "../../../../shared/navigation/CommonContainer";
 import HeaderLeftButton from "../../../../shared/navigation/HeaderLeftButton";
+import { MODE } from "../../constants";
 import useFolderTitle from "../../hooks/useTitle";
 
 const FolderTitleContainer = (props) => {
@@ -12,7 +13,28 @@ const FolderTitleContainer = (props) => {
     moreList,
     handleMoreClick,
     defaultFolder,
+    mode,
+    handleCancelEditPress,
+    handleDeleteLinkPress,
   } = useFolderTitle(props);
+
+  if (mode === MODE.edit) {
+    return (
+      <CommonTitleContainer onPress={handleTitleAreaPress}>
+        <View style={styles.container}>
+          <View style={styles.content}>
+            <Pressable onPress={handleCancelEditPress} hitSlop={30}>
+              <Text>취소</Text>
+            </Pressable>
+            <Text style={styles.title}>목록 편집</Text>
+            <Pressable onPress={handleDeleteLinkPress} hitSlop={30}>
+              <Text style={styles.delete}>삭제</Text>
+            </Pressable>
+          </View>
+        </View>
+      </CommonTitleContainer>
+    );
+  }
 
   return (
     <CommonTitleContainer onPress={handleTitleAreaPress}>
@@ -57,6 +79,9 @@ const styles = StyleSheet.create({
     lineHeight: 41,
     letterSpacing: 0.374,
     color: "#2D264B",
+  },
+  delete: {
+    color: "#FF5C5D",
   },
 });
 

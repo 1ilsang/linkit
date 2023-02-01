@@ -1,10 +1,15 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import MoreButton from "../../../../shared/icons/MoreButton";
-import NoImage from "../../../../shared/icons/NonImage";
+import IconFactory from "../../../../../shared/icons/IconFactory";
+import NoImage from "../../../../../shared/icons/NonImage";
 
-const FolderContentItem = ({ linkName, url }) => {
+const EditItem = ({ id, linkName, url, onCirclePress, checked }) => {
+  const handleCirclePress = () => {
+    onCirclePress(id);
+  };
+
   return (
-    <Pressable style={styles.container}>
+    <Pressable style={styles.container} onPress={handleCirclePress}>
+      {IconFactory[checked ? "CheckedCircle" : "Circle"]}
       <View style={styles.contentContainer}>
         <View style={styles.thumbnail}>
           <NoImage size={40} />
@@ -13,7 +18,6 @@ const FolderContentItem = ({ linkName, url }) => {
           <Text style={styles.linkName}>{linkName}</Text>
           <Text style={styles.url}>{url}</Text>
         </View>
-        <MoreButton style={{ color: "#262424" }} />
       </View>
     </Pressable>
   );
@@ -31,6 +35,7 @@ const styles = StyleSheet.create({
     paddingRight: 18,
   },
   contentContainer: {
+    paddingLeft: 12.25,
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
@@ -74,4 +79,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FolderContentItem;
+export default EditItem;

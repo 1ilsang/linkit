@@ -42,6 +42,8 @@ import MagnifyingGlass from "../../../assets/icon/magnifying-glass.svg";
 import XCircle from "../../../assets/icon/x-circle.svg";
 import PencilSimple from "../../../assets/icon/pencil-simple.svg";
 import Trash from "../../../assets/icon/trash.svg";
+import Circle from "../../../assets/icon/circle.svg";
+import CheckedCircle from "../../../assets/icon/checkedCircle.svg";
 
 const IconFactory = {
   FolderSimpleDotted: <FolderSimpleDotted />,
@@ -88,6 +90,8 @@ const IconFactory = {
   World: <World />,
   Map: <Map />,
   Train: <Train />,
+  Circle: <Circle />,
+  CheckedCircle: <CheckedCircle />,
 };
 
 export default IconFactory;

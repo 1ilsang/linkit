@@ -3,14 +3,9 @@ import { MODE } from "./constants";
 
 export const initialFolderDetail = {
   id: undefined,
-  title: "",
-  description: "",
-  defaultFolder: false,
-  icon: undefined,
-  color: undefined,
   mode: MODE.normal,
   search: "",
-  linkList: [],
+  deleteLinkList: [],
   titleMoreOpen: undefined,
   itemMoreOpen: undefined,
 };
