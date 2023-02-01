@@ -13,6 +13,7 @@ import { linkAdderAtom } from "../atoms";
 import { folderListAtom } from "../../../shared/atoms";
 import { LOCAL_STORAGE_KEY, save } from "../../../shared/utils/localStorage";
 import { useNavigation } from "@react-navigation/native";
+import { sortLinkList } from "../../../shared/utils/helpers";
 
 const LinkAdderContentContainer = () => {
   const navigation = useNavigation();
@@ -79,6 +80,7 @@ const LinkAdderContentContainer = () => {
         submitLink.linkName = getAutoLinkName();
       }
       existPrevData.linkList.push(submitLink);
+      existPrevData.linkList.sort(sortLinkList(existPrevData.sort));
       const next = [...prev];
       save(LOCAL_STORAGE_KEY.folderList, next);
       // TODO: Toast text 색 및 배치 수정 필요

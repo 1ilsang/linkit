@@ -11,6 +11,7 @@ import { useLayoutEffect } from "react";
 import { folderListAtom } from "./src/shared/atoms";
 import { load, LOCAL_STORAGE_KEY, save } from "./src/shared/utils/localStorage";
 import { colorSets } from "./src/shared/constants/colors";
+import { FOLDER_SORT } from "./src/shared/constants/folder";
 
 const App = () => {
   const [, setFolderList] = useAtom(folderListAtom);
@@ -29,6 +30,7 @@ const App = () => {
                 description: "기본 폴더에요.",
                 defaultFolder: true,
                 icon: "Heart",
+                sort: FOLDER_SORT.DATE,
                 color: colorSets[selectedIndex],
                 linkList: [],
               },

@@ -8,6 +8,7 @@ import { atom } from "jotai";
  *   defaultFolder: true,
  *   icon: "Heart",
  *   color: colorSets[selectedIndex],
+ *   sort: FOLDER_SORT.DATE
  *   linkList: [],
  * },
  */

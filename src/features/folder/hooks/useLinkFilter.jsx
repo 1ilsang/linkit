@@ -4,6 +4,8 @@ import { Keyboard } from "react-native";
 import { folderListAtom } from "../../../shared/atoms";
 import { folderDetailAtom } from "../atoms";
 import { LOCAL_STORAGE_KEY, save } from "../../../shared/utils/localStorage";
+import { sortLinkList } from "../../../shared/utils/helpers";
+import { FOLDER_SORT } from "../../../shared/constants/folder";
 
 const actionSheetOptions = {
   title: "링크 정렬",
@@ -27,12 +29,9 @@ const useLinkFilter = () => {
     if (![0, 1].includes(filterIndex)) return;
     setFolderList((prev) => {
       const targetFolder = prev.find((item) => item.id === folderDetail.id);
-      targetFolder.linkList.sort((a, b) => {
-        if (filterIndex === 0) {
-          return new Date(b.date) - new Date(a.date);
-        }
-        return a.linkName < b.linkName ? -1 : 1;
-      });
+      const sortType = filterIndex === 0 ? FOLDER_SORT.DATE : FOLDER_SORT.NAME;
+      targetFolder.linkList.sort(sortLinkList(sortType));
+      targetFolder.sort = sortType;
       const next = [...prev];
       save(LOCAL_STORAGE_KEY.folderList, next);
       return next;
