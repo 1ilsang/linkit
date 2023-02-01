@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import FolderContainer from "../folder/Container";
-import FolderTitleContainer from "../folder/title/Container";
+import FolderContainer from "../folder/components/Container";
+import FolderTitleContainer from "../folder/components/title/Container";
 import FolderCreateEditContainer from "../folderCreateEdit/Container";
 import FolderCreateEditTitleContainer from "../folderCreateEdit/title/Container";
 import LinkAdderContainer from "../linkAdder/Container";

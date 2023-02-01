@@ -1,10 +1,10 @@
 import { useAtom } from "jotai";
 import { useLayoutEffect } from "react";
 import { Pressable, ScrollView } from "react-native";
-import { folderListAtom } from "../../../shared/atoms";
-import EmptyImage from "../../../shared/EmptyImage";
-import SearchInputBox from "../../../shared/inputBox/SearchInputBox";
-import { folderDetailAtom, initialFolderDetail } from "../atoms";
+import { folderListAtom } from "../../../../shared/atoms";
+import EmptyImage from "../../../../shared/EmptyImage";
+import SearchInputBox from "../../../../shared/inputBox/SearchInputBox";
+import { folderDetailAtom, initialFolderDetail } from "../../atoms";
 import FilterArea from "./filter/FilterArea";
 import FolderContentItem from "./Item";
 

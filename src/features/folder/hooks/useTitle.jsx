@@ -1,19 +1,15 @@
-import { StyleSheet, Text, View } from "react-native";
+import { useNavigation, StackActions } from "@react-navigation/native";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import { useResetAtom } from "jotai/utils";
-import MoreButton from "../../../shared/icons/MoreButton";
-import CommonTitleContainer from "../../../shared/navigation/CommonContainer";
-import HeaderLeftButton from "../../../shared/navigation/HeaderLeftButton";
-import { useNavigation, StackActions } from "@react-navigation/native";
+import Toast from "react-native-root-toast";
 import { useAtom } from "jotai";
 import { folderListAtom } from "../../../shared/atoms";
 import { LOCAL_STORAGE_KEY, save } from "../../../shared/utils/localStorage";
-import Toast from "react-native-root-toast";
 import { DEFAULT_SHORT_TOAST } from "../../../shared/constants/toast";
 import { folderDetailAtom } from "../atoms";
 import { MODE } from "../constants";
 
-const FolderTitleContainer = (props) => {
+const useFolderTitle = (props) => {
   const { title, id, defaultFolder } = props.route.params;
 
   const [, setFolderList] = useAtom(folderListAtom);
@@ -105,50 +101,14 @@ const FolderTitleContainer = (props) => {
     }));
   };
 
-  return (
-    <CommonTitleContainer onPress={handleTitleAreaPress}>
-      <View style={styles.container}>
-        <HeaderLeftButton {...props} />
-        <View style={styles.content}>
-          <Text style={styles.title}>{title}</Text>
-          <MoreButton
-            style={{ color: "#262424" }}
-            open={titleMoreOpen}
-            list={moreList}
-            onPress={handleMoreClick}
-            defaultFolder={defaultFolder}
-          />
-        </View>
-      </View>
-    </CommonTitleContainer>
-  );
+  return {
+    handleTitleAreaPress,
+    title,
+    titleMoreOpen,
+    moreList,
+    handleMoreClick,
+    defaultFolder,
+  };
 };
 
-const styles = StyleSheet.create({
-  container: {
-    width: "100%",
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    height: 41,
-  },
-  content: {
-    paddingLeft: 10,
-    paddingRight: 14,
-    width: "100%",
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  title: {
-    fontWeight: "700",
-    fontSize: 24,
-    lineHeight: 41,
-    letterSpacing: 0.374,
-    color: "#2D264B",
-  },
-});
-
-export default FolderTitleContainer;
+export default useFolderTitle;
