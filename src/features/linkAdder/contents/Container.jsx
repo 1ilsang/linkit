@@ -31,7 +31,10 @@ const LinkAdderContentContainer = () => {
 
   const getAutoLinkName = () => {
     // TODO: Enhancement. og tag 추출
-    const linkList = url.replace(/https?:\/\/(www\.)?|.com/g, "").split("/");
+    const linkList = url
+      .replace(/https?:\/\/(www\.)?|.com/g, "")
+      .split("/")
+      .filter((str) => str && str.trim().length > 0);
     if (linkList.length < 2) {
       return linkList[0];
     }
@@ -67,7 +70,11 @@ const LinkAdderContentContainer = () => {
         );
         return prev;
       }
-      const submitLink = { ...linkAdder, id: Number(new Date()) };
+      const submitLink = {
+        ...linkAdder,
+        id: Number(new Date()),
+        date: new Date(),
+      };
       if (submitLink.autoLinkName) {
         submitLink.linkName = getAutoLinkName();
       }

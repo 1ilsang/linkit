@@ -2,6 +2,10 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 
 import FilterButton from "../../../../shared/icons/FilterButton";
+import { useAtom } from "jotai";
+import { folderListAtom } from "../../../../shared/atoms";
+import { folderDetailAtom } from "../../atoms";
+import { LOCAL_STORAGE_KEY, save } from "../../../../shared/utils/localStorage";
 
 const actionSheetOptions = {
   title: "링크 정렬",
@@ -12,11 +16,27 @@ const actionSheetOptions = {
 
 const FilterArea = () => {
   const { showActionSheetWithOptions } = useActionSheet();
+  const [folderDetail] = useAtom(folderDetailAtom);
+  const [, setFolderList] = useAtom(folderListAtom);
 
   const handleFilterClick = () => {
     showActionSheetWithOptions(actionSheetOptions, handleActionSheetClick);
   };
-  const handleActionSheetClick = (data) => console.log(data);
+  const handleActionSheetClick = (filterIndex) => {
+    if (![0, 1].includes(filterIndex)) return;
+    setFolderList((prev) => {
+      const targetFolder = prev.find((item) => item.id === folderDetail.id);
+      targetFolder.linkList.sort((a, b) => {
+        if (filterIndex === 0) {
+          return new Date(b.date) - new Date(a.date);
+        }
+        return a.linkName < b.linkName ? -1 : 1;
+      });
+      const next = [...prev];
+      save(LOCAL_STORAGE_KEY.folderList, next);
+      return next;
+    });
+  };
 
   return (
     <View style={styles.container}>

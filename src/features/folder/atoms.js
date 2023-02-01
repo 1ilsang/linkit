@@ -1,4 +1,5 @@
 import { atomWithReset } from "jotai/utils";
+import { MODE } from "./constants";
 
 export const initialFolderDetail = {
   id: undefined,
@@ -7,7 +8,7 @@ export const initialFolderDetail = {
   defaultFolder: false,
   icon: undefined,
   color: undefined,
-  mode: "normal",
+  mode: MODE.normal,
   search: "",
   linkList: [],
   titleMoreOpen: undefined,

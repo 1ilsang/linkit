@@ -11,6 +11,7 @@ import { LOCAL_STORAGE_KEY, save } from "../../../shared/utils/localStorage";
 import Toast from "react-native-root-toast";
 import { DEFAULT_SHORT_TOAST } from "../../../shared/constants/toast";
 import { folderDetailAtom } from "../atoms";
+import { MODE } from "../constants";
 
 const FolderTitleContainer = (props) => {
   const { title, id, defaultFolder } = props.route.params;
@@ -58,6 +59,7 @@ const FolderTitleContainer = (props) => {
           ...prev,
           titleMoreOpen: undefined,
           itemMoreOpen: undefined,
+          mode: MODE.edit,
         }));
       },
       icon: "FolderSimpleDotted",
