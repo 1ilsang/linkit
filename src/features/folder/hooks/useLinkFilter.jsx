@@ -20,10 +20,20 @@ const useLinkFilter = () => {
   const [, setFolderList] = useAtom(folderListAtom);
 
   const handleFilterClick = () => {
+    setFolderDetail((prev) => ({
+      ...prev,
+      titleMoreOpen: undefined,
+      itemMoreOpen: undefined,
+    }));
     showActionSheetWithOptions(actionSheetOptions, handleActionSheetClick);
   };
   const handleContainerClick = () => {
     Keyboard.dismiss();
+    setFolderDetail((prev) => ({
+      ...prev,
+      titleMoreOpen: undefined,
+      itemMoreOpen: undefined,
+    }));
   };
   const handleActionSheetClick = (filterIndex) => {
     if (![0, 1].includes(filterIndex)) return;

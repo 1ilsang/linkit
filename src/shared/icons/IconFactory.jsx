@@ -44,6 +44,7 @@ import PencilSimple from "../../../assets/icon/pencil-simple.svg";
 import Trash from "../../../assets/icon/trash.svg";
 import Circle from "../../../assets/icon/circle.svg";
 import CheckedCircle from "../../../assets/icon/checkedCircle.svg";
+import Share from "../../../assets/icon/share.svg";
 
 const IconFactory = {
   FolderSimpleDotted: <FolderSimpleDotted />,
@@ -92,6 +93,7 @@ const IconFactory = {
   Train: <Train />,
   Circle: <Circle />,
   CheckedCircle: <CheckedCircle />,
+  Share: <Share />,
 };
 
 export default IconFactory;

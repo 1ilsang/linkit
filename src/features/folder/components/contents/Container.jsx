@@ -65,12 +65,20 @@ const FolderContentContainer = (props) => {
     ).linkList;
     setFolderDetail((prev) => ({ ...prev, searchLinkList, search: "" }));
   };
+  const handlePressIn = () => {
+    setFolderDetail((prev) => ({
+      ...prev,
+      titleMoreOpen: undefined,
+      itemMoreOpen: undefined,
+    }));
+  };
 
   return (
     <Pressable onPress={handleContainerPress}>
       {mode === MODE.normal && (
         <>
           <SearchInputBox
+            onPressIn={handlePressIn}
             placeholder={"링크 제목, URL을 검색해 주세요."}
             value={folderDetail.search}
             onChangeText={handleSearchChange}

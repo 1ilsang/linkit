@@ -15,12 +15,38 @@ const getText = (targetText, searchText) => {
   };
 };
 
-const FolderContentItem = ({ linkName, url }) => {
-  const [folderDetail] = useAtom(folderDetailAtom);
-  const { search } = folderDetail;
+const FolderContentItem = ({ linkName, url, id }) => {
+  const [folderDetail, setFolderDetail] = useAtom(folderDetailAtom);
+  const { search, itemMoreOpen } = folderDetail;
 
   const linkText = getText(linkName, search);
   const urlText = getText(url, search);
+
+  const handleMorePress = () => {
+    setFolderDetail((prev) => ({
+      ...prev,
+      itemMoreOpen: prev.itemMoreOpen === id ? undefined : id,
+    }));
+  };
+
+  const moreList = [
+    // TODO: start detail
+    {
+      name: "링크 공유",
+      icon: "Share",
+      onPress: () => {},
+    },
+    {
+      name: "링크 편집",
+      icon: "PencilSimple",
+      onPress: () => {},
+    },
+    {
+      name: "링크 삭제",
+      icon: "Trash",
+      onPress: () => {},
+    },
+  ];
 
   return (
     <Pressable style={styles.container}>
@@ -52,7 +78,12 @@ const FolderContentItem = ({ linkName, url }) => {
             )}
           </Text>
         </View>
-        <MoreButton style={{ color: "#262424" }} />
+        <MoreButton
+          style={{ color: "#262424" }}
+          open={itemMoreOpen === id}
+          list={moreList}
+          onPress={handleMorePress}
+        />
       </View>
     </Pressable>
   );

@@ -7,6 +7,7 @@ const SearchInputBox = ({
   onSubmitEditing,
   onClearPress,
   placeholder,
+  onPressIn,
 }) => {
   const MagnifyingGlass = IconFactory["MagnifyingGlass"];
   const XCircle = IconFactory["XCircle"];
@@ -21,6 +22,7 @@ const SearchInputBox = ({
       <View style={styles.container}>
         <View style={styles.glass}>{MagnifyingGlass}</View>
         <TextInput
+          onPressIn={onPressIn}
           style={styles.input}
           placeholder={placeholder}
           onSubmitEditing={onSubmitEditing}
