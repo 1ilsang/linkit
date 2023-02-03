@@ -1,8 +1,27 @@
+import { useAtom } from "jotai";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import MoreButton from "../../../../../shared/icons/MoreButton";
 import NoImage from "../../../../../shared/icons/NonImage";
+import { folderDetailAtom } from "../../../atoms";
+
+const getText = (targetText, searchText) => {
+  const startIndex = targetText.indexOf(searchText);
+  const endIndex = startIndex + searchText.length;
+  return {
+    searched: startIndex !== -1,
+    prevText: targetText.slice(0, startIndex),
+    nextText: targetText.slice(endIndex),
+    originText: targetText,
+  };
+};
 
 const FolderContentItem = ({ linkName, url }) => {
+  const [folderDetail] = useAtom(folderDetailAtom);
+  const { search } = folderDetail;
+
+  const linkText = getText(linkName, search);
+  const urlText = getText(url, search);
+
   return (
     <Pressable style={styles.container}>
       <View style={styles.contentContainer}>
@@ -10,8 +29,28 @@ const FolderContentItem = ({ linkName, url }) => {
           <NoImage size={40} />
         </View>
         <View style={styles.content}>
-          <Text style={styles.linkName}>{linkName}</Text>
-          <Text style={styles.url}>{url}</Text>
+          <Text style={styles.linkName}>
+            {linkText.searched ? (
+              <>
+                {linkText.prevText}
+                <Text style={styles.search}>{search}</Text>
+                {linkText.nextText}
+              </>
+            ) : (
+              linkText.originText
+            )}
+          </Text>
+          <Text style={styles.url}>
+            {urlText.searched ? (
+              <>
+                {urlText.prevText}
+                <Text style={styles.search}>{search}</Text>
+                {urlText.nextText}
+              </>
+            ) : (
+              urlText.originText
+            )}
+          </Text>
         </View>
         <MoreButton style={{ color: "#262424" }} />
       </View>
@@ -71,6 +110,9 @@ const styles = StyleSheet.create({
     lineHeight: 17,
     letterSpacing: -0.005,
     color: "#A5A5A5",
+  },
+  search: {
+    color: "#3583F0",
   },
 });
 

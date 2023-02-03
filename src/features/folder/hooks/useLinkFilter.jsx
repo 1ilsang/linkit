@@ -16,7 +16,7 @@ const actionSheetOptions = {
 
 const useLinkFilter = () => {
   const { showActionSheetWithOptions } = useActionSheet();
-  const [folderDetail] = useAtom(folderDetailAtom);
+  const [folderDetail, setFolderDetail] = useAtom(folderDetailAtom);
   const [, setFolderList] = useAtom(folderListAtom);
 
   const handleFilterClick = () => {
@@ -27,15 +27,18 @@ const useLinkFilter = () => {
   };
   const handleActionSheetClick = (filterIndex) => {
     if (![0, 1].includes(filterIndex)) return;
+    const nextLinkList = [];
     setFolderList((prev) => {
       const targetFolder = prev.find((item) => item.id === folderDetail.id);
       const sortType = filterIndex === 0 ? FOLDER_SORT.DATE : FOLDER_SORT.NAME;
       targetFolder.linkList.sort(sortLinkList(sortType));
+      nextLinkList.push(...targetFolder.linkList);
       targetFolder.sort = sortType;
       const next = [...prev];
       save(LOCAL_STORAGE_KEY.folderList, next);
       return next;
     });
+    setFolderDetail((prev) => ({ ...prev, searchLinkList: nextLinkList }));
   };
 
   return {

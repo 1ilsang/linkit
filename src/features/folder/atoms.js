@@ -5,6 +5,7 @@ export const initialFolderDetail = {
   id: undefined,
   mode: MODE.normal,
   search: "",
+  searchLinkList: [],
   deleteLinkList: [],
   titleMoreOpen: undefined,
   itemMoreOpen: undefined,

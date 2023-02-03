@@ -5,6 +5,7 @@ const SearchInputBox = ({
   value,
   onChangeText,
   onSubmitEditing,
+  onClearPress,
   placeholder,
 }) => {
   const MagnifyingGlass = IconFactory["MagnifyingGlass"];
@@ -12,6 +13,7 @@ const SearchInputBox = ({
 
   const handleClearPress = () => {
     onChangeText("");
+    onClearPress?.();
   };
 
   return (

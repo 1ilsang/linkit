@@ -12,7 +12,7 @@ import { MODE } from "../constants";
 const useFolderTitle = (props) => {
   const { title, id, defaultFolder } = props.route.params;
 
-  const [, setFolderList] = useAtom(folderListAtom);
+  const [folderList, setFolderList] = useAtom(folderListAtom);
   const [folderDetail, setFolderDetail] = useAtom(folderDetailAtom);
   const { titleMoreOpen, mode, deleteLinkList } = folderDetail;
 
@@ -71,10 +71,15 @@ const useFolderTitle = (props) => {
     {
       name: "목록 편집",
       onPress: () => {
+        const { linkList: searchLinkList } = folderList.find(
+          (item) => item.id === id
+        );
         setFolderDetail((prev) => ({
           ...prev,
           titleMoreOpen: undefined,
           itemMoreOpen: undefined,
+          search: "",
+          searchLinkList,
           mode: MODE.edit,
         }));
       },
