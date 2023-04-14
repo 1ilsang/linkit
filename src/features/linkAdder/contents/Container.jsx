@@ -14,14 +14,28 @@ import { folderListAtom } from "../../../shared/atoms";
 import { LOCAL_STORAGE_KEY, save } from "../../../shared/utils/localStorage";
 import { useNavigation } from "@react-navigation/native";
 import { sortLinkList } from "../../../shared/utils/helpers";
+import { useEffect } from "react";
 
-const LinkAdderContentContainer = () => {
+const LinkAdderContentContainer = ({ id }) => {
   const navigation = useNavigation();
 
   const [, setMain] = useAtom(mainAtom);
-  const [, setFolderList] = useAtom(folderListAtom);
+  const [folderList, setFolderList] = useAtom(folderListAtom);
   const [linkAdder, setLinkAdder] = useAtom(linkAdderAtom);
   const { autoLinkName, linkName, url, targetFolder, memo } = linkAdder;
+
+  useEffect(() => {
+    if (!id) return;
+    const target = folderList.find((item) => item.id === id);
+    if (!target) {
+      throw new Error("아이디가 존재하지 않습니다");
+    }
+    setLinkAdder((prev) => ({
+      ...prev,
+      targetFolder: { id: target.id, title: target.title },
+    }));
+    setMain((prev) => ({ ...prev, folderPickerOpen: false }));
+  }, [id]);
 
   const validSubmit = !!(url.length > 0 &&
   targetFolder.title.length > 0 &&

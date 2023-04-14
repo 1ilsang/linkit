@@ -5,7 +5,7 @@ import { linkAdderAtom } from "./atoms";
 
 import FolderAdderContentContainer from "./contents/Container";
 
-const LinkAdderContainer = () => {
+const LinkAdderContainer = (props) => {
   const resetLinkAdder = useResetAtom(linkAdderAtom);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const LinkAdderContainer = () => {
   return (
     <View style={styles.container}>
       <Pressable style={{ flex: 1 }} onPress={() => Keyboard.dismiss()}>
-        <FolderAdderContentContainer />
+        <FolderAdderContentContainer id={props.route?.params?.id} />
       </Pressable>
     </View>
   );

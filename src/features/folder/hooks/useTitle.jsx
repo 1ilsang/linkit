@@ -136,6 +136,7 @@ const useFolderTitle = (props) => {
   };
 
   return {
+    id,
     title,
     titleMoreOpen,
     moreList,

@@ -4,9 +4,11 @@ import CommonTitleContainer from "../../../../shared/navigation/CommonContainer"
 import HeaderLeftButton from "../../../../shared/navigation/HeaderLeftButton";
 import { MODE } from "../../constants";
 import useFolderTitle from "../../hooks/useTitle";
+import LinkAddButton from "../../../../shared/icons/LinkAddButton";
 
 const FolderTitleContainer = (props) => {
   const {
+    id,
     handleTitleAreaPress,
     title,
     titleMoreOpen,
@@ -41,7 +43,13 @@ const FolderTitleContainer = (props) => {
       <View style={styles.container}>
         <HeaderLeftButton {...props} />
         <View style={styles.content}>
-          <Text style={styles.title}>{title}</Text>
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>{title}</Text>
+            <LinkAddButton
+              style={{ ...styles.title, fontWeight: "400" }}
+              id={id}
+            />
+          </View>
           <MoreButton
             style={{ color: "#262424" }}
             open={titleMoreOpen}
@@ -71,6 +79,12 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "space-between",
+  },
+  titleContainer: {
+    width: "90%",
+    display: "flex",
+    flexDirection: "row",
     justifyContent: "space-between",
   },
   title: {
