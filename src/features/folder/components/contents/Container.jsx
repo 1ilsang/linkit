@@ -26,9 +26,10 @@ const FolderContentContainer = (props) => {
 
   useLayoutEffect(() => {
     if (!folderDetail.id || !folderList) return;
-    const { linkList: searchLinkList } = folderList.find(
-      (item) => item.id === folderDetail.id
-    );
+    const targetFolder = folderList.find((item) => item.id === folderDetail.id);
+    if (!targetFolder) return;
+
+    const { linkList: searchLinkList } = targetFolder;
     setFolderDetail((prev) => ({
       ...prev,
       searchLinkList,

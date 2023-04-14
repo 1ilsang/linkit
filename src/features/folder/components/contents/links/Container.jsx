@@ -13,6 +13,7 @@ const LinkContainer = () => {
   if (folderDetail.mode === MODE.edit) {
     return (
       <ScrollView>
+        {/* TODO: 이거 지워야 할듯? */}
         <Edit />
       </ScrollView>
     );

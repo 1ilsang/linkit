@@ -6,6 +6,8 @@ const FormInputBox = ({
   value,
   onChangeText,
   onInputPress,
+  error = "",
+  maxLength = 100,
   editable = true,
   required = false,
 }) => {
@@ -16,6 +18,7 @@ const FormInputBox = ({
         {required && <Text style={styles.required}>*</Text>}
       </View>
       <TextInput
+        maxLength={maxLength}
         onPressIn={onInputPress}
         style={styles.input}
         placeholder={placeholder}
@@ -23,6 +26,7 @@ const FormInputBox = ({
         value={value}
         editable={editable}
       />
+      {error.length > 0 && <Text style={styles.errorLabel}>{error}</Text>}
     </View>
   );
 };
@@ -43,6 +47,14 @@ const styles = StyleSheet.create({
     lineHeight: 17,
     letterSpacing: -0.5,
     color: "#000000",
+  },
+  errorLabel: {
+    height: 17,
+    fontWeight: "300",
+    fontSize: 12,
+    lineHeight: 17,
+    letterSpacing: -0.5,
+    color: "#E65E2A",
   },
   required: {
     color: "#E65E2A",

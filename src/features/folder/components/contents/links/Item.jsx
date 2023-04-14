@@ -1,8 +1,17 @@
 import { useAtom } from "jotai";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View, Share } from "react-native";
+import { useActionSheet } from "@expo/react-native-action-sheet";
 import MoreButton from "../../../../../shared/icons/MoreButton";
 import NoImage from "../../../../../shared/icons/NonImage";
 import { folderDetailAtom } from "../../../atoms";
+import { folderListAtom } from "../../../../../shared/atoms";
+import Toast from "react-native-root-toast";
+import {
+  save,
+  LOCAL_STORAGE_KEY,
+} from "../../../../../shared/utils/localStorage";
+import { DEFAULT_SHORT_TOAST } from "../../../../../shared/constants/toast";
+import { MODE } from "../../../constants";
 
 const getText = (targetText, searchText) => {
   const startIndex = targetText.indexOf(searchText);
@@ -17,6 +26,9 @@ const getText = (targetText, searchText) => {
 
 const FolderContentItem = ({ linkName, url, id }) => {
   const [folderDetail, setFolderDetail] = useAtom(folderDetailAtom);
+  const [, setFolderList] = useAtom(folderListAtom);
+  const { showActionSheetWithOptions } = useActionSheet();
+
   const { search, itemMoreOpen } = folderDetail;
 
   const linkText = getText(linkName, search);
@@ -29,22 +41,64 @@ const FolderContentItem = ({ linkName, url, id }) => {
     }));
   };
 
+  const deleteLinkActionSheetOptions = {
+    title: `${linkName} 링크를 삭제하시겠어요?`,
+    options: ["취소", "삭제"],
+    cancelButtonIndex: 0,
+    destructiveButtonIndex: 1,
+  };
+  const handleLinkActionSheetClick = (actionIndex) => {
+    if (actionIndex !== 1) return;
+    setFolderList((prev) => {
+      const targetFolder = prev.find((item) => item.id === folderDetail.id);
+      const refinedLinkList = targetFolder.linkList.filter(
+        (item) => item.id !== id
+      );
+      targetFolder.linkList = refinedLinkList;
+      const next = [...prev];
+      save(LOCAL_STORAGE_KEY.folderList, next);
+      return next;
+    });
+    Toast.show("링크가 삭제되었어요.", DEFAULT_SHORT_TOAST);
+  };
+
   const moreList = [
-    // TODO: start detail
     {
       name: "링크 공유",
       icon: "Share",
-      onPress: () => {},
+      onPress: async () => {
+        await Share.share({ message: linkName });
+        setFolderDetail((prev) => ({
+          ...prev,
+          itemMoreOpen: undefined,
+        }));
+      },
     },
     {
       name: "링크 편집",
       icon: "PencilSimple",
-      onPress: () => {},
+      onPress: () => {
+        // TODO: 편집 창으로 가야함.
+        setFolderDetail((prev) => ({
+          ...prev,
+          mode: MODE.edit,
+          itemMoreOpen: undefined,
+        }));
+      },
     },
     {
       name: "링크 삭제",
       icon: "Trash",
-      onPress: () => {},
+      onPress: () => {
+        showActionSheetWithOptions(
+          deleteLinkActionSheetOptions,
+          handleLinkActionSheetClick
+        );
+        setFolderDetail((prev) => ({
+          ...prev,
+          itemMoreOpen: undefined,
+        }));
+      },
     },
   ];
 
