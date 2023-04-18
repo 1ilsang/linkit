@@ -16,7 +16,7 @@ import { useNavigation } from "@react-navigation/native";
 import { sortLinkList } from "../../../shared/utils/helpers";
 import { useEffect, useState } from "react";
 
-const SALT = 1_000_000;
+const SALT = 1000000;
 
 const LinkAdderContentContainer = ({ id }) => {
   const navigation = useNavigation();
