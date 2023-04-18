@@ -47,7 +47,7 @@ const PickerBottomSheet = ({ list, open, onDoneClick, onCancelClick }) => {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    height: 575,
+    height: "100%",
     display: "flex",
     position: "absolute",
   },

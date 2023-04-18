@@ -1,6 +1,5 @@
 import { useAtom } from "jotai";
-import { Pressable, StyleSheet, Text, View, Share } from "react-native";
-import { useActionSheet } from "@expo/react-native-action-sheet";
+import { Pressable, StyleSheet, Text, View, Share, Alert } from "react-native";
 import MoreButton from "../../../../../shared/icons/MoreButton";
 import NoImage from "../../../../../shared/icons/NonImage";
 import { folderDetailAtom } from "../../../atoms";
@@ -27,7 +26,6 @@ const getText = (targetText, searchText) => {
 const FolderContentItem = ({ linkName, url, id }) => {
   const [folderDetail, setFolderDetail] = useAtom(folderDetailAtom);
   const [, setFolderList] = useAtom(folderListAtom);
-  const { showActionSheetWithOptions } = useActionSheet();
 
   const { search, itemMoreOpen } = folderDetail;
 
@@ -41,14 +39,7 @@ const FolderContentItem = ({ linkName, url, id }) => {
     }));
   };
 
-  const deleteLinkActionSheetOptions = {
-    title: `${linkName} 링크를 삭제하시겠어요?`,
-    options: ["취소", "삭제"],
-    cancelButtonIndex: 0,
-    destructiveButtonIndex: 1,
-  };
-  const handleLinkActionSheetClick = (actionIndex) => {
-    if (actionIndex !== 1) return;
+  const handleLinkDeleteClick = () => {
     setFolderList((prev) => {
       const targetFolder = prev.find((item) => item.id === folderDetail.id);
       const refinedLinkList = targetFolder.linkList.filter(
@@ -90,10 +81,10 @@ const FolderContentItem = ({ linkName, url, id }) => {
       name: "링크 삭제",
       icon: "Trash",
       onPress: () => {
-        showActionSheetWithOptions(
-          deleteLinkActionSheetOptions,
-          handleLinkActionSheetClick
-        );
+        Alert.alert(`${linkName} 링크를 삭제하시겠어요?`, "", [
+          { text: "취소", style: "cancel" },
+          { text: "삭제", onPress: handleLinkDeleteClick },
+        ]);
         setFolderDetail((prev) => ({
           ...prev,
           itemMoreOpen: undefined,

@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     paddingBottom: 24,
 
-    width: 160,
+    width: "47%",
     height: 152,
 
     backgroundColor: "black",

@@ -1,6 +1,6 @@
 import { useAtom } from "jotai";
 import { useLayoutEffect } from "react";
-import { Pressable } from "react-native";
+import { Pressable, StyleSheet } from "react-native";
 import { folderListAtom } from "../../../../shared/atoms";
 import SearchInputBox from "../../../../shared/inputBox/SearchInputBox";
 import { folderDetailAtom, initialFolderDetail } from "../../atoms";
@@ -75,7 +75,7 @@ const FolderContentContainer = (props) => {
   };
 
   return (
-    <Pressable onPress={handleContainerPress}>
+    <Pressable onPress={handleContainerPress} style={styles.container}>
       {mode === MODE.normal && (
         <>
           <SearchInputBox
@@ -92,5 +92,11 @@ const FolderContentContainer = (props) => {
     </Pressable>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    height: "100%",
+  },
+});
 
 export default FolderContentContainer;

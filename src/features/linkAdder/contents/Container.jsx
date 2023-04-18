@@ -162,7 +162,6 @@ const LinkAdderContentContainer = ({ id }) => {
         onPress={handleSubmitPress}
         disabled={!validSubmit}
       />
-      {/* TODO: 키보드에 가려지는 부분이 있으므로 밀어주는 작업 해야함. */}
     </View>
   );
 };
