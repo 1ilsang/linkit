@@ -70,7 +70,7 @@ const FolderCreateEditContentContainer = (props) => {
     navigation.navigate("Main");
     const toastMessage = isEdit
       ? "편집한 내용이 저장되었어요."
-      : `${saveFolderData.title} 폴더가 추가되었어요.              폴더로 이동`;
+      : `폴더가 추가되었어요.              폴더로 이동`;
     // TODO: Toast text 색 및 배치 수정 필요
     Toast.show(toastMessage, {
       ...DEFAULT_SHORT_TOAST,
