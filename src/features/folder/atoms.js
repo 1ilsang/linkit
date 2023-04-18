@@ -8,7 +8,8 @@ export const initialFolderDetail = {
   searchLinkList: [],
   deleteLinkList: [],
   titleMoreOpen: undefined,
-  itemMoreOpen: undefined,
+  bottomSheetRef: undefined,
+  bottomSheetItem: undefined,
 };
 
 export const folderDetailAtom = atomWithReset(initialFolderDetail);

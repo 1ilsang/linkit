@@ -1,6 +1,5 @@
-import { StyleSheet, Text, View, Pressable } from "react-native";
+import { StyleSheet, Text, View, Pressable, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { useActionSheet } from "@expo/react-native-action-sheet";
 import Toast from "react-native-root-toast";
 import MoreButton from "../../../shared/icons/MoreButton";
 import IconFactory from "../../../shared/icons/IconFactory";
@@ -18,25 +17,16 @@ const ContentBox = ({ id, title, description, defaultFolder, color, icon }) => {
   const [main, setMain] = useAtom(mainAtom);
   const [, setFolderList] = useAtom(folderListAtom);
 
-  const { showActionSheetWithOptions } = useActionSheet();
   const resetFolderDetail = useResetAtom(folderDetailAtom);
 
   const { moreOpen } = main;
   const IconComponent = IconFactory[icon];
 
-  const deleteActionSheetOptions = {
-    title: `${title} 폴더를 삭제하시겠어요? 폴더 내 링크도 함께 삭제되며, 삭제 후엔 복구할 수 없어요.`,
-    options: ["취소", "삭제"],
-    cancelButtonIndex: 0,
-    destructiveButtonIndex: 1,
-  };
-  const handleActionSheetClick = (actionIndex) => {
-    if (actionIndex !== 1) return;
-
+  const handleLinkDeleteClick = () => {
     setFolderList((prev) => {
       const next = prev.filter((item) => item.id !== id);
       save(LOCAL_STORAGE_KEY.folderList, next);
-      return next;
+      return [...next];
     });
     // TODO: delete links
     resetFolderDetail();
@@ -56,9 +46,13 @@ const ContentBox = ({ id, title, description, defaultFolder, color, icon }) => {
       name: "폴더 삭제",
       onPress: () => {
         setMain((prev) => ({ ...prev, moreOpen: undefined }));
-        showActionSheetWithOptions(
-          deleteActionSheetOptions,
-          handleActionSheetClick
+        Alert.alert(
+          `${title} 폴더를 삭제하시겠어요? 폴더 내 링크도 함께 삭제되며, 삭제 후엔 복구할 수 없어요.`,
+          "",
+          [
+            { text: "취소", style: "cancel" },
+            { text: "삭제", onPress: handleLinkDeleteClick },
+          ]
         );
       },
       icon: "Trash",

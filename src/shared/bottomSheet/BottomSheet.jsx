@@ -4,10 +4,15 @@ import { Modalize } from "react-native-modalize";
 import { Portal } from "react-native-portalize";
 import IconFactory from "../icons/IconFactory";
 
+const MIN_BOTTOM_HEIGHT = 30;
+const DEFAULT_ITEM_HEIGHT = 80;
+
 const BottomSheet = forwardRef(({ list }, ref) => {
+  const modalHeight = list.length * DEFAULT_ITEM_HEIGHT + MIN_BOTTOM_HEIGHT;
+
   return (
     <Portal>
-      <Modalize ref={ref} snapPoint={184} handlePosition="inside">
+      <Modalize ref={ref} handlePosition="inside" modalHeight={modalHeight}>
         <View style={styles.container}>
           {list.map(({ name, onPress, icon }) => {
             const Icon = IconFactory[icon];
@@ -35,7 +40,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#FFFFFF",
     paddingTop: 42,
-    height: 214,
+    height: "100%",
     borderRadius: 30,
   },
   content: {

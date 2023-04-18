@@ -36,13 +36,6 @@ const FolderContentContainer = (props) => {
     }));
   }, [folderList, folderDetail.id]);
 
-  const handleContainerPress = () => {
-    setFolderDetail((prev) => ({
-      ...prev,
-      titleMoreOpen: undefined,
-      itemMoreOpen: undefined,
-    }));
-  };
   const handleSearchChange = (search) => {
     const originLinkList = folderList.find(
       (item) => item.id === folderDetail.id
@@ -66,20 +59,19 @@ const FolderContentContainer = (props) => {
     ).linkList;
     setFolderDetail((prev) => ({ ...prev, searchLinkList, search: "" }));
   };
-  const handlePressIn = () => {
+  const closeModal = () => {
     setFolderDetail((prev) => ({
       ...prev,
       titleMoreOpen: undefined,
-      itemMoreOpen: undefined,
     }));
   };
 
   return (
-    <Pressable onPress={handleContainerPress} style={styles.container}>
+    <Pressable onPress={closeModal} style={styles.container}>
       {mode === MODE.normal && (
         <>
           <SearchInputBox
-            onPressIn={handlePressIn}
+            onPressIn={closeModal}
             placeholder={"링크 제목, URL을 검색해 주세요."}
             value={folderDetail.search}
             onChangeText={handleSearchChange}

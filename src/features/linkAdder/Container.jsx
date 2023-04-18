@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { Keyboard, Pressable, StyleSheet, View } from "react-native";
 import { linkAdderAtom } from "./atoms";
 
-import FolderAdderContentContainer from "./contents/Container";
+import LinkAdderContentContainer from "./contents/Container";
 
 const LinkAdderContainer = (props) => {
   const resetLinkAdder = useResetAtom(linkAdderAtom);
@@ -17,7 +17,7 @@ const LinkAdderContainer = (props) => {
   return (
     <View style={styles.container}>
       <Pressable style={{ flex: 1 }} onPress={() => Keyboard.dismiss()}>
-        <FolderAdderContentContainer id={props.route?.params?.id} />
+        <LinkAdderContentContainer id={props.route?.params?.id} />
       </Pressable>
     </View>
   );

@@ -1,16 +1,8 @@
 import { useAtom } from "jotai";
-import { Pressable, StyleSheet, Text, View, Share, Alert } from "react-native";
-import MoreButton from "../../../../../shared/icons/MoreButton";
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Feather } from "@expo/vector-icons";
 import NoImage from "../../../../../shared/icons/NonImage";
 import { folderDetailAtom } from "../../../atoms";
-import { folderListAtom } from "../../../../../shared/atoms";
-import Toast from "react-native-root-toast";
-import {
-  save,
-  LOCAL_STORAGE_KEY,
-} from "../../../../../shared/utils/localStorage";
-import { DEFAULT_SHORT_TOAST } from "../../../../../shared/constants/toast";
-import { MODE } from "../../../constants";
 
 const getText = (targetText, searchText) => {
   const startIndex = targetText.indexOf(searchText);
@@ -23,75 +15,21 @@ const getText = (targetText, searchText) => {
   };
 };
 
-const FolderContentItem = ({ linkName, url, id }) => {
+const FolderContentItem = (props) => {
   const [folderDetail, setFolderDetail] = useAtom(folderDetailAtom);
-  const [, setFolderList] = useAtom(folderListAtom);
-
-  const { search, itemMoreOpen } = folderDetail;
+  const { linkName, url } = props;
+  const { search } = folderDetail;
 
   const linkText = getText(linkName, search);
   const urlText = getText(url, search);
 
   const handleMorePress = () => {
+    folderDetail.bottomSheetRef?.current?.open();
     setFolderDetail((prev) => ({
       ...prev,
-      itemMoreOpen: prev.itemMoreOpen === id ? undefined : id,
+      bottomSheetItem: { ...props },
     }));
   };
-
-  const handleLinkDeleteClick = () => {
-    setFolderList((prev) => {
-      const targetFolder = prev.find((item) => item.id === folderDetail.id);
-      const refinedLinkList = targetFolder.linkList.filter(
-        (item) => item.id !== id
-      );
-      targetFolder.linkList = refinedLinkList;
-      const next = [...prev];
-      save(LOCAL_STORAGE_KEY.folderList, next);
-      return next;
-    });
-    Toast.show("링크가 삭제되었어요.", DEFAULT_SHORT_TOAST);
-  };
-
-  const moreList = [
-    {
-      name: "링크 공유",
-      icon: "Share",
-      onPress: async () => {
-        await Share.share({ message: linkName });
-        setFolderDetail((prev) => ({
-          ...prev,
-          itemMoreOpen: undefined,
-        }));
-      },
-    },
-    {
-      name: "링크 편집",
-      icon: "PencilSimple",
-      onPress: () => {
-        // TODO: 편집 창으로 가야함.
-        setFolderDetail((prev) => ({
-          ...prev,
-          mode: MODE.edit,
-          itemMoreOpen: undefined,
-        }));
-      },
-    },
-    {
-      name: "링크 삭제",
-      icon: "Trash",
-      onPress: () => {
-        Alert.alert(`${linkName} 링크를 삭제하시겠어요?`, "", [
-          { text: "취소", style: "cancel" },
-          { text: "삭제", onPress: handleLinkDeleteClick },
-        ]);
-        setFolderDetail((prev) => ({
-          ...prev,
-          itemMoreOpen: undefined,
-        }));
-      },
-    },
-  ];
 
   return (
     <Pressable style={styles.container}>
@@ -123,12 +61,13 @@ const FolderContentItem = ({ linkName, url, id }) => {
             )}
           </Text>
         </View>
-        <MoreButton
-          style={{ color: "#262424" }}
-          open={itemMoreOpen === id}
-          list={moreList}
-          onPress={handleMorePress}
-        />
+        <Pressable onPress={handleMorePress} hitSlop={10}>
+          <Feather
+            style={{ color: "#262424" }}
+            name="more-vertical"
+            size={22}
+          />
+        </Pressable>
       </View>
     </Pressable>
   );

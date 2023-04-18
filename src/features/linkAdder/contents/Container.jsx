@@ -14,7 +14,9 @@ import { folderListAtom } from "../../../shared/atoms";
 import { LOCAL_STORAGE_KEY, save } from "../../../shared/utils/localStorage";
 import { useNavigation } from "@react-navigation/native";
 import { sortLinkList } from "../../../shared/utils/helpers";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+
+const SALT = 1_000_000;
 
 const LinkAdderContentContainer = ({ id }) => {
   const navigation = useNavigation();
@@ -23,6 +25,9 @@ const LinkAdderContentContainer = ({ id }) => {
   const [folderList, setFolderList] = useAtom(folderListAtom);
   const [linkAdder, setLinkAdder] = useAtom(linkAdderAtom);
   const { autoLinkName, linkName, url, targetFolder, memo } = linkAdder;
+
+  const [linkNameError, setLinkNameError] = useState("");
+  const [memoError, setMemoError] = useState("");
 
   useEffect(() => {
     if (!id) return;
@@ -59,16 +64,24 @@ const LinkAdderContentContainer = ({ id }) => {
     setLinkAdder((prev) => ({
       ...prev,
       autoLinkName: !prev.autoLinkName,
+      linkName: "",
     }));
+    setLinkNameError("");
   };
-  const handleLinkTextChange = (linkName) => {
+  const handleLinkNameChange = (linkName) => {
     setLinkAdder((prev) => ({ ...prev, linkName }));
+    setLinkNameError(
+      linkName.length > 20 ? "공백 포함 20자까지 입력할 수 있어요." : ""
+    );
   };
   const handleUrlTextChange = (url) => {
     setLinkAdder((prev) => ({ ...prev, url }));
   };
   const handleMemoTextChange = (memo) => {
     setLinkAdder((prev) => ({ ...prev, memo }));
+    setMemoError(
+      memo.length > 100 ? "공백 포함 100자까지 입력할 수 있어요." : ""
+    );
   };
   const handleFolderPress = () => {
     Keyboard.dismiss();
@@ -87,7 +100,7 @@ const LinkAdderContentContainer = ({ id }) => {
       }
       const submitLink = {
         ...linkAdder,
-        id: Number(new Date()),
+        id: Number(new Date()) + Math.floor(Math.random() * SALT),
         date: new Date(),
       };
       if (submitLink.autoLinkName) {
@@ -97,21 +110,25 @@ const LinkAdderContentContainer = ({ id }) => {
       existPrevData.linkList.sort(sortLinkList(existPrevData.sort));
       const next = [...prev];
       save(LOCAL_STORAGE_KEY.folderList, next);
-      // TODO: Toast text 색 및 배치 수정 필요
-      Toast.show(
-        "링크가 저장되었어요!                       저장 폴더로 이동",
-        {
-          ...DEFAULT_LONG_TOAST,
-          hideOnPress: true,
-          onPress: (e) => {
-            navigation.navigate("Folder", {
-              id: targetFolder.id,
-              title: targetFolder.title,
-            });
-          },
-        }
-      );
-      navigation.navigate("Main");
+
+      const toastMessage = id
+        ? "링크가 저장되었어요!"
+        : "링크가 저장되었어요!                       저장 폴더로 이동";
+      Toast.show(toastMessage, {
+        ...DEFAULT_LONG_TOAST,
+        hideOnPress: true,
+        onPress: (e) => {
+          navigation.navigate("Folder", {
+            id: targetFolder.id,
+            title: targetFolder.title,
+          });
+        },
+      });
+      if (id) {
+        navigation.goBack();
+      } else {
+        navigation.navigate("Main");
+      }
       return next;
     });
   };
@@ -130,8 +147,9 @@ const LinkAdderContentContainer = ({ id }) => {
           <FormInputBox
             label="링크 이름"
             placeholder="링크 이름을 입력해 주세요."
-            onChangeText={handleLinkTextChange}
+            onChangeText={handleLinkNameChange}
             value={linkName}
+            error={linkNameError}
             required
           />
         )}
@@ -146,7 +164,7 @@ const LinkAdderContentContainer = ({ id }) => {
           label="폴더"
           placeholder="폴더를 선택해 주세요."
           editable={false}
-          value={targetFolder.title}
+          value={targetFolder.title || folderList[0].title}
           onInputPress={handleFolderPress}
           required
         />
@@ -155,6 +173,7 @@ const LinkAdderContentContainer = ({ id }) => {
           placeholder="내용을 입력해 주세요. (100자 이하)"
           onChangeText={handleMemoTextChange}
           value={memo}
+          error={memoError}
         />
       </View>
       <SubmitButton

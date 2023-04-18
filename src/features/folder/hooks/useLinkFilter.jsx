@@ -23,7 +23,6 @@ const useLinkFilter = () => {
     setFolderDetail((prev) => ({
       ...prev,
       titleMoreOpen: undefined,
-      itemMoreOpen: undefined,
     }));
     showActionSheetWithOptions(actionSheetOptions, handleActionSheetClick);
   };
@@ -32,7 +31,6 @@ const useLinkFilter = () => {
     setFolderDetail((prev) => ({
       ...prev,
       titleMoreOpen: undefined,
-      itemMoreOpen: undefined,
     }));
   };
   const handleActionSheetClick = (filterIndex) => {

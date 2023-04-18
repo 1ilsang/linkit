@@ -1,5 +1,4 @@
 import { useNavigation, StackActions } from "@react-navigation/native";
-import { useActionSheet } from "@expo/react-native-action-sheet";
 import { useResetAtom } from "jotai/utils";
 import Toast from "react-native-root-toast";
 import { useAtom } from "jotai";
@@ -8,6 +7,7 @@ import { LOCAL_STORAGE_KEY, save } from "../../../shared/utils/localStorage";
 import { DEFAULT_SHORT_TOAST } from "../../../shared/constants/toast";
 import { folderDetailAtom } from "../atoms";
 import { MODE } from "../constants";
+import { Alert } from "react-native";
 
 const useFolderTitle = (props) => {
   const { title, id, defaultFolder } = props.route.params;
@@ -17,43 +17,27 @@ const useFolderTitle = (props) => {
   const { titleMoreOpen, mode, deleteLinkList } = folderDetail;
 
   const navigation = useNavigation();
-  const { showActionSheetWithOptions } = useActionSheet();
   const resetFolderDetail = useResetAtom(folderDetailAtom);
 
   const handleMoreClick = () => {
     setFolderDetail((prev) => ({
       ...prev,
       titleMoreOpen: !prev.titleMoreOpen,
-      itemMoreOpen: undefined,
     }));
   };
 
-  const deleteFolderActionSheetOptions = {
-    title: `${title} 폴더를 삭제하시겠어요? 폴더 내 링크도 함께 삭제되며, 삭제 후엔 복구할 수 없어요.`,
-    options: ["취소", "삭제"],
-    cancelButtonIndex: 0,
-    destructiveButtonIndex: 1,
-  };
-  const deleteLinkActionSheetOptions = {
-    title: `${title}의 링크 ${deleteLinkList.length}건을 삭제하시겠어요?`,
-    options: ["취소", "삭제"],
-    cancelButtonIndex: 0,
-    destructiveButtonIndex: 1,
-  };
-
-  const handleActionSheetClick = (actionIndex) => {
-    if (actionIndex !== 1) return;
+  const handleLinkDeleteClick = () => {
     setFolderList((prev) => {
       const next = prev.filter((item) => item.id !== id);
       save(LOCAL_STORAGE_KEY.folderList, next);
-      return next;
+      return [...next];
     });
     resetFolderDetail();
     Toast.show("폴더가 삭제되었어요.", DEFAULT_SHORT_TOAST);
     navigation.navigate("Main");
   };
-  const handleLinkActionSheetClick = (actionIndex) => {
-    if (actionIndex !== 1) return;
+  const handleLinkAllDeleteClick = () => {
+    setFolderDetail((prev) => ({ ...prev, mode: MODE.normal }));
     setFolderList((prev) => {
       const targetFolder = prev.find((item) => item.id === id);
       const refinedLinkList = targetFolder.linkList.filter(
@@ -77,7 +61,6 @@ const useFolderTitle = (props) => {
         setFolderDetail((prev) => ({
           ...prev,
           titleMoreOpen: undefined,
-          itemMoreOpen: undefined,
           search: "",
           searchLinkList,
           mode: MODE.edit,
@@ -91,7 +74,6 @@ const useFolderTitle = (props) => {
         setFolderDetail((prev) => ({
           ...prev,
           titleMoreOpen: undefined,
-          itemMoreOpen: undefined,
         }));
         const pushAction = StackActions.push("FolderCreateEdit", {
           type: "edit",
@@ -107,11 +89,14 @@ const useFolderTitle = (props) => {
         setFolderDetail((prev) => ({
           ...prev,
           titleMoreOpen: undefined,
-          itemMoreOpen: undefined,
         }));
-        showActionSheetWithOptions(
-          deleteFolderActionSheetOptions,
-          handleActionSheetClick
+        Alert.alert(
+          `${title} 폴더를 삭제하시겠어요? 폴더 내 링크도 함께 삭제되며, 삭제 후엔 복구할 수 없어요.`,
+          "",
+          [
+            { text: "취소", style: "cancel" },
+            { text: "삭제", onPress: handleLinkDeleteClick },
+          ]
         );
       },
       icon: "Trash",
@@ -122,16 +107,19 @@ const useFolderTitle = (props) => {
     setFolderDetail((prev) => ({
       ...prev,
       titleMoreOpen: undefined,
-      itemMoreOpen: undefined,
     }));
   };
   const handleCancelEditPress = () => {
     setFolderDetail((prev) => ({ ...prev, mode: MODE.normal }));
   };
   const handleDeleteLinkPress = () => {
-    showActionSheetWithOptions(
-      deleteLinkActionSheetOptions,
-      handleLinkActionSheetClick
+    Alert.alert(
+      `${title}의 링크 ${deleteLinkList.length}건을 삭제하시겠어요?`,
+      "",
+      [
+        { text: "취소", style: "cancel" },
+        { text: "삭제", onPress: handleLinkAllDeleteClick },
+      ]
     );
   };
 

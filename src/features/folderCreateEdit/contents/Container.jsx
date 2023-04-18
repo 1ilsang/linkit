@@ -84,12 +84,16 @@ const FolderCreateEditContentContainer = (props) => {
     });
   };
   const handleTitleChange = (title) => {
+    setTitleError(
+      title.length > 16 ? "공백 포함 16자까지 입력할 수 있어요." : ""
+    );
     setCreateEdit((prev) => ({ ...prev, title }));
-    setTitleError("");
   };
   const handleDescriptionChange = (description) => {
+    setDescriptionError(
+      description.length > 10 ? "공백 포함 10자까지 입력할 수 있어요." : ""
+    );
     setCreateEdit((prev) => ({ ...prev, description }));
-    setDescriptionError("");
   };
 
   return (
