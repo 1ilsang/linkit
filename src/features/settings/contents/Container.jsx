@@ -1,32 +1,35 @@
 import { useState } from "react";
-import { Text } from "react-native";
-
-import InputBox from "./InputBox";
+import { Pressable, StyleSheet, Text } from "react-native";
+import Toggle from "../../../shared/icons/Toggle";
 
 const SettingsContentContainer = () => {
-  const [inputText, setInputText] = useState("");
+  const [push, setPush] = useState(true);
 
-  const handleInputChange = (text) => {
-    setInputText(text);
+  const handlePushToggle = () => {
+    setPush((prev) => !prev);
   };
 
   return (
     <>
       <Text>푸시 알림 설정</Text>
-      <InputBox
-        placeholder="이거머야"
-        value={inputText}
-        onChange={handleInputChange}
-      />
-      <Text>링크 설정</Text>
-      <InputBox
-        placeholder="먼가가 먼가먼가리리"
-        value={inputText}
-        onChange={handleInputChange}
-      />
-      <Text>아이콘</Text>
+      <Pressable style={styles.toggleContainer} onPress={handlePushToggle}>
+        <Text>푸시 알림</Text>
+        <Toggle selected={push} />
+      </Pressable>
+      <Text>리마인드 알림 ~~~ 등을 알려드릴게요.</Text>
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  toggleContainer: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingBottom: 24,
+  },
+});
 
 export default SettingsContentContainer;
