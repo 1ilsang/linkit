@@ -1,17 +1,20 @@
 import { useAtom } from "jotai";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { colorSets } from "../../../shared/constants/colors";
-import IconFactory from "../../../shared/icons/IconFactory";
 import { createEditAtom } from "../atoms";
+import { Check } from "phosphor-react-native";
 
 const ColorItem = ({ color, checked, onPress }) => {
-  const checkIcon = IconFactory["Check"];
   return (
     <Pressable
       style={{ ...styles.colorItem, backgroundColor: color }}
       onPress={() => onPress(color)}
     >
-      {checked && <View style={styles.checked}>{checkIcon}</View>}
+      {checked && (
+        <View style={styles.checked}>
+          <Check />
+        </View>
+      )}
     </Pressable>
   );
 };
