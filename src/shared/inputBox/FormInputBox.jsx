@@ -60,7 +60,6 @@ const styles = StyleSheet.create({
     color: "#E65E2A",
   },
   input: {
-    boxSizing: "border-box",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",

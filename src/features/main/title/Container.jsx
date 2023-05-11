@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     fontSize: 34,
     lineHeight: 41,
 
-    letterSpacing: "0.374",
+    letterSpacing: 0.374,
 
     color: "#2D264B",
   },

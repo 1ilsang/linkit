@@ -19,13 +19,12 @@ import {
   Lightbulb,
   PaintBrush,
   Binoculars,
-  Movie,
-  TV,
-  Music,
-  Youtube,
+  TelevisionSimple,
+  MusicNote,
+  YoutubeLogo,
   Books,
   BookOpen,
-  Cart,
+  ShoppingCartSimple,
   Handbag,
   CoatHanger,
   Coffee,
@@ -34,21 +33,22 @@ import {
   Newspaper,
   Article,
   File,
-  PaperClip,
+  Paperclip,
   EnvelopeOpen,
   Archive,
-  Exercise,
+  Barbell,
   Bathtub,
-  Medi,
-  World,
-  Map,
+  FirstAid,
+  GlobeHemisphereWest,
+  MapTrifold,
   Train,
   Circle,
   CheckedCircle,
   Share,
+  FilmSlate,
 } from "phosphor-react-native";
 
-const IconFactory = ({ icon, color = "black" }) => {
+const IconFactory = ({ icon, color = "black", weight = "regular" }) => {
   switch (icon) {
     case "FolderSimpleDotted":
       return <FolderSimpleDotted color={color} />;
@@ -57,13 +57,13 @@ const IconFactory = ({ icon, color = "black" }) => {
     case "PencilSimple":
       return <PencilSimple color={color} />;
     case "XCircle":
-      return <XCircle color={color} />;
+      return <XCircle color={color} weight={weight} />;
     case "MagnifyingGlass":
       return <MagnifyingGlass color={color} />;
     case "Check":
       return <Check color={color} />;
     case "FolderSimplePlus":
-      <FolderSimplePlus color={color} />;
+      return <FolderSimplePlus color={color} />;
     case "Link":
       return <Link color={color} />;
     case "Heart":
@@ -91,19 +91,19 @@ const IconFactory = ({ icon, color = "black" }) => {
     case "Binoculars":
       return <Binoculars color={color} />;
     case "Movie":
-      return <Movie color={color} />;
+      return <FilmSlate color={color} />;
     case "TV":
-      return <TV color={color} />;
+      return <TelevisionSimple color={color} />;
     case "Music":
-      return <Music color={color} />;
+      return <MusicNote color={color} />;
     case "Youtube":
-      return <Youtube color={color} />;
+      return <YoutubeLogo color={color} />;
     case "Books":
       return <Books color={color} />;
     case "BookOpen":
       return <BookOpen color={color} />;
     case "Cart":
-      return <Cart color={color} />;
+      return <ShoppingCartSimple color={color} />;
     case "Handbag":
       return <Handbag color={color} />;
     case "CoatHanger":
@@ -121,21 +121,21 @@ const IconFactory = ({ icon, color = "black" }) => {
     case "File":
       return <File color={color} />;
     case "PaperClip":
-      return <PaperClip color={color} />;
+      return <Paperclip color={color} />;
     case "EnvelopeOpen":
       return <EnvelopeOpen color={color} />;
     case "Archive":
       return <Archive color={color} />;
     case "Exercise":
-      return <Exercise color={color} />;
+      return <Barbell color={color} />;
     case "Bathtub":
       return <Bathtub color={color} />;
     case "Medi":
-      return <Medi color={color} />;
+      return <FirstAid color={color} />;
     case "World":
-      return <World color={color} />;
+      return <GlobeHemisphereWest color={color} />;
     case "Map":
-      return <Map color={color} />;
+      return <MapTrifold color={color} />;
     case "Train":
       return <Train color={color} />;
     case "Circle":
@@ -145,7 +145,7 @@ const IconFactory = ({ icon, color = "black" }) => {
     case "Share":
       return <Share color={color} />;
     default:
-      return null;
+      return <View></View>;
   }
 };
 

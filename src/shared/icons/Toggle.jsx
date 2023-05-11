@@ -31,7 +31,6 @@ const styles = StyleSheet.create({
   circle: {
     width: 30.38,
     height: 30,
-    boxSizing: "border-box",
     backgroundColor: "#FFFFFF",
     borderColor: "#1DB191",
     borderWidth: 2,

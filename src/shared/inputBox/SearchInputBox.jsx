@@ -18,7 +18,7 @@ const SearchInputBox = ({
     <View style={styles.wrapper}>
       <View style={styles.container}>
         <View style={styles.glass}>
-          <IconFactory icon="MagnifyingGlass" />
+          <IconFactory icon="MagnifyingGlass" color="#A5A5A5" />
         </View>
         <TextInput
           onPressIn={onPressIn}
@@ -27,12 +27,13 @@ const SearchInputBox = ({
           onSubmitEditing={onSubmitEditing}
           onChangeText={onChangeText}
           value={value}
+          placeholderTextColor="#B0B0B0"
         />
         <Pressable
           style={{ ...styles.xCircle, opacity: value.length > 0 ? 1 : 0 }}
           onPress={handleClearPress}
         >
-          <IconFactory icon="XCircle" />
+          <IconFactory icon="XCircle" color="#A5A5A5" weight="fill" />
         </Pressable>
       </View>
     </View>
@@ -59,7 +60,6 @@ const styles = StyleSheet.create({
   input: {
     color: "#2D264B",
     width: 240,
-    placeholderTextColor: "#B0B0B0",
   },
   xCircle: {
     paddingTop: 13,
