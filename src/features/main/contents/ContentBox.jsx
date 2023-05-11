@@ -10,8 +10,17 @@ import { folderListAtom } from "../../../shared/atoms";
 import { DEFAULT_SHORT_TOAST } from "../../../shared/constants/toast.js";
 import { LOCAL_STORAGE_KEY, save } from "../../../shared/utils/localStorage";
 import { folderDetailAtom } from "../../folder/atoms";
+import { Link } from "phosphor-react-native";
 
-const ContentBox = ({ id, title, description, defaultFolder, color, icon }) => {
+const ContentBox = ({
+  id,
+  title,
+  description,
+  defaultFolder,
+  color,
+  icon,
+  linkList,
+}) => {
   const navigation = useNavigation();
 
   const [main, setMain] = useAtom(mainAtom);
@@ -97,6 +106,10 @@ const ContentBox = ({ id, title, description, defaultFolder, color, icon }) => {
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.description}>{description}</Text>
       </View>
+      <View style={styles.linkContent}>
+        <Link color="white" size={17} />
+        <Text style={styles.linkText}>{linkList.length}</Text>
+      </View>
     </Pressable>
   );
 };
@@ -135,7 +148,20 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
 
     width: 120,
-    height: 76,
+    height: 60,
+  },
+  linkContent: {
+    width: 120,
+    paddingTop: 10,
+    display: "flex",
+
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
+  },
+  linkText: {
+    color: "#FFFFFF",
+    paddingLeft: 2,
   },
   title: {
     width: 120,

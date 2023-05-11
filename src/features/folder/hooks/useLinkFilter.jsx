@@ -52,6 +52,7 @@ const useLinkFilter = () => {
   return {
     handleFilterClick,
     handleContainerClick,
+    linkCount: folderDetail.searchLinkList.length,
   };
 };
 
