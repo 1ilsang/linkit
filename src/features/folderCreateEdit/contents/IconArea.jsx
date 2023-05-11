@@ -13,10 +13,11 @@ const labelList = [
 ];
 
 const IconItem = ({ label, onPress, checked }) => {
-  const Icon = IconFactory[label];
   return (
     <Pressable onPress={() => onPress(label)} hitSlop={10}>
-      <View style={checked ? styles.checked : {}}>{Icon}</View>
+      <View style={checked ? styles.checked : {}}>
+        <IconFactory icon={label} />
+      </View>
       {checked && <View style={styles.checkedBackground} />}
     </Pressable>
   );

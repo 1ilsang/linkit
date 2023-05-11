@@ -15,7 +15,6 @@ const BottomSheet = forwardRef(({ list }, ref) => {
       <Modalize ref={ref} handlePosition="inside" modalHeight={modalHeight}>
         <View style={styles.container}>
           {list.map(({ name, onPress, icon }) => {
-            const Icon = IconFactory[icon];
             return (
               <Pressable
                 key={name}
@@ -25,7 +24,9 @@ const BottomSheet = forwardRef(({ list }, ref) => {
                   onPress();
                 }}
               >
-                <View style={styles.icon}>{Icon}</View>
+                <View style={styles.icon}>
+                  <IconFactory icon={icon} />
+                </View>
                 <Text>{name}</Text>
               </Pressable>
             );

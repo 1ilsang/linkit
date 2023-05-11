@@ -29,7 +29,6 @@ const ContentBox = ({
   const resetFolderDetail = useResetAtom(folderDetailAtom);
 
   const { moreOpen } = main;
-  const IconComponent = IconFactory[icon];
 
   const handleLinkDeleteClick = () => {
     setFolderList((prev) => {
@@ -93,7 +92,7 @@ const ContentBox = ({
       onPress={handlePressClick}
     >
       <View style={styles.top}>
-        {IconComponent}
+        <IconFactory icon={icon} color="#FFFFFF" />
         <MoreButton
           size={16}
           open={id === moreOpen}
@@ -167,7 +166,7 @@ const styles = StyleSheet.create({
     width: 120,
     height: 38,
 
-    fontWeight: "590",
+    fontWeight: "600",
     fontSize: 16,
     lineHeight: 19,
 

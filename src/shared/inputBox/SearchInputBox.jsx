@@ -9,9 +9,6 @@ const SearchInputBox = ({
   placeholder,
   onPressIn,
 }) => {
-  const MagnifyingGlass = IconFactory["MagnifyingGlass"];
-  const XCircle = IconFactory["XCircle"];
-
   const handleClearPress = () => {
     onChangeText("");
     onClearPress?.();
@@ -20,7 +17,9 @@ const SearchInputBox = ({
   return (
     <View style={styles.wrapper}>
       <View style={styles.container}>
-        <View style={styles.glass}>{MagnifyingGlass}</View>
+        <View style={styles.glass}>
+          <IconFactory icon="MagnifyingGlass" />
+        </View>
         <TextInput
           onPressIn={onPressIn}
           style={styles.input}
@@ -33,7 +32,7 @@ const SearchInputBox = ({
           style={{ ...styles.xCircle, opacity: value.length > 0 ? 1 : 0 }}
           onPress={handleClearPress}
         >
-          {XCircle}
+          <IconFactory icon="XCircle" />
         </Pressable>
       </View>
     </View>

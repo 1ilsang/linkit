@@ -28,8 +28,6 @@ const MoreButton = ({
       {open && (
         <View style={styles.modalContainer}>
           {list.map(({ name, onPress, icon }, index) => {
-            const Icon = IconFactory[icon];
-
             if (defaultFolder && icon === "Trash") {
               return null;
             }
@@ -44,7 +42,9 @@ const MoreButton = ({
                 onPress={onPress}
               >
                 <Text>{name}</Text>
-                <View style={styles.icon}>{Icon}</View>
+                <View style={styles.icon}>
+                  <IconFactory icon={icon} />
+                </View>
               </Pressable>
             );
           })}
