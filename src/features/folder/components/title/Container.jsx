@@ -13,6 +13,7 @@ const FolderTitleContainer = (props) => {
     title,
     titleMoreOpen,
     moreList,
+    deleteLinkList,
     handleMoreClick,
     defaultFolder,
     mode,
@@ -29,8 +30,18 @@ const FolderTitleContainer = (props) => {
               <Text>취소</Text>
             </Pressable>
             <Text style={styles.title}>목록 편집</Text>
-            <Pressable onPress={handleDeleteLinkPress} hitSlop={30}>
-              <Text style={styles.delete}>삭제</Text>
+            <Pressable
+              onPress={handleDeleteLinkPress}
+              disabled={deleteLinkList.length === 0}
+              hitSlop={30}
+            >
+              <Text
+                style={
+                  deleteLinkList.length === 0 ? styles.disabled : styles.delete
+                }
+              >
+                삭제
+              </Text>
             </Pressable>
           </View>
         </View>
@@ -96,6 +107,9 @@ const styles = StyleSheet.create({
   },
   delete: {
     color: "#FF5C5D",
+  },
+  disabled: {
+    color: "#CFCFCF",
   },
 });
 

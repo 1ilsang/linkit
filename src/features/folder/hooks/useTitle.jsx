@@ -128,6 +128,7 @@ const useFolderTitle = (props) => {
     title,
     titleMoreOpen,
     moreList,
+    deleteLinkList,
     defaultFolder,
     mode,
     handleTitleAreaPress,
