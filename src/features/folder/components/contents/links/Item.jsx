@@ -22,6 +22,8 @@ import {
   LOCAL_STORAGE_KEY,
   save,
 } from "../../../../../shared/utils/localStorage";
+import { useEffect, useRef } from "react";
+import { sortLinkList } from "../../../../../shared/utils/helpers";
 
 const getText = (targetText, searchText) => {
   const startIndex = targetText.indexOf(searchText);
@@ -35,10 +37,11 @@ const getText = (targetText, searchText) => {
 };
 
 const FolderContentItem = (props) => {
+  const swipeableRef = useRef(null);
   const [folderDetail, setFolderDetail] = useAtom(folderDetailAtom);
   const [, setFolderList] = useAtom(folderListAtom);
 
-  const { linkName, url } = props;
+  const { linkName, url, pin } = props;
   const { search } = folderDetail;
 
   const linkText = getText(linkName, search);
@@ -64,13 +67,39 @@ const FolderContentItem = (props) => {
     });
     Toast.show("링크가 삭제되었어요.", DEFAULT_SHORT_TOAST);
   };
+  const handlePinClick = (linkId) => {
+    setFolderList((prev) => {
+      const targetFolder = prev.find((item) => item.id === folderDetail.id);
+      const targetLink = targetFolder.linkList.find(
+        (item) => item.id === linkId
+      );
+      targetLink.pin = !targetLink.pin;
+      targetFolder.linkList.sort(sortLinkList(targetFolder.sort));
+      const next = [...prev];
+      save(LOCAL_STORAGE_KEY.folderList, next);
+      if (!targetLink.pin) {
+        swipeableRef.current?.close();
+      }
+      return next;
+    });
+  };
+
+  useEffect(() => {
+    if (!pin || !swipeableRef) return;
+    setTimeout(() => {
+      swipeableRef.current.openLeft();
+    }, 100);
+  }, [swipeableRef, pin]);
 
   return (
     <GestureHandlerRootView>
       <Swipeable
-        renderLeftActions={(dragX) => renderLeftActions(dragX, props)}
+        ref={swipeableRef}
+        renderLeftActions={(dragX) =>
+          renderLeftActions({ dragX, props, pin, handlePinClick })
+        }
         renderRightActions={(dragX) =>
-          renderRightActions(dragX, props, handleLinkDeleteClick)
+          renderRightActions({ dragX, props, handleLinkDeleteClick })
         }
       >
         <Pressable style={styles.container}>
@@ -116,27 +145,31 @@ const FolderContentItem = (props) => {
   );
 };
 
-const renderLeftActions = (dragX, { pinned }) => {
+const renderLeftActions = ({ dragX, pin, handlePinClick, props }) => {
   const trans = dragX.interpolate({
     inputRange: [0, 1],
     outputRange: [0, 1],
   });
+  const handlePinPress = () => {
+    handlePinClick(props.id);
+  };
 
   return (
-    <Pressable onPress={() => console.log("1")}>
+    <Pressable onPress={handlePinPress}>
       <Animated.View
         style={{
           ...styles.pin,
           transform: [{ translateX: trans }],
         }}
       >
-        <PushPin color="#FFFFFF" />
+        <PushPin color="#FFFFFF" weight={pin ? "fill" : undefined} />
       </Animated.View>
     </Pressable>
   );
 };
 
-const renderRightActions = (dragX, { linkName, id }, handleLinkDeleteClick) => {
+const renderRightActions = ({ dragX, props, handleLinkDeleteClick }) => {
+  const { linkName, id } = props;
   const trans = dragX.interpolate({
     inputRange: [-100, 0],
     outputRange: [0, 1],
