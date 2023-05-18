@@ -20,7 +20,6 @@ const ToggleBox = ({ title, list, style }) => {
 
 const styles = StyleSheet.create({
   toggleBox: {
-    paddingTop: 27,
     paddingLeft: 27,
     paddingRight: 27,
     backgroundColor: "#ffffff",
