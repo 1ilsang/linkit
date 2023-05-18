@@ -14,4 +14,11 @@ import { atom } from "jotai";
  */
 const initialData = [];
 
+const initialApp = {
+  pushNotification: true,
+  defaultBrowser: true,
+  clipboardLinkAutoPaste: true,
+};
+
+export const appEnvAtom = atom(initialApp);
 export const folderListAtom = atom(initialData);

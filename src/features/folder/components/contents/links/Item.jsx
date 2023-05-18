@@ -7,6 +7,7 @@ import {
   View,
   Alert,
   Image,
+  Linking,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import NoImage from "../../../../../shared/icons/NonImage";
@@ -16,7 +17,7 @@ import {
   GestureHandlerRootView,
 } from "react-native-gesture-handler";
 import { PushPin, Trash } from "phosphor-react-native";
-import { folderListAtom } from "../../../../../shared/atoms";
+import { appEnvAtom, folderListAtom } from "../../../../../shared/atoms";
 import Toast from "react-native-root-toast";
 import { DEFAULT_SHORT_TOAST } from "../../../../../shared/constants/toast";
 import {
@@ -39,6 +40,8 @@ const getText = (targetText, searchText) => {
 
 const FolderContentItem = (props) => {
   const swipeableRef = useRef(null);
+
+  const [appEnv] = useAtom(appEnvAtom);
   const [folderDetail, setFolderDetail] = useAtom(folderDetailAtom);
   const [, setFolderList] = useAtom(folderListAtom);
 
@@ -87,12 +90,18 @@ const FolderContentItem = (props) => {
     });
   };
   const handleLinkPress = () => {
-    setFolderDetail((prev) => ({
-      ...prev,
-      webView: {
-        url,
-      },
-    }));
+    if (appEnv.defaultBrowser) {
+      Linking.openURL(url).catch(() => {
+        Alert.alert("Error", "웹사이트를 열수 없어요. URL을 확인해 주세요.");
+      });
+    } else {
+      setFolderDetail((prev) => ({
+        ...prev,
+        webView: {
+          url,
+        },
+      }));
+    }
   };
 
   useEffect(() => {

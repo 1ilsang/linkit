@@ -1,13 +1,31 @@
 import { useState } from "react";
 import ToggleBox from "./ToggleBox";
 import InfoBox from "./InfoBox";
+import { useAtom } from "jotai";
+import { appEnvAtom } from "../../../shared/atoms";
 
 const SettingsContentContainer = () => {
-  // TODO: localStorage
-  const [push, setPush] = useState(true);
+  // TODO: localStorage, toggleAnimation
+  const [appEnv, setAppEnv] = useAtom(appEnvAtom);
+  const { pushNotification, defaultBrowser, clipboardLinkAutoPaste } = appEnv;
 
   const handlePushToggle = () => {
-    setPush((prev) => !prev);
+    setAppEnv((prev) => ({
+      ...prev,
+      pushNotification: !prev.pushNotification,
+    }));
+  };
+  const handleDefaultBrowserToggle = () => {
+    setAppEnv((prev) => ({
+      ...prev,
+      defaultBrowser: !prev.defaultBrowser,
+    }));
+  };
+  const handleClipboardLinkAutoPasteToggle = () => {
+    setAppEnv((prev) => ({
+      ...prev,
+      clipboardLinkAutoPaste: !prev.clipboardLinkAutoPaste,
+    }));
   };
 
   return (
@@ -20,7 +38,7 @@ const SettingsContentContainer = () => {
             content: "푸시 알림",
             description: "리마인드 알림 ~~~ 등을 알려드릴게요.",
             onPress: handlePushToggle,
-            selected: push,
+            selected: pushNotification,
           },
         ]}
       />
@@ -31,15 +49,15 @@ const SettingsContentContainer = () => {
             content: "기본 브라우저 앱으로 링크 열기",
             description:
               "링킷 앱 내 저장된 링크 터치 시 기본 브라우저 앱으로 링크 열기 또는 링킷 앱 내에서 링크 열기 등 링크를 여는 방법을 설정할 수 있어요.",
-            onPress: handlePushToggle,
-            selected: push,
+            onPress: handleDefaultBrowserToggle,
+            selected: defaultBrowser,
           },
           {
             content: "클립보드 링크 자동으로 붙여넣기",
             description:
               "링킷 앱에 링크 추가 시 클립보드에 복사된 링크를 자동으로 붙여 넣거나 수동으로 붙여 넣을 수 있어요.",
-            onPress: handlePushToggle,
-            selected: push,
+            onPress: handleClipboardLinkAutoPasteToggle,
+            selected: clipboardLinkAutoPaste,
           },
         ]}
       />
