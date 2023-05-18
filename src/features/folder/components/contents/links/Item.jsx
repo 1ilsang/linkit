@@ -6,6 +6,7 @@ import {
   Text,
   View,
   Alert,
+  Image,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import NoImage from "../../../../../shared/icons/NonImage";
@@ -22,7 +23,7 @@ import {
   LOCAL_STORAGE_KEY,
   save,
 } from "../../../../../shared/utils/localStorage";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { sortLinkList } from "../../../../../shared/utils/helpers";
 
 const getText = (targetText, searchText) => {
@@ -40,6 +41,8 @@ const FolderContentItem = (props) => {
   const swipeableRef = useRef(null);
   const [folderDetail, setFolderDetail] = useAtom(folderDetailAtom);
   const [, setFolderList] = useAtom(folderListAtom);
+
+  const [ogImageUrl, setOgImageUrl] = useState("");
 
   const { linkName, url, pin } = props;
   const { search } = folderDetail;
@@ -99,6 +102,35 @@ const FolderContentItem = (props) => {
     }, 100);
   }, [swipeableRef, pin]);
 
+  useEffect(() => {
+    if (!url) return;
+
+    const getOgImageUrl = async () => {
+      try {
+        const response = await fetch(url);
+        const html = await response.text();
+
+        const ogImageRegex = /<meta[^>]*property=["']og:image["'][^>]*>/g;
+        // TODO: 링크 자동 추가에 필요
+        const titleRegex = /<title[^>]*>([^<]+)<\/title>/i;
+
+        const ogImageTags = html.match(ogImageRegex);
+        const titleTag = html.match(titleRegex);
+
+        if (ogImageTags) {
+          const ogImageUrl = ogImageTags[0].match(/content=["'](.*?)["']/)[1];
+          setOgImageUrl(ogImageUrl);
+        }
+
+        if (titleTag && titleTag.length >= 2) {
+          const title = titleTag[1];
+          // console.log("Title:", title);
+        }
+      } catch (error) {}
+    };
+    getOgImageUrl();
+  }, [url]);
+
   return (
     <GestureHandlerRootView>
       <Swipeable
@@ -113,7 +145,14 @@ const FolderContentItem = (props) => {
         <Pressable style={styles.container} onPress={handleLinkPress}>
           <View style={styles.contentContainer}>
             <View style={styles.thumbnail}>
-              <NoImage size={40} />
+              {ogImageUrl.length > 0 ? (
+                <Image
+                  source={{ uri: ogImageUrl }}
+                  style={{ width: 40, height: 40 }}
+                />
+              ) : (
+                <NoImage size={40} />
+              )}
             </View>
             <View style={styles.content}>
               <Text style={styles.linkName}>
