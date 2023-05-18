@@ -8,17 +8,19 @@ import { RootSiblingParent } from "react-native-root-siblings";
 
 import MainStack from "./src/features/stackNavigation/MainStack";
 import { useLayoutEffect } from "react";
-import { folderListAtom } from "./src/shared/atoms";
+import { appEnvAtom, folderListAtom, initialApp } from "./src/shared/atoms";
 import { load, LOCAL_STORAGE_KEY, save } from "./src/shared/utils/localStorage";
 import { colorSets } from "./src/shared/constants/colors";
 import { FOLDER_SORT } from "./src/shared/constants/folder";
 
 const App = () => {
+  const [, setAppEnv] = useAtom(appEnvAtom);
   const [, setFolderList] = useAtom(folderListAtom);
 
   useLayoutEffect(() => {
     const loadLocalStorage = async () => {
       const data = await load(LOCAL_STORAGE_KEY.folderList);
+      const appData = await load(LOCAL_STORAGE_KEY.appEnv);
       const selectedIndex = Math.floor((Math.random() * 10) % 7);
       const initData =
         data && data.length > 0
@@ -35,7 +37,9 @@ const App = () => {
                 linkList: [],
               },
             ];
+      const initAppEnv = appData ? appData : initialApp;
       setFolderList(initData);
+      setAppEnv(initAppEnv);
       await save(LOCAL_STORAGE_KEY.folderList, initData);
     };
     loadLocalStorage();

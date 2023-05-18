@@ -3,6 +3,7 @@ import { Alert } from "react-native";
 
 export const LOCAL_STORAGE_KEY = {
   folderList: "folderList",
+  appEnv: "appEnv",
 };
 
 export const save = async (key, data) => {

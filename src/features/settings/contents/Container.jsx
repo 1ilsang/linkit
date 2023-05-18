@@ -2,23 +2,32 @@ import ToggleBox from "./ToggleBox";
 import InfoBox from "./InfoBox";
 import { useAtom } from "jotai";
 import { appEnvAtom } from "../../../shared/atoms";
+import { LOCAL_STORAGE_KEY, save } from "../../../shared/utils/localStorage";
 
 const SettingsContentContainer = () => {
-  // TODO: localStorage, toggleAnimation
+  // TODO: toggleAnimation
   const [appEnv, setAppEnv] = useAtom(appEnvAtom);
   const { defaultBrowser, clipboardLinkAutoPaste } = appEnv;
 
   const handleDefaultBrowserToggle = () => {
-    setAppEnv((prev) => ({
-      ...prev,
-      defaultBrowser: !prev.defaultBrowser,
-    }));
+    setAppEnv((prev) => {
+      const next = {
+        ...prev,
+        defaultBrowser: !prev.defaultBrowser,
+      };
+      save(LOCAL_STORAGE_KEY.appEnv, next);
+      return next;
+    });
   };
   const handleClipboardLinkAutoPasteToggle = () => {
-    setAppEnv((prev) => ({
-      ...prev,
-      clipboardLinkAutoPaste: !prev.clipboardLinkAutoPaste,
-    }));
+    setAppEnv((prev) => {
+      const next = {
+        ...prev,
+        clipboardLinkAutoPaste: !prev.clipboardLinkAutoPaste,
+      };
+      save(LOCAL_STORAGE_KEY.appEnv, next);
+      return next;
+    });
   };
 
   return (

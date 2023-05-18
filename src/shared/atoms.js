@@ -14,7 +14,7 @@ import { atom } from "jotai";
  */
 const initialData = [];
 
-const initialApp = {
+export const initialApp = {
   defaultBrowser: true,
   clipboardLinkAutoPaste: true,
 };
