@@ -15,7 +15,6 @@ import { atom } from "jotai";
 const initialData = [];
 
 const initialApp = {
-  pushNotification: true,
   defaultBrowser: true,
   clipboardLinkAutoPaste: true,
 };

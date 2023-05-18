@@ -48,10 +48,17 @@ import {
   FilmSlate,
   House,
   Gear,
+  PushPin,
 } from "phosphor-react-native";
 import { View } from "react-native";
 
-const IconFactory = ({ icon, color = "black", weight = "regular" }) => {
+const IconFactory = ({
+  icon,
+  color = "black",
+  weight = "regular",
+  size = 20,
+  style = {},
+}) => {
   switch (icon) {
     case "FolderSimpleDotted":
       return <FolderSimpleDotted color={color} />;
@@ -151,6 +158,10 @@ const IconFactory = ({ icon, color = "black", weight = "regular" }) => {
       return <House color={color} weight={weight} />;
     case "Setting":
       return <Gear color={color} weight={weight} />;
+    case "PushPin":
+      return (
+        <PushPin color={color} weight={weight} size={size} style={style} />
+      );
     default:
       return <View></View>;
   }

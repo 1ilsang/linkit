@@ -1,4 +1,3 @@
-import { useState } from "react";
 import ToggleBox from "./ToggleBox";
 import InfoBox from "./InfoBox";
 import { useAtom } from "jotai";
@@ -7,14 +6,8 @@ import { appEnvAtom } from "../../../shared/atoms";
 const SettingsContentContainer = () => {
   // TODO: localStorage, toggleAnimation
   const [appEnv, setAppEnv] = useAtom(appEnvAtom);
-  const { pushNotification, defaultBrowser, clipboardLinkAutoPaste } = appEnv;
+  const { defaultBrowser, clipboardLinkAutoPaste } = appEnv;
 
-  const handlePushToggle = () => {
-    setAppEnv((prev) => ({
-      ...prev,
-      pushNotification: !prev.pushNotification,
-    }));
-  };
   const handleDefaultBrowserToggle = () => {
     setAppEnv((prev) => ({
       ...prev,
@@ -30,18 +23,6 @@ const SettingsContentContainer = () => {
 
   return (
     <>
-      <ToggleBox
-        style={{ paddingTop: 9 }}
-        title="알림"
-        list={[
-          {
-            content: "푸시 알림",
-            description: "리마인드 알림 ~~~ 등을 알려드릴게요.",
-            onPress: handlePushToggle,
-            selected: pushNotification,
-          },
-        ]}
-      />
       <ToggleBox
         title="링크 설정"
         list={[

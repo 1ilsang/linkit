@@ -16,7 +16,6 @@ import {
   Swipeable,
   GestureHandlerRootView,
 } from "react-native-gesture-handler";
-import { PushPin, Trash } from "phosphor-react-native";
 import { appEnvAtom, folderListAtom } from "../../../../../shared/atoms";
 import Toast from "react-native-root-toast";
 import { DEFAULT_SHORT_TOAST } from "../../../../../shared/constants/toast";
@@ -26,6 +25,7 @@ import {
 } from "../../../../../shared/utils/localStorage";
 import { useEffect, useRef, useState } from "react";
 import { sortLinkList } from "../../../../../shared/utils/helpers";
+import IconFactory from "../../../../../shared/icons/IconFactory";
 
 const getText = (targetText, searchText) => {
   const startIndex = targetText.indexOf(searchText);
@@ -83,9 +83,7 @@ const FolderContentItem = (props) => {
       targetFolder.linkList.sort(sortLinkList(targetFolder.sort));
       const next = [...prev];
       save(LOCAL_STORAGE_KEY.folderList, next);
-      if (!targetLink.pin) {
-        swipeableRef.current?.close();
-      }
+      swipeableRef.current?.close();
       return next;
     });
   };
@@ -103,13 +101,6 @@ const FolderContentItem = (props) => {
       }));
     }
   };
-
-  useEffect(() => {
-    if (!pin || !swipeableRef) return;
-    setTimeout(() => {
-      swipeableRef.current.openLeft();
-    }, 100);
-  }, [swipeableRef, pin]);
 
   useEffect(() => {
     if (!url) return;
@@ -151,7 +142,7 @@ const FolderContentItem = (props) => {
           renderRightActions({ dragX, props, handleLinkDeleteClick })
         }
       >
-        <Pressable style={styles.container} onPress={handleLinkPress}>
+        <Pressable style={styles.container}>
           <View style={styles.contentContainer}>
             <View style={styles.thumbnail}>
               {ogImageUrl.length > 0 ? (
@@ -163,7 +154,7 @@ const FolderContentItem = (props) => {
                 <NoImage size={40} />
               )}
             </View>
-            <View style={styles.content}>
+            <Pressable style={styles.content} onPress={handleLinkPress}>
               <Text style={styles.linkName}>
                 {linkText.searched ? (
                   <>
@@ -173,6 +164,15 @@ const FolderContentItem = (props) => {
                   </>
                 ) : (
                   linkText.originText
+                )}
+                {pin && (
+                  <IconFactory
+                    icon="PushPin"
+                    size="12"
+                    weight="fill"
+                    color="#A5A5A5"
+                    style={{ paddingLeft: 20 }}
+                  />
                 )}
               </Text>
               <Text style={styles.url}>
@@ -186,7 +186,7 @@ const FolderContentItem = (props) => {
                   urlText.originText
                 )}
               </Text>
-            </View>
+            </Pressable>
             <Pressable onPress={handleMorePress} hitSlop={10}>
               <Feather
                 style={{ color: "#262424" }}
@@ -218,7 +218,11 @@ const renderLeftActions = ({ dragX, pin, handlePinClick, props }) => {
           transform: [{ translateX: trans }],
         }}
       >
-        <PushPin color="#FFFFFF" weight={pin ? "fill" : undefined} />
+        <IconFactory
+          icon="PushPin"
+          color="#FFFFFF"
+          weight={pin ? "fill" : undefined}
+        />
       </Animated.View>
     </Pressable>
   );
@@ -246,7 +250,7 @@ const renderRightActions = ({ dragX, props, handleLinkDeleteClick }) => {
           },
         ]}
       >
-        <Trash color="#FFFFFF" />
+        <IconFactory icon="Trash" color="#FFFFFF" />
       </Animated.View>
     </Pressable>
   );
