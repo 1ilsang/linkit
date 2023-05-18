@@ -15,13 +15,14 @@ import { folderListAtom } from "../../../shared/atoms";
 import { LOCAL_STORAGE_KEY, save } from "../../../shared/utils/localStorage";
 import Toast from "react-native-root-toast";
 import { DEFAULT_SHORT_TOAST } from "../../../shared/constants/toast";
+import WebViewContainer from "../../../shared/WebViewContainer";
 
 const FolderContainer = (props) => {
   const bottomSheetRef = useRef(null);
 
   const [folderDetail, setFolderDetail] = useAtom(folderDetailAtom);
   const [, setFolderList] = useAtom(folderListAtom);
-  const { bottomSheetItem } = folderDetail;
+  const { bottomSheetItem, webView } = folderDetail;
 
   useLayoutEffect(() => {
     if (!bottomSheetRef) return;
@@ -71,12 +72,20 @@ const FolderContainer = (props) => {
     },
   ];
 
+  const handleWebViewClose = () => {
+    setFolderDetail((prev) => ({ ...prev, webView: undefined }));
+  };
   return (
     <View style={styles.container}>
       <Pressable style={{ flex: 1 }} onPress={() => Keyboard.dismiss()}>
         <FolderContentContainer {...props} />
       </Pressable>
       <BottomSheet ref={bottomSheetRef} list={bottomSheetList} />
+      <WebViewContainer
+        uri={webView?.url}
+        close={!webView}
+        onClose={handleWebViewClose}
+      />
     </View>
   );
 };

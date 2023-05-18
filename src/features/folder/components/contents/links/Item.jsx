@@ -83,6 +83,14 @@ const FolderContentItem = (props) => {
       return next;
     });
   };
+  const handleLinkPress = () => {
+    setFolderDetail((prev) => ({
+      ...prev,
+      webView: {
+        url,
+      },
+    }));
+  };
 
   useEffect(() => {
     if (!pin || !swipeableRef) return;
@@ -102,7 +110,7 @@ const FolderContentItem = (props) => {
           renderRightActions({ dragX, props, handleLinkDeleteClick })
         }
       >
-        <Pressable style={styles.container}>
+        <Pressable style={styles.container} onPress={handleLinkPress}>
           <View style={styles.contentContainer}>
             <View style={styles.thumbnail}>
               <NoImage size={40} />
