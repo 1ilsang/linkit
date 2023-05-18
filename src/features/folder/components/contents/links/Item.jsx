@@ -116,32 +116,30 @@ const FolderContentItem = (props) => {
   );
 };
 
-const renderLeftActions = (dragX) => {
+const renderLeftActions = (dragX, { pinned }) => {
   const trans = dragX.interpolate({
-    inputRange: [0, 100],
-    outputRange: [0, 0],
+    inputRange: [0, 1],
+    outputRange: [0, 1],
   });
+
   return (
     <Pressable onPress={() => console.log("1")}>
-      <View style={styles.pin}>
-        <Animated.Text
-          style={[
-            {
-              transform: [{ translateX: trans }],
-            },
-          ]}
-        >
-          <PushPin color="#FFFFFF" />
-        </Animated.Text>
-      </View>
+      <Animated.View
+        style={{
+          ...styles.pin,
+          transform: [{ translateX: trans }],
+        }}
+      >
+        <PushPin color="#FFFFFF" />
+      </Animated.View>
     </Pressable>
   );
 };
 
 const renderRightActions = (dragX, { linkName, id }, handleLinkDeleteClick) => {
   const trans = dragX.interpolate({
-    inputRange: [0, 100],
-    outputRange: [0, 0],
+    inputRange: [-100, 0],
+    outputRange: [0, 1],
   });
   const handleDeleteClick = () => {
     Alert.alert(`${linkName} 링크를 삭제하시겠어요?`, "", [
@@ -151,17 +149,16 @@ const renderRightActions = (dragX, { linkName, id }, handleLinkDeleteClick) => {
   };
   return (
     <Pressable onPress={handleDeleteClick}>
-      <View style={styles.delete}>
-        <Animated.Text
-          style={[
-            {
-              transform: [{ translateX: trans }],
-            },
-          ]}
-        >
-          <Trash color="#FFFFFF" />
-        </Animated.Text>
-      </View>
+      <Animated.View
+        style={[
+          styles.delete,
+          {
+            transform: [{ translateX: trans }],
+          },
+        ]}
+      >
+        <Trash color="#FFFFFF" />
+      </Animated.View>
     </Pressable>
   );
 };
@@ -176,6 +173,7 @@ const styles = StyleSheet.create({
     paddingBottom: 8,
     paddingLeft: 18,
     paddingRight: 18,
+    backgroundColor: "#FFFFFF",
   },
   contentContainer: {
     display: "flex",
