@@ -2,24 +2,33 @@ import { StyleSheet, View } from "react-native";
 import Home from "./Home";
 import Adder from "./Adder";
 import Settings from "./Settings";
+import { useState } from "react";
 
 const navList = ["홈", "추가", "설정"];
 
-const Item = ({ name }) => {
+const Item = (props) => {
+  const { name } = props;
   return (
     <View style={styles.item}>
-      {name === "홈" && <Home />}
-      {name === "추가" && <Adder />}
-      {name === "설정" && <Settings />}
+      {name === "홈" && <Home {...props} />}
+      {name === "추가" && <Adder {...props} />}
+      {name === "설정" && <Settings {...props} />}
     </View>
   );
 };
 
 const NavbarContainer = () => {
+  const [selectedNav, setSelectedNav] = useState(navList[0]);
+
   return (
     <View style={styles.container}>
       {navList.map((name) => (
-        <Item key={name} name={name} />
+        <Item
+          key={name}
+          name={name}
+          selectedNav={selectedNav}
+          onClick={setSelectedNav}
+        />
       ))}
     </View>
   );

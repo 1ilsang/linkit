@@ -1,15 +1,16 @@
 import { Pressable, StyleSheet, Text } from "react-native";
-import { Foundation } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { useAtom } from "jotai";
 import { mainAtom } from "../../main/atoms";
+import IconFactory from "../../../shared/icons/IconFactory";
 
-const Home = () => {
+const Home = ({ selectedNav, onClick }) => {
   const navigation = useNavigation();
 
   const [main, setMain] = useAtom(mainAtom);
 
   const handleHomeClick = () => {
+    onClick("홈");
     setMain((prev) => ({ ...prev, moreOpen: undefined }));
     main.scrollViewRef.current.scrollTo({ top: 0 });
     navigation.navigate("Main");
@@ -17,7 +18,10 @@ const Home = () => {
 
   return (
     <Pressable style={styles.item} onPress={handleHomeClick}>
-      <Foundation name="home" size={24} color="#2D264B" />
+      <IconFactory
+        icon="House"
+        weight={selectedNav === "홈" ? "fill" : undefined}
+      />
       <Text style={styles.text}>홈</Text>
     </Pressable>
   );

@@ -46,7 +46,10 @@ import {
   CheckedCircle,
   Share,
   FilmSlate,
+  House,
+  Gear,
 } from "phosphor-react-native";
+import { View } from "react-native";
 
 const IconFactory = ({ icon, color = "black", weight = "regular" }) => {
   switch (icon) {
@@ -144,6 +147,10 @@ const IconFactory = ({ icon, color = "black", weight = "regular" }) => {
       return <CheckedCircle color={color} />;
     case "Share":
       return <Share color={color} />;
+    case "House":
+      return <House color={color} weight={weight} />;
+    case "Setting":
+      return <Gear color={color} weight={weight} />;
     default:
       return <View></View>;
   }
