@@ -26,6 +26,7 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { sortLinkList } from "../../../../../shared/utils/helpers";
 import IconFactory from "../../../../../shared/icons/IconFactory";
+import { getOgData } from "../../../../linkAdder/helpers";
 
 const getText = (targetText, searchText) => {
   const startIndex = targetText.indexOf(searchText);
@@ -104,29 +105,9 @@ const FolderContentItem = (props) => {
 
   useEffect(() => {
     if (!url) return;
-
     const getOgImageUrl = async () => {
-      try {
-        const response = await fetch(url);
-        const html = await response.text();
-
-        const ogImageRegex = /<meta[^>]*property=["']og:image["'][^>]*>/g;
-        // TODO: 링크 자동 추가에 필요
-        const titleRegex = /<title[^>]*>([^<]+)<\/title>/i;
-
-        const ogImageTags = html.match(ogImageRegex);
-        const titleTag = html.match(titleRegex);
-
-        if (ogImageTags) {
-          const ogImageUrl = ogImageTags[0].match(/content=["'](.*?)["']/)[1];
-          setOgImageUrl(ogImageUrl);
-        }
-
-        if (titleTag && titleTag.length >= 2) {
-          const title = titleTag[1];
-          // console.log("Title:", title);
-        }
-      } catch (error) {}
+      const { ogImageUrl } = await getOgData(url);
+      setOgImageUrl(ogImageUrl);
     };
     getOgImageUrl();
   }, [url]);
@@ -145,7 +126,7 @@ const FolderContentItem = (props) => {
         <Pressable style={styles.container}>
           <View style={styles.contentContainer}>
             <View style={styles.thumbnail}>
-              {ogImageUrl.length > 0 ? (
+              {ogImageUrl && ogImageUrl.length > 0 ? (
                 <Image
                   source={{ uri: ogImageUrl }}
                   style={{ width: 40, height: 40 }}

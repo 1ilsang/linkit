@@ -15,6 +15,7 @@ import { LOCAL_STORAGE_KEY, save } from "../../../shared/utils/localStorage";
 import { useNavigation } from "@react-navigation/native";
 import { sortLinkList } from "../../../shared/utils/helpers";
 import { useEffect, useState } from "react";
+import { getOgData } from "../helpers";
 
 const SALT = 1000000;
 
@@ -49,8 +50,11 @@ const LinkAdderContentContainer = ({ id }) => {
     ? true
     : linkName.length > 0);
 
-  const getAutoLinkName = () => {
-    // TODO: Enhancement. og tag 추출
+  const getAutoLinkName = async () => {
+    const { ogTitle } = await getOgData(url);
+    if (ogTitle.length > 0) {
+      return ogTitle;
+    }
     const linkList = url
       .replace(/https?:\/\/(www\.)?|.com/g, "")
       .split("/")
@@ -87,8 +91,14 @@ const LinkAdderContentContainer = ({ id }) => {
     Keyboard.dismiss();
     setMain((prev) => ({ ...prev, folderPickerOpen: true }));
   };
-  const handleSubmitPress = () => {
+  const handleSubmitPress = async () => {
     if (!validSubmit) return;
+
+    let nextAutoLinkName = "";
+    if (autoLinkName) {
+      nextAutoLinkName = await getAutoLinkName();
+    }
+
     setFolderList((prev) => {
       const existPrevData = prev.find((item) => item.id === targetFolder.id);
       if (!existPrevData) {
@@ -104,7 +114,7 @@ const LinkAdderContentContainer = ({ id }) => {
         date: new Date(),
       };
       if (submitLink.autoLinkName) {
-        submitLink.linkName = getAutoLinkName();
+        submitLink.linkName = nextAutoLinkName;
       }
       existPrevData.linkList.push(submitLink);
       existPrevData.linkList.sort(sortLinkList(existPrevData.sort));
