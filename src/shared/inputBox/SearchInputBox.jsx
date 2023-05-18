@@ -8,6 +8,7 @@ const SearchInputBox = ({
   onClearPress,
   placeholder,
   onPressIn,
+  autoFocus = false,
 }) => {
   const handleClearPress = () => {
     onChangeText("");
@@ -28,6 +29,7 @@ const SearchInputBox = ({
           onChangeText={onChangeText}
           value={value}
           placeholderTextColor="#B0B0B0"
+          autoFocus={autoFocus}
         />
         <Pressable
           style={{ ...styles.xCircle, opacity: value.length > 0 ? 1 : 0 }}

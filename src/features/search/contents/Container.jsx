@@ -1,40 +1,36 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import SearchInputBox from "../../../shared/inputBox/SearchInputBox";
 import EmptyImage from "./EmptyImage";
 import RecentSearchArea from "./RecentSearchArea";
-
-const dummyList = [
-  { name: "메타버스" },
-  { name: "월드" },
-  { name: "New jeans" },
-  { name: "에스파" },
-  { name: "IU" },
-];
+import { useAtom } from "jotai";
+import { globalSearchAtom } from "../atoms";
 
 const SearchContentContainer = () => {
-  const [inputText, setInputText] = useState("");
-  const [searched, setSearched] = useState(true);
+  const [globalSearch, setGlobalSearch] = useAtom(globalSearchAtom);
+  const { searchWorld, searchedList, recentSearchList } = globalSearch;
+
+  const searched = useRef(false);
 
   const handleInputChange = (text) => {
-    setInputText(text);
-    setSearched(true);
-  };
-  const handleInputSubmit = (e) => {
-    const { text } = e.nativeEvent;
-    setSearched(false);
+    if (!searched.current) {
+      searched.current = true;
+    }
+    setGlobalSearch((prev) => ({ ...prev, searchWorld: text }));
   };
 
   return (
     <>
       <SearchInputBox
         placeholder="링크 제목, URL을 검색해 주세요."
-        value={inputText}
-        onSubmitEditing={handleInputSubmit}
+        value={searchWorld}
         onChangeText={handleInputChange}
+        autoFocus
       />
-      {!inputText && <RecentSearchArea list={dummyList} />}
-      {inputText && !searched && <EmptyImage />}
+      {!searchWorld && recentSearchList.length > 0 && (
+        <RecentSearchArea list={recentSearchList} />
+      )}
+      {searchWorld && searchedList.length === 0 && <EmptyImage />}
     </>
   );
 };
