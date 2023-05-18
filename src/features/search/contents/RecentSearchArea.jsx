@@ -1,11 +1,13 @@
-import { StyleSheet, Text, View } from "react-native";
-import DeleteIcon from "../../../shared/icons/Delete";
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import IconFactory from "../../../shared/icons/IconFactory";
 
 const Item = ({ name }) => {
   return (
     <View style={styles.itemContainer}>
       <Text>{name}</Text>
-      <DeleteIcon />
+      <Pressable hitSlop={10}>
+        <IconFactory icon="X" color="#C8C8C8" size={16} />
+      </Pressable>
     </View>
   );
 };

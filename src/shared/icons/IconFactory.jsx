@@ -49,6 +49,7 @@ import {
   House,
   Gear,
   PushPin,
+  X,
 } from "phosphor-react-native";
 import { View } from "react-native";
 
@@ -66,8 +67,10 @@ const IconFactory = ({
       return <Trash color={color} />;
     case "PencilSimple":
       return <PencilSimple color={color} />;
+    case "X":
+      return <X color={color} weight={weight} size={size} />;
     case "XCircle":
-      return <XCircle color={color} weight={weight} />;
+      return <XCircle color={color} weight={weight} size={size} />;
     case "MagnifyingGlass":
       return <MagnifyingGlass color={color} />;
     case "Check":
