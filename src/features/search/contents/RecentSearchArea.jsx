@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Alert, Pressable, StyleSheet, Text, View } from "react-native";
 import IconFactory from "../../../shared/icons/IconFactory";
 import { useAtom } from "jotai";
 import { globalSearchAtom } from "../atoms";
@@ -52,8 +52,14 @@ const RecentSearchArea = ({ list }) => {
   const [, setGlobalSearch] = useAtom(globalSearchAtom);
 
   const handleDeleteAllClick = () => {
-    // TODO: 모달 떠야함
-    setGlobalSearch((prev) => ({ ...prev, recentSearchList: [] }));
+    Alert.alert(`최근 검색어를 모두 삭제하시겠어요?`, "", [
+      { text: "취소", style: "cancel" },
+      {
+        text: "삭제",
+        onPress: () =>
+          setGlobalSearch((prev) => ({ ...prev, recentSearchList: [] })),
+      },
+    ]);
   };
 
   return (
@@ -61,7 +67,7 @@ const RecentSearchArea = ({ list }) => {
       <View style={styles.titleContainer}>
         <Text style={styles.title}>최근 검색</Text>
 
-        <Pressable onPress={handleDeleteAllClick}>
+        <Pressable onPress={handleDeleteAllClick} hitSlop={10}>
           <Text style={styles.deleteText}>전체 삭제</Text>
         </Pressable>
       </View>
