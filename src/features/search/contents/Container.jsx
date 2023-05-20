@@ -14,7 +14,7 @@ const SearchContentContainer = () => {
   const [globalSearch, setGlobalSearch] = useAtom(globalSearchAtom);
   const [folderList] = useAtom(folderListAtom);
 
-  const { searchWorld, searchedList, recentSearchList } = globalSearch;
+  const { searchWord, searchedList, recentSearchList } = globalSearch;
 
   const searched = useRef(false);
 
@@ -29,7 +29,7 @@ const SearchContentContainer = () => {
     );
     setGlobalSearch((prev) => ({
       ...prev,
-      searchWorld: text,
+      searchWord: text,
       searchedList: [...filteredList],
     }));
   };
@@ -37,12 +37,12 @@ const SearchContentContainer = () => {
   const handleBodyClick = () => {
     setGlobalSearch((prev) => {
       const isExist = prev.recentSearchList.find(
-        (keyword) => keyword === searchWorld
+        (keyword) => keyword === searchWord
       );
       if (isExist) return prev;
       return {
         ...prev,
-        recentSearchList: [...prev.recentSearchList, searchWorld],
+        recentSearchList: [...prev.recentSearchList, searchWord],
       };
     });
   };
@@ -51,7 +51,7 @@ const SearchContentContainer = () => {
     return () => {
       setGlobalSearch((prev) => ({
         ...prev,
-        searchWorld: "",
+        searchWord: "",
         searchedList: [],
       }));
     };
@@ -61,14 +61,14 @@ const SearchContentContainer = () => {
     <>
       <SearchInputBox
         placeholder="링크 제목, URL을 검색해 주세요."
-        value={searchWorld}
+        value={searchWord}
         onChangeText={handleInputChange}
         autoFocus
       />
-      {!searchWorld && recentSearchList.length > 0 && (
+      {!searchWord && recentSearchList.length > 0 && (
         <RecentSearchArea list={recentSearchList} />
       )}
-      {searchWorld && (
+      {searchWord && (
         <ScrollView>
           {searchedList.length === 0 ? (
             <EmptyImage />
@@ -78,7 +78,7 @@ const SearchContentContainer = () => {
                 key={id}
                 linkName={linkName}
                 url={url}
-                search={searchWorld}
+                search={searchWord}
                 onBodyClick={handleBodyClick}
               />
             ))

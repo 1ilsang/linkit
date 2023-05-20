@@ -6,6 +6,10 @@ import { globalSearchAtom } from "../atoms";
 const Item = ({ keyword }) => {
   const [, setGlobalSearch] = useAtom(globalSearchAtom);
 
+  const handleKeywordClick = () => {
+    setGlobalSearch((prev) => ({ ...prev, searchWord: keyword }));
+  };
+
   const handleDeleteClick = () => {
     setGlobalSearch((prev) => ({
       ...prev,
@@ -17,7 +21,9 @@ const Item = ({ keyword }) => {
 
   return (
     <View style={styles.itemContainer}>
-      <Text>{keyword}</Text>
+      <Pressable onPress={handleKeywordClick}>
+        <Text>{keyword}</Text>
+      </Pressable>
       <Pressable hitSlop={10} onPress={handleDeleteClick}>
         <IconFactory icon="X" color="#C8C8C8" size={16} />
       </Pressable>
