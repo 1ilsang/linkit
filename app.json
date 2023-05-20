@@ -2,7 +2,7 @@
   "expo": {
     "name": "Linkit",
     "slug": "linkit",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -17,7 +17,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "ios.sidejob.linkit",
-      "buildNumber": "8"
+      "buildNumber": "0"
     },
     "android": {
       "adaptiveIcon": {
