@@ -1,11 +1,24 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import IconFactory from "../../../shared/icons/IconFactory";
+import { useAtom } from "jotai";
+import { globalSearchAtom } from "../atoms";
 
-const Item = ({ name }) => {
+const Item = ({ keyword }) => {
+  const [, setGlobalSearch] = useAtom(globalSearchAtom);
+
+  const handleDeleteClick = () => {
+    setGlobalSearch((prev) => ({
+      ...prev,
+      recentSearchList: [
+        ...prev.recentSearchList.filter((word) => word !== keyword),
+      ],
+    }));
+  };
+
   return (
     <View style={styles.itemContainer}>
-      <Text>{name}</Text>
-      <Pressable hitSlop={10}>
+      <Text>{keyword}</Text>
+      <Pressable hitSlop={10} onPress={handleDeleteClick}>
         <IconFactory icon="X" color="#C8C8C8" size={16} />
       </Pressable>
     </View>
@@ -19,8 +32,8 @@ const RecentSearchArea = ({ list }) => {
         <Text style={styles.title}>최근 검색</Text>
       </View>
       <View style={styles.listContainer}>
-        {list.map((item) => (
-          <Item key={item.name} {...item} />
+        {list.map((keyword) => (
+          <Item key={keyword} keyword={keyword} />
         ))}
       </View>
     </View>

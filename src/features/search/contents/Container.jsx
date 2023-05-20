@@ -34,6 +34,19 @@ const SearchContentContainer = () => {
     }));
   };
 
+  const handleBodyClick = () => {
+    setGlobalSearch((prev) => {
+      const isExist = prev.recentSearchList.find(
+        (keyword) => keyword === searchWorld
+      );
+      if (isExist) return prev;
+      return {
+        ...prev,
+        recentSearchList: [...prev.recentSearchList, searchWorld],
+      };
+    });
+  };
+
   useEffect(() => {
     return () => {
       setGlobalSearch((prev) => ({
@@ -66,6 +79,7 @@ const SearchContentContainer = () => {
                 linkName={linkName}
                 url={url}
                 search={searchWorld}
+                onBodyClick={handleBodyClick}
               />
             ))
           )}

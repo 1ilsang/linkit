@@ -19,8 +19,6 @@ const LinkItemBodyContainer = ({
   const [, setFolderDetail] = useAtom(folderDetailAtom);
 
   const handleBodyClick = () => {
-    onBodyClick?.();
-
     if (appEnv.defaultBrowser) {
       Linking.openURL(url).catch(() => {
         Alert.alert("Error", "웹사이트를 열수 없어요. URL을 확인해 주세요.");
@@ -33,6 +31,7 @@ const LinkItemBodyContainer = ({
         },
       }));
     }
+    onBodyClick?.();
   };
   return (
     <View style={styles.container}>
