@@ -29,11 +29,12 @@ import IconFactory from "../../../../../shared/icons/IconFactory";
 import { getOgData } from "../../../../linkAdder/helpers";
 
 const getText = (targetText, searchText) => {
-  const startIndex = targetText.indexOf(searchText);
+  const startIndex = targetText.toLowerCase().indexOf(searchText.toLowerCase());
   const endIndex = startIndex + searchText.length;
   return {
     searched: startIndex !== -1,
     prevText: targetText.slice(0, startIndex),
+    searchedText: targetText.slice(startIndex, endIndex),
     nextText: targetText.slice(endIndex),
     originText: targetText,
   };
@@ -140,7 +141,7 @@ const FolderContentItem = (props) => {
                 {linkText.searched ? (
                   <>
                     {linkText.prevText}
-                    <Text style={styles.search}>{search}</Text>
+                    <Text style={styles.search}>{linkText.searchedText}</Text>
                     {linkText.nextText}
                   </>
                 ) : (
@@ -160,7 +161,7 @@ const FolderContentItem = (props) => {
                 {urlText.searched ? (
                   <>
                     {urlText.prevText}
-                    <Text style={styles.search}>{search}</Text>
+                    <Text style={styles.search}>{urlText.searchedText}</Text>
                     {urlText.nextText}
                   </>
                 ) : (

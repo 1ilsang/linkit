@@ -40,12 +40,9 @@ const FolderContentContainer = (props) => {
     const originLinkList = folderList.find(
       (item) => item.id === folderDetail.id
     ).linkList;
-    const nextLinkList = originLinkList.filter((item) => {
-      return (
-        item.linkName.includes(search) ||
-        item.memo.includes(search) ||
-        item.url.includes(search)
-      );
+    const nextLinkList = originLinkList.filter(({ linkName, memo, url }) => {
+      const regExp = new RegExp(search, "gi");
+      return regExp.test(linkName) || regExp.test(memo) || regExp.test(url);
     });
     setFolderDetail((prev) => ({
       ...prev,
