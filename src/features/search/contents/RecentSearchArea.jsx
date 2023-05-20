@@ -2,12 +2,29 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import IconFactory from "../../../shared/icons/IconFactory";
 import { useAtom } from "jotai";
 import { globalSearchAtom } from "../atoms";
+import { folderListAtom } from "../../../shared/atoms";
+import { handleLinkSearch } from "../helpers";
 
 const Item = ({ keyword }) => {
   const [, setGlobalSearch] = useAtom(globalSearchAtom);
+  const [folderList] = useAtom(folderListAtom);
 
   const handleKeywordClick = () => {
-    setGlobalSearch((prev) => ({ ...prev, searchWord: keyword }));
+    const linkList = folderList.flatMap((item) => item.linkList);
+    const filteredList = linkList.filter((link) =>
+      handleLinkSearch(keyword, link)
+    );
+    setGlobalSearch((prev) => {
+      const prevRecentSearchList = prev.recentSearchList.filter(
+        (word) => word !== keyword
+      );
+      return {
+        ...prev,
+        recentSearchList: [keyword, ...prevRecentSearchList],
+        searchWord: keyword,
+        searchedList: [...filteredList],
+      };
+    });
   };
 
   const handleDeleteClick = () => {
@@ -21,7 +38,7 @@ const Item = ({ keyword }) => {
 
   return (
     <View style={styles.itemContainer}>
-      <Pressable onPress={handleKeywordClick}>
+      <Pressable onPress={handleKeywordClick} hitSlop={10}>
         <Text>{keyword}</Text>
       </Pressable>
       <Pressable hitSlop={10} onPress={handleDeleteClick}>

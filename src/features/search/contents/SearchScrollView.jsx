@@ -21,15 +21,13 @@ const SearchScrollView = () => {
       });
       webView.url = undefined;
     }
-
     setGlobalSearch((prev) => {
-      const isExist = prev.recentSearchList.find(
-        (keyword) => keyword === searchWord
+      const prevRecentSearchList = prev.recentSearchList.filter(
+        (keyword) => keyword !== searchWord
       );
-      if (isExist) return prev;
       return {
         ...prev,
-        recentSearchList: [...prev.recentSearchList, searchWord],
+        recentSearchList: [searchWord, ...prevRecentSearchList],
         webView,
       };
     });

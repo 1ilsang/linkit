@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 
 import SearchInputBox from "../../../shared/inputBox/SearchInputBox";
 import RecentSearchArea from "./RecentSearchArea";
@@ -31,16 +31,6 @@ const SearchContentContainer = () => {
       searchedList: [...filteredList],
     }));
   };
-
-  useEffect(() => {
-    return () => {
-      setGlobalSearch((prev) => ({
-        ...prev,
-        searchWord: "",
-        searchedList: [],
-      }));
-    };
-  }, []);
 
   return (
     <>
