@@ -73,19 +73,16 @@ const FolderContainer = (props) => {
   ];
 
   const handleWebViewClose = () => {
-    setFolderDetail((prev) => ({ ...prev, webView: undefined }));
+    setFolderDetail((prev) => ({ ...prev, webView: {} }));
   };
+
   return (
     <View style={styles.container}>
       <Pressable style={{ flex: 1 }} onPress={() => Keyboard.dismiss()}>
         <FolderContentContainer {...props} />
       </Pressable>
       <BottomSheet ref={bottomSheetRef} list={bottomSheetList} />
-      <WebViewContainer
-        uri={webView?.url}
-        close={!webView}
-        onClose={handleWebViewClose}
-      />
+      <WebViewContainer uri={webView.url} onClose={handleWebViewClose} />
     </View>
   );
 };

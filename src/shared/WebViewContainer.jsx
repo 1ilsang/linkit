@@ -1,8 +1,8 @@
 import { View, Button, StyleSheet } from "react-native";
 import { WebView } from "react-native-webview";
 
-const WebViewContainer = ({ uri, close, onClose }) => {
-  if (close) return null;
+const WebViewContainer = ({ uri, onClose }) => {
+  if (!uri) return null;
 
   return (
     <View style={styles.container}>

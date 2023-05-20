@@ -1,11 +1,8 @@
-import { Alert, Linking, Pressable, StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 import Thumbnail from "./Thumbnail";
 import LinkItemTitle from "./Title";
 import LinkItemDescription from "./Description";
 import MoreButton from "../../../../../../../shared/buttons/More";
-import { appEnvAtom } from "../../../../../../../shared/atoms";
-import { useAtom } from "jotai";
-import { folderDetailAtom } from "../../../../../atoms";
 
 const LinkItemBodyContainer = ({
   onBodyClick,
@@ -15,29 +12,11 @@ const LinkItemBodyContainer = ({
   url,
   onMoreClick,
 }) => {
-  const [appEnv] = useAtom(appEnvAtom);
-  const [, setFolderDetail] = useAtom(folderDetailAtom);
-
-  const handleBodyClick = () => {
-    if (appEnv.defaultBrowser) {
-      Linking.openURL(url).catch(() => {
-        Alert.alert("Error", "웹사이트를 열수 없어요. URL을 확인해 주세요.");
-      });
-    } else {
-      setFolderDetail((prev) => ({
-        ...prev,
-        webView: {
-          url,
-        },
-      }));
-    }
-    onBodyClick?.();
-  };
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
         <Thumbnail url={url} />
-        <Pressable style={styles.content} onPress={handleBodyClick}>
+        <Pressable style={styles.content} onPress={onBodyClick}>
           <LinkItemTitle pin={pin} linkName={linkName} search={search} />
           <LinkItemDescription url={url} search={search} />
         </Pressable>

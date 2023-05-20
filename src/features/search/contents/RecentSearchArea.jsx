@@ -32,10 +32,21 @@ const Item = ({ keyword }) => {
 };
 
 const RecentSearchArea = ({ list }) => {
+  const [, setGlobalSearch] = useAtom(globalSearchAtom);
+
+  const handleDeleteAllClick = () => {
+    // TODO: 모달 떠야함
+    setGlobalSearch((prev) => ({ ...prev, recentSearchList: [] }));
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>최근 검색</Text>
+
+        <Pressable onPress={handleDeleteAllClick}>
+          <Text style={styles.deleteText}>전체 삭제</Text>
+        </Pressable>
       </View>
       <View style={styles.listContainer}>
         {list.map((keyword) => (
@@ -54,6 +65,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     display: "flex",
     flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
     paddingTop: 34,
     paddingBottom: 14,
@@ -65,6 +77,10 @@ const styles = StyleSheet.create({
     lineHeight: 19,
     letterSpacing: -1,
     color: "#1A1A1A",
+  },
+  deleteText: {
+    color: "#A5A5A5",
+    fontSize: 12,
   },
   listContainer: {},
   itemContainer: {

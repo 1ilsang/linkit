@@ -10,6 +10,9 @@ export const initialFolderDetail = {
   titleMoreOpen: undefined,
   bottomSheetRef: undefined,
   bottomSheetItem: undefined,
+  webView: {
+    url: undefined,
+  },
 };
 
 export const folderDetailAtom = atomWithReset(initialFolderDetail);

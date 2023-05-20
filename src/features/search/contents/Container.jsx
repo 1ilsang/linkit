@@ -1,20 +1,18 @@
 import { useEffect, useRef } from "react";
 
 import SearchInputBox from "../../../shared/inputBox/SearchInputBox";
-import EmptyImage from "./EmptyImage";
 import RecentSearchArea from "./RecentSearchArea";
 import { useAtom } from "jotai";
 import { globalSearchAtom } from "../atoms";
 import { folderListAtom } from "../../../shared/atoms";
 import { handleLinkSearch } from "../helpers";
-import { ScrollView } from "react-native";
-import LinkItemBodyContainer from "../../folder/components/contents/links/item/body/Container";
+import SearchScrollView from "./SearchScrollView";
 
 const SearchContentContainer = () => {
   const [globalSearch, setGlobalSearch] = useAtom(globalSearchAtom);
   const [folderList] = useAtom(folderListAtom);
 
-  const { searchWord, searchedList, recentSearchList } = globalSearch;
+  const { searchWord, recentSearchList } = globalSearch;
 
   const searched = useRef(false);
 
@@ -32,19 +30,6 @@ const SearchContentContainer = () => {
       searchWord: text,
       searchedList: [...filteredList],
     }));
-  };
-
-  const handleBodyClick = () => {
-    setGlobalSearch((prev) => {
-      const isExist = prev.recentSearchList.find(
-        (keyword) => keyword === searchWord
-      );
-      if (isExist) return prev;
-      return {
-        ...prev,
-        recentSearchList: [...prev.recentSearchList, searchWord],
-      };
-    });
   };
 
   useEffect(() => {
@@ -68,23 +53,7 @@ const SearchContentContainer = () => {
       {!searchWord && recentSearchList.length > 0 && (
         <RecentSearchArea list={recentSearchList} />
       )}
-      {searchWord && (
-        <ScrollView>
-          {searchedList.length === 0 ? (
-            <EmptyImage />
-          ) : (
-            searchedList.map(({ linkName, url, id }) => (
-              <LinkItemBodyContainer
-                key={id}
-                linkName={linkName}
-                url={url}
-                search={searchWord}
-                onBodyClick={handleBodyClick}
-              />
-            ))
-          )}
-        </ScrollView>
-      )}
+      <SearchScrollView />
     </>
   );
 };

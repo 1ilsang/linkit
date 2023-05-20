@@ -4,7 +4,7 @@ import {
   Swipeable,
   GestureHandlerRootView,
 } from "react-native-gesture-handler";
-import { folderListAtom } from "../../../../../../shared/atoms";
+import { appEnvAtom, folderListAtom } from "../../../../../../shared/atoms";
 import Toast from "react-native-root-toast";
 import { DEFAULT_SHORT_TOAST } from "../../../../../../shared/constants/toast";
 import {
@@ -16,12 +16,14 @@ import { sortLinkList } from "../../../../../../shared/utils/helpers";
 import renderLeftActions from "./swipe/LeftAction";
 import renderRightActions from "./swipe/RightAction";
 import LinkItemBodyContainer from "./body/Container";
+import { Alert, Linking } from "react-native";
 
 const FolderContentItemContainer = (props) => {
   const swipeableRef = useRef(null);
 
   const [folderDetail, setFolderDetail] = useAtom(folderDetailAtom);
   const [, setFolderList] = useAtom(folderListAtom);
+  const [appEnv] = useAtom(appEnvAtom);
 
   const { linkName, url, pin } = props;
   const { search } = folderDetail;
@@ -61,6 +63,21 @@ const FolderContentItemContainer = (props) => {
     });
   };
 
+  const handleBodyClick = () => {
+    if (appEnv.defaultBrowser) {
+      Linking.openURL(url).catch(() => {
+        Alert.alert("Error", "웹사이트를 열수 없어요. URL을 확인해 주세요.");
+      });
+    } else {
+      setFolderDetail((prev) => ({
+        ...prev,
+        webView: {
+          url,
+        },
+      }));
+    }
+  };
+
   return (
     <GestureHandlerRootView>
       <Swipeable
@@ -77,6 +94,7 @@ const FolderContentItemContainer = (props) => {
           linkName={linkName}
           search={search}
           url={url}
+          onBodyClick={handleBodyClick}
           onMoreClick={handleMorePress}
         />
       </Swipeable>

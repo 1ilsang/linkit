@@ -5,6 +5,9 @@ export const initialGlobalSearch = {
   searchWord: "",
   recentSearchList: [],
   searchedList: [],
+  webView: {
+    url: undefined,
+  },
 };
 
 export const globalSearchAtom = atomWithReset(initialGlobalSearch);
