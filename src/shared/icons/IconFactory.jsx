@@ -50,6 +50,7 @@ import {
   Gear,
   PushPin,
   X,
+  Image,
 } from "phosphor-react-native";
 import { View } from "react-native";
 
@@ -165,6 +166,8 @@ const IconFactory = ({
       return (
         <PushPin color={color} weight={weight} size={size} style={style} />
       );
+    case "Image":
+      return <Image color={color} weight={weight} size={size} style={style} />;
     default:
       return <View></View>;
   }

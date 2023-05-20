@@ -4,7 +4,7 @@ import EmptyImage from "../../../../../shared/EmptyImage";
 import { folderDetailAtom } from "../../../atoms";
 import { MODE } from "../../../constants";
 import Edit from "./Edit";
-import FolderContentItem from "./Item";
+import FolderContentItem from "./item/Container";
 
 const LinkContainer = () => {
   const [folderDetail] = useAtom(folderDetailAtom);

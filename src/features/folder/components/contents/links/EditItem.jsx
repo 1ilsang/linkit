@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import NoImage from "../../../../../shared/icons/NonImage";
 import { CheckCircle, Circle } from "phosphor-react-native";
+import IconFactory from "../../../../../shared/icons/IconFactory";
 
 const EditItem = ({ id, linkName, url, onCirclePress, checked }) => {
   const handleCirclePress = () => {
@@ -12,7 +12,7 @@ const EditItem = ({ id, linkName, url, onCirclePress, checked }) => {
       {checked ? <CheckCircle weight="fill" /> : <Circle />}
       <View style={styles.contentContainer}>
         <View style={styles.thumbnail}>
-          <NoImage size={40} />
+          <IconFactory icon="Image" size={40} color="#CFCFCF" />
         </View>
         <View style={styles.content}>
           <Text style={styles.linkName}>{linkName}</Text>

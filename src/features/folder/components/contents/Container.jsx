@@ -7,6 +7,7 @@ import { folderDetailAtom, initialFolderDetail } from "../../atoms";
 import { MODE } from "../../constants";
 import FilterArea from "./filter/FilterArea";
 import LinkContainer from "./links/Container";
+import { handleLinkSearch } from "../../../search/helpers";
 
 const FolderContentContainer = (props) => {
   const [folderList] = useAtom(folderListAtom);
@@ -40,10 +41,9 @@ const FolderContentContainer = (props) => {
     const originLinkList = folderList.find(
       (item) => item.id === folderDetail.id
     ).linkList;
-    const nextLinkList = originLinkList.filter(({ linkName, memo, url }) => {
-      const regExp = new RegExp(search, "gi");
-      return regExp.test(linkName) || regExp.test(memo) || regExp.test(url);
-    });
+    const nextLinkList = originLinkList.filter((link) =>
+      handleLinkSearch(search, link)
+    );
     setFolderDetail((prev) => ({
       ...prev,
       searchLinkList: nextLinkList,
