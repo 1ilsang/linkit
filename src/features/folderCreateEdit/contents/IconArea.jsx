@@ -2,6 +2,7 @@ import { useAtom } from "jotai";
 import { Pressable, StyleSheet, View } from "react-native";
 import IconFactory from "../../../shared/icons/IconFactory";
 import { createEditAtom } from "../atoms";
+import InputLabel from "../../../shared/inputBox/Label";
 
 const labelList = [
   ["Heart", "Star", "Moon", "Smiley", "SmileyMeh", "SmileyXEyes"],
@@ -46,16 +47,19 @@ const IconArea = () => {
   };
 
   return (
-    <View style={styles.container}>
-      {labelList.map((labels) => (
-        <IconRow
-          key={labels[0]}
-          labels={labels}
-          checkedLabel={createEdit.icon}
-          onPress={handleIconPress}
-        />
-      ))}
-    </View>
+    <>
+      <InputLabel label="아이콘" required />
+      <View style={styles.container}>
+        {labelList.map((labels) => (
+          <IconRow
+            key={labels[0]}
+            labels={labels}
+            checkedLabel={createEdit.icon}
+            onPress={handleIconPress}
+          />
+        ))}
+      </View>
+    </>
   );
 };
 

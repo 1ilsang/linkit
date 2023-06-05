@@ -1,5 +1,5 @@
 import { useAtom } from "jotai";
-import { Pressable, StyleSheet, Text } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import SubmitButton from "../../../shared/buttons/Submit";
 import { folderListAtom } from "../../../shared/atoms";
 import FormInputBox from "../../../shared/inputBox/FormInputBox";
@@ -11,6 +11,7 @@ import { useNavigation } from "@react-navigation/native";
 import Toast from "react-native-root-toast";
 import { DEFAULT_SHORT_TOAST } from "../../../shared/constants/toast";
 import { useState } from "react";
+import InputLabel from "../../../shared/inputBox/Label";
 
 const FolderCreateEditContentContainer = (props) => {
   const navigation = useNavigation();
@@ -114,10 +115,9 @@ const FolderCreateEditContentContainer = (props) => {
         error={descriptionError}
       />
 
-      <Text style={styles.label}>아이콘</Text>
       <IconArea />
-
       <ColorArea />
+
       <SubmitButton
         label={isEdit ? "저장하기" : "만들기"}
         onPress={handleSubmitPress}
@@ -135,14 +135,6 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     height: "100%",
     paddingBottom: 36,
-  },
-  label: {
-    height: 17,
-    fontWeight: "400",
-    fontSize: 14,
-    lineHeight: 17,
-    letterSpacing: -0.5,
-    color: "#000000",
   },
 });
 

@@ -3,6 +3,7 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import { colorSets } from "../../../shared/constants/colors";
 import { createEditAtom } from "../atoms";
 import { Check } from "phosphor-react-native";
+import InputLabel from "../../../shared/inputBox/Label";
 
 const ColorItem = ({ color, checked, onPress }) => {
   return (
@@ -27,8 +28,8 @@ const ColorArea = () => {
   };
 
   return (
-    <View>
-      <Text style={styles.label}>컬러</Text>
+    <>
+      <InputLabel label="컬러" required />
       <View style={styles.colorContainer}>
         {colorSets.map((color) => (
           <ColorItem
@@ -39,18 +40,11 @@ const ColorArea = () => {
           />
         ))}
       </View>
-    </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  label: {
-    height: 17,
-    fontSize: 14,
-    lineHeight: 17,
-    letterSpacing: -0.5,
-    color: "#000000",
-  },
   colorContainer: {
     display: "flex",
     width: "100%",
