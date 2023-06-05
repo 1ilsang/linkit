@@ -2,6 +2,7 @@ import { Pressable, StyleSheet, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useAtom } from "jotai";
 import { mainAtom } from "../../main/atoms";
+import { itemStyle } from "./styles";
 
 const Adder = () => {
   const [main, setMain] = useAtom(mainAtom);
@@ -19,34 +20,7 @@ const Adder = () => {
 };
 
 const styles = StyleSheet.create({
-  item: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-
-    paddingTop: 4,
-    paddingRight: 4,
-    paddingBottom: 4,
-    paddingLeft: 4,
-
-    width: 97,
-    height: 72,
-  },
-  text: {
-    display: "flex",
-    width: 42,
-    height: 18,
-
-    fontWeight: "500",
-    fontSize: 14,
-    lineHeight: 18,
-
-    textAlign: "center",
-    letterSpacing: -0.01,
-
-    color: "#2D264B",
-  },
+  ...itemStyle,
 });
 
 export default Adder;

@@ -39,10 +39,10 @@ const Item = ({ keyword }) => {
   return (
     <View style={styles.itemContainer}>
       <Pressable onPress={handleKeywordClick} hitSlop={10}>
-        <Text>{keyword}</Text>
+        <Text style={styles.keyword}>{keyword}</Text>
       </Pressable>
       <Pressable hitSlop={10} onPress={handleDeleteClick}>
-        <IconFactory icon="X" color="#C8C8C8" size={16} />
+        <IconFactory icon="XCircle" weight="fill" color="#CFCFCF" />
       </Pressable>
     </View>
   );
@@ -105,7 +105,9 @@ const styles = StyleSheet.create({
     color: "#A5A5A5",
     fontSize: 12,
   },
-  listContainer: {},
+  listContainer: {
+    paddingLeft: 2,
+  },
   itemContainer: {
     display: "flex",
     flexDirection: "row",
@@ -121,6 +123,11 @@ const styles = StyleSheet.create({
     lineHeight: 17,
     letterSpacing: -1,
     color: "#1A1A1A",
+  },
+  keyword: {
+    fontWeight: "400",
+    fontSize: 14,
+    lineHeight: 20,
   },
 });
 
