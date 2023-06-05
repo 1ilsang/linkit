@@ -16,14 +16,7 @@ const MainContentsContainer = ({ scrollViewRef }) => {
     >
       <ScrollView
         ref={scrollViewRef}
-        contentContainerStyle={{
-          display: "flex",
-          flexWrap: "wrap",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          paddingRight: 18,
-          paddingLeft: 18,
-        }}
+        contentContainerStyle={styles.contentContainer}
       >
         {folderList.length === 0 ? (
           <EmptyImage />
@@ -36,6 +29,14 @@ const MainContentsContainer = ({ scrollViewRef }) => {
 };
 
 const styles = StyleSheet.create({
+  contentContainer: {
+    display: "flex",
+    flexWrap: "wrap",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingRight: 18,
+    paddingLeft: 18,
+  },
   container: {
     width: "100%",
     height: "90%",
