@@ -63,105 +63,202 @@ const IconFactory = ({
 }) => {
   switch (icon) {
     case "FolderSimpleDotted":
-      return <FolderSimpleDotted color={color} />;
+      return (
+        <FolderSimpleDotted
+          color={color}
+          weight={weight}
+          size={size}
+          style={style}
+        />
+      );
     case "Trash":
-      return <Trash color={color} />;
+      return <Trash color={color} weight={weight} size={size} style={style} />;
     case "PencilSimple":
-      return <PencilSimple color={color} />;
+      return (
+        <PencilSimple color={color} weight={weight} size={size} style={style} />
+      );
     case "X":
-      return <X color={color} weight={weight} size={size} />;
+      return <X color={color} weight={weight} size={size} style={style} />;
     case "XCircle":
-      return <XCircle color={color} weight={weight} size={size} />;
+      return (
+        <XCircle color={color} weight={weight} size={size} style={style} />
+      );
     case "MagnifyingGlass":
-      return <MagnifyingGlass color={color} />;
+      return (
+        <MagnifyingGlass
+          color={color}
+          weight={weight}
+          size={size}
+          style={style}
+        />
+      );
     case "Check":
-      return <Check color={color} />;
+      return <Check color={color} weight={weight} size={size} style={style} />;
     case "FolderSimplePlus":
-      return <FolderSimplePlus color={color} />;
+      return (
+        <FolderSimplePlus
+          color={color}
+          weight={weight}
+          size={size}
+          style={style}
+        />
+      );
     case "Link":
-      return <Link color={color} />;
+      return <Link color={color} weight={weight} size={size} style={style} />;
     case "Heart":
-      return <Heart color={color} />;
+      return <Heart color={color} weight={weight} size={size} style={style} />;
     case "Star":
-      return <Star color={color} />;
+      return <Star color={color} weight={weight} size={size} style={style} />;
     case "Moon":
-      return <Moon color={color} />;
+      return <Moon color={color} weight={weight} size={size} style={style} />;
     case "Smiley":
-      return <Smiley color={color} />;
+      return <Smiley color={color} weight={weight} size={size} style={style} />;
     case "SmileyMeh":
-      return <SmileyMeh color={color} />;
+      return (
+        <SmileyMeh color={color} weight={weight} size={size} style={style} />
+      );
     case "SmileyXEyes":
-      return <SmileyXEyes color={color} />;
+      return (
+        <SmileyXEyes color={color} weight={weight} size={size} style={style} />
+      );
     case "AndroidLogo":
-      return <AndroidLogo color={color} />;
+      return (
+        <AndroidLogo color={color} weight={weight} size={size} style={style} />
+      );
     case "Gift":
-      return <Gift color={color} />;
+      return <Gift color={color} weight={weight} size={size} style={style} />;
     case "Flag":
-      return <Flag color={color} />;
+      return <Flag color={color} weight={weight} size={size} style={style} />;
     case "Lightbulb":
-      return <Lightbulb color={color} />;
+      return (
+        <Lightbulb color={color} weight={weight} size={size} style={style} />
+      );
     case "PaintBrush":
-      return <PaintBrush color={color} />;
+      return (
+        <PaintBrush color={color} weight={weight} size={size} style={style} />
+      );
     case "Binoculars":
-      return <Binoculars color={color} />;
+      return (
+        <Binoculars color={color} weight={weight} size={size} style={style} />
+      );
     case "Movie":
-      return <FilmSlate color={color} />;
+      return (
+        <FilmSlate color={color} weight={weight} size={size} style={style} />
+      );
     case "TV":
-      return <TelevisionSimple color={color} />;
+      return (
+        <TelevisionSimple
+          color={color}
+          weight={weight}
+          size={size}
+          style={style}
+        />
+      );
     case "Music":
-      return <MusicNote color={color} />;
+      return (
+        <MusicNote color={color} weight={weight} size={size} style={style} />
+      );
     case "Youtube":
-      return <YoutubeLogo color={color} />;
+      return (
+        <YoutubeLogo color={color} weight={weight} size={size} style={style} />
+      );
     case "Books":
-      return <Books color={color} />;
+      return <Books color={color} weight={weight} size={size} style={style} />;
     case "BookOpen":
-      return <BookOpen color={color} />;
+      return (
+        <BookOpen color={color} weight={weight} size={size} style={style} />
+      );
     case "Cart":
-      return <ShoppingCartSimple color={color} />;
+      return (
+        <ShoppingCartSimple
+          color={color}
+          weight={weight}
+          size={size}
+          style={style}
+        />
+      );
     case "Handbag":
-      return <Handbag color={color} />;
+      return (
+        <Handbag color={color} weight={weight} size={size} style={style} />
+      );
     case "CoatHanger":
-      return <CoatHanger color={color} />;
+      return (
+        <CoatHanger color={color} weight={weight} size={size} style={style} />
+      );
     case "Coffee":
-      return <Coffee color={color} />;
+      return <Coffee color={color} weight={weight} size={size} style={style} />;
     case "Brandy":
-      return <Brandy color={color} />;
+      return <Brandy color={color} weight={weight} size={size} style={style} />;
     case "ForkKnife":
-      return <ForkKnife color={color} />;
+      return (
+        <ForkKnife color={color} weight={weight} size={size} style={style} />
+      );
     case "Newspaper":
-      return <Newspaper color={color} />;
+      return (
+        <Newspaper color={color} weight={weight} size={size} style={style} />
+      );
     case "Article":
-      return <Article color={color} />;
+      return (
+        <Article color={color} weight={weight} size={size} style={style} />
+      );
     case "File":
-      return <File color={color} />;
+      return <File color={color} weight={weight} size={size} style={style} />;
     case "PaperClip":
-      return <Paperclip color={color} />;
+      return (
+        <Paperclip color={color} weight={weight} size={size} style={style} />
+      );
     case "EnvelopeOpen":
-      return <EnvelopeOpen color={color} />;
+      return (
+        <EnvelopeOpen color={color} weight={weight} size={size} style={style} />
+      );
     case "Archive":
-      return <Archive color={color} />;
+      return (
+        <Archive color={color} weight={weight} size={size} style={style} />
+      );
     case "Exercise":
-      return <Barbell color={color} />;
+      return (
+        <Barbell color={color} weight={weight} size={size} style={style} />
+      );
     case "Bathtub":
-      return <Bathtub color={color} />;
+      return (
+        <Bathtub color={color} weight={weight} size={size} style={style} />
+      );
     case "Medi":
-      return <FirstAid color={color} />;
+      return (
+        <FirstAid color={color} weight={weight} size={size} style={style} />
+      );
     case "World":
-      return <GlobeHemisphereWest color={color} />;
+      return (
+        <GlobeHemisphereWest
+          color={color}
+          weight={weight}
+          size={size}
+          style={style}
+        />
+      );
     case "Map":
-      return <MapTrifold color={color} />;
+      return (
+        <MapTrifold color={color} weight={weight} size={size} style={style} />
+      );
     case "Train":
-      return <Train color={color} />;
+      return <Train color={color} weight={weight} size={size} style={style} />;
     case "Circle":
-      return <Circle color={color} />;
+      return <Circle color={color} weight={weight} size={size} style={style} />;
     case "CheckedCircle":
-      return <CheckedCircle color={color} />;
+      return (
+        <CheckedCircle
+          color={color}
+          weight={weight}
+          size={size}
+          style={style}
+        />
+      );
     case "Share":
-      return <Share color={color} />;
+      return <Share color={color} weight={weight} size={size} style={style} />;
     case "House":
-      return <House color={color} weight={weight} />;
+      return <House color={color} weight={weight} size={size} style={style} />;
     case "Setting":
-      return <Gear color={color} weight={weight} />;
+      return <Gear color={color} weight={weight} size={size} style={style} />;
     case "PushPin":
       return (
         <PushPin color={color} weight={weight} size={size} style={style} />

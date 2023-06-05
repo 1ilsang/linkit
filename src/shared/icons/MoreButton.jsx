@@ -41,9 +41,9 @@ const MoreButton = ({
                 }}
                 onPress={onPress}
               >
-                <Text>{name}</Text>
+                <Text style={styles.text}>{name}</Text>
                 <View style={styles.icon}>
-                  <IconFactory icon={icon} />
+                  <IconFactory icon={icon} size={18} />
                 </View>
               </Pressable>
             );
@@ -80,11 +80,17 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
 
     width: "100%",
     paddingTop: 14,
     paddingLeft: 12,
     paddingBottom: 14,
+  },
+  text: {
+    fontWeight: "400",
+    fontSize: 14,
+    lineHeight: 20,
   },
   icon: {
     paddingRight: 13,
