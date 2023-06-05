@@ -43,11 +43,13 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",
-    marginBottom: 20,
+
     paddingTop: 18,
     paddingLeft: 20,
     paddingRight: 20,
     paddingBottom: 24,
+
+    marginBottom: 20,
 
     width: "47%",
     height: 152,
@@ -60,7 +62,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingBottom: 10,
+
+    marginBottom: 10,
     zIndex: 300,
     width: 120,
     height: 24,
@@ -71,12 +74,13 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "flex-start",
 
+    marginBottom: 10,
+
     width: 120,
-    height: 60,
+    height: 55,
   },
   linkContent: {
     width: 120,
-    paddingTop: 10,
     display: "flex",
 
     flexDirection: "row",
@@ -89,11 +93,11 @@ const styles = StyleSheet.create({
   },
   title: {
     width: 120,
-    height: 38,
+    height: 28,
 
-    fontWeight: "600",
-    fontSize: 16,
-    lineHeight: 19,
+    fontWeight: "500",
+    fontSize: 18,
+    lineHeight: 23,
 
     color: "#FFFFFF",
   },

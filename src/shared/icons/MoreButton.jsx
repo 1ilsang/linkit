@@ -10,8 +10,8 @@ const MoreButton = ({
   style = {},
   size = 22,
 }) => {
-  const getBottomBorderStyle = (index) => {
-    if (index === list.length - 1) return {};
+  const getBottomBorderStyle = (index, defaultFolder) => {
+    if (index === list.length - 1 || (index === 0 && defaultFolder)) return {};
     return {
       borderBottomColor: "#F4F4F4",
       borderBottomWidth: StyleSheet.hairlineWidth,
@@ -37,7 +37,7 @@ const MoreButton = ({
                 key={name}
                 style={{
                   ...styles.modalItem,
-                  ...getBottomBorderStyle(index),
+                  ...getBottomBorderStyle(index, defaultFolder),
                 }}
                 onPress={onPress}
               >
