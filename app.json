@@ -17,7 +17,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "ios.sidejob.linkit",
-      "buildNumber": "0"
+      "buildNumber": "1"
     },
     "android": {
       "adaptiveIcon": {
