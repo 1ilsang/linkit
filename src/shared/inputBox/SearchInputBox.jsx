@@ -1,5 +1,6 @@
 import { StyleSheet, TextInput, View, Pressable } from "react-native";
 import IconFactory from "../icons/IconFactory";
+import { useEffect, useRef } from "react";
 
 const SearchInputBox = ({
   value,
@@ -8,12 +9,22 @@ const SearchInputBox = ({
   onClearPress,
   placeholder,
   onPressIn,
+  delayFocus = false,
   autoFocus = false,
 }) => {
+  const textInputRef = useRef(null);
+
   const handleClearPress = () => {
     onChangeText("");
     onClearPress?.();
   };
+
+  useEffect(() => {
+    if (!delayFocus || !textInputRef.current) return;
+    setTimeout(() => {
+      textInputRef.current.focus();
+    }, 550);
+  }, [delayFocus]);
 
   return (
     <View style={styles.wrapper}>
@@ -22,6 +33,7 @@ const SearchInputBox = ({
           <IconFactory icon="MagnifyingGlass" color="#B0B0B0" size="18" />
         </View>
         <TextInput
+          ref={textInputRef}
           onPressIn={onPressIn}
           style={styles.input}
           placeholder={placeholder}

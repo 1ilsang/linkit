@@ -27,7 +27,7 @@ const SearchScrollView = () => {
       );
       return {
         ...prev,
-        recentSearchList: [searchWord, ...prevRecentSearchList],
+        recentSearchList: [searchWord, ...prevRecentSearchList].slice(0, 7),
         webView,
       };
     });

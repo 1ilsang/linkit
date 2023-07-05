@@ -4,6 +4,7 @@ import { useAtom } from "jotai";
 import { globalSearchAtom } from "../atoms";
 import { folderListAtom } from "../../../shared/atoms";
 import { handleLinkSearch } from "../helpers";
+import { ScrollView } from "react-native";
 
 const Item = ({ keyword }) => {
   const [, setGlobalSearch] = useAtom(globalSearchAtom);
@@ -20,7 +21,7 @@ const Item = ({ keyword }) => {
       );
       return {
         ...prev,
-        recentSearchList: [keyword, ...prevRecentSearchList],
+        recentSearchList: [keyword, ...prevRecentSearchList].slice(0, 7),
         searchWord: keyword,
         searchedList: [...filteredList],
       };
@@ -37,14 +38,14 @@ const Item = ({ keyword }) => {
   };
 
   return (
-    <View style={styles.itemContainer}>
+    <Pressable style={styles.itemContainer}>
       <Pressable onPress={handleKeywordClick} hitSlop={10}>
         <Text style={styles.keyword}>{keyword}</Text>
       </Pressable>
-      <Pressable hitSlop={10} onPress={handleDeleteClick}>
+      <Pressable hitSlop={14} onPress={handleDeleteClick}>
         <IconFactory icon="XCircle" weight="fill" color="#CFCFCF" />
       </Pressable>
-    </View>
+    </Pressable>
   );
 };
 
@@ -71,11 +72,11 @@ const RecentSearchArea = ({ list }) => {
           <Text style={styles.deleteText}>전체 삭제</Text>
         </Pressable>
       </View>
-      <View style={styles.listContainer}>
+      <ScrollView style={styles.listContainer}>
         {list.map((keyword) => (
           <Item key={keyword} keyword={keyword} />
         ))}
-      </View>
+      </ScrollView>
     </View>
   );
 };
@@ -84,6 +85,7 @@ const styles = StyleSheet.create({
   container: {
     paddingLeft: 18,
     paddingRight: 18,
+    height: "90%",
   },
   titleContainer: {
     display: "flex",

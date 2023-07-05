@@ -38,12 +38,12 @@ const SearchContentContainer = () => {
         placeholder="링크 제목, URL을 검색해 주세요."
         value={searchWord}
         onChangeText={handleInputChange}
-        autoFocus
+        delayFocus
       />
       {!searchWord && recentSearchList.length > 0 && (
         <RecentSearchArea list={recentSearchList} />
       )}
-      <SearchScrollView />
+      {searchWord && <SearchScrollView />}
     </>
   );
 };
