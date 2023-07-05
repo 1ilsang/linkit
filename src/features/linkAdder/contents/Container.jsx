@@ -31,8 +31,9 @@ const LinkAdderContentContainer = ({ id }) => {
   const [memoError, setMemoError] = useState("");
 
   useEffect(() => {
-    if (!id) return;
-    const target = folderList.find((item) => item.id === id);
+    const target = id
+      ? folderList.find((item) => item.id === id)
+      : folderList[0];
     if (!target) {
       throw new Error("아이디가 존재하지 않습니다");
     }
@@ -104,6 +105,13 @@ const LinkAdderContentContainer = ({ id }) => {
       if (!existPrevData) {
         Toast.show(
           "해당 폴더가 존재하지 않습니다. 에러가 계속해서 발생한다면 고객센터에 문의해주세요.",
+          DEFAULT_SHORT_TOAST
+        );
+        return prev;
+      }
+      if (existPrevData.linkList.length === 100) {
+        Toast.show(
+          "폴더 당 최대 100개의 링크를 저장할 수 있어요. 다른 폴더에 저장해 주세요.",
           DEFAULT_SHORT_TOAST
         );
         return prev;
