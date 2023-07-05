@@ -16,10 +16,20 @@ const labelList = [
 const IconItem = ({ label, onPress, checked }) => {
   return (
     <Pressable onPress={() => onPress(label)} hitSlop={10}>
-      <View style={checked ? styles.checked : {}}>
-        <IconFactory icon={label} />
+      <View
+        style={
+          checked
+            ? { ...styles.icon, ...styles.checkedBackground }
+            : styles.icon
+        }
+      >
+        <IconFactory
+          icon={label}
+          weight={checked ? "fill" : undefined}
+          color={checked ? "#FFFFFF" : undefined}
+          style={checked ? styles.checked : {}}
+        />
       </View>
-      {checked && <View style={styles.checkedBackground} />}
     </Pressable>
   );
 };
@@ -79,15 +89,12 @@ const styles = StyleSheet.create({
     width: "100%",
     paddingBottom: 22.5,
   },
+  icon: {
+    padding: 4,
+  },
   checkedBackground: {
-    position: "absolute",
-    width: 32,
-    height: 32,
-    backgroundColor: "#a0a0a0",
-    opacity: 0.2,
+    backgroundColor: "black",
     borderRadius: 4,
-    top: -4,
-    left: -4,
   },
 });
 

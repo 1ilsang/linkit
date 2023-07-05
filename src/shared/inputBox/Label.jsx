@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   label: {
     height: 17,
     fontWeight: "400",
-    fontSize: 14,
+    fontSize: 16,
     lineHeight: 17,
     letterSpacing: -0.5,
     color: "#000000",

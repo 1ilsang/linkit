@@ -51,6 +51,7 @@ import {
   PushPin,
   X,
   Image,
+  SlidersHorizontal,
 } from "phosphor-react-native";
 import { View } from "react-native";
 
@@ -265,6 +266,15 @@ const IconFactory = ({
       );
     case "Image":
       return <Image color={color} weight={weight} size={size} style={style} />;
+    case "SlidersHorizontal":
+      return (
+        <SlidersHorizontal
+          color={color}
+          weight={weight}
+          size={size}
+          style={style}
+        />
+      );
     default:
       return <View></View>;
   }

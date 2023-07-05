@@ -1,4 +1,5 @@
 import { atom } from "jotai";
+import { colorSets } from "../../shared/constants/colors";
 
 export const initialCreateEdit = {
   id: undefined,
@@ -6,7 +7,7 @@ export const initialCreateEdit = {
   description: "",
   defaultFolder: false,
   icon: undefined,
-  color: undefined,
+  color: colorSets[0],
   linkList: [],
 };
 
