@@ -20,7 +20,7 @@ import { getOgData } from "../helpers";
 const SALT = 1000000;
 
 const LinkAdderContentContainer = ({params}) => {
-  const {id, type} = params;
+  const {id, linkId, type} = params;
   const navigation = useNavigation();
 
   const [, setMain] = useAtom(mainAtom);
@@ -40,7 +40,7 @@ const LinkAdderContentContainer = ({params}) => {
     if (!target) {
       throw new Error("아이디가 존재하지 않습니다");
     }
-    setLinkAdder((prev) => ({
+    setLinkAdder((prev) => (linkId ? target.linkList.find((item) => item.id === linkId) : {
       ...prev,
       targetFolder: { id: target.id, title: target.title },
     }));
@@ -119,6 +119,50 @@ const LinkAdderContentContainer = ({params}) => {
         );
         return prev;
       }
+      
+      if (isEdit) {
+        const editLink = {
+          ...linkAdder,
+          date: new Date(),
+        }
+        if (editLink.autoLinkName) {
+          editLink.linkName = nextAutoLinkName;
+        }
+        // 원래 폴더에서 삭제
+        const prevFolderData = prev.find((item) => item.id === id);
+        const removedPrevData = prevFolderData.linkList.filter((item) => item.id !== linkId)
+        prevFolderData.linkList = removedPrevData;
+
+        // 새로운 폴더에 삽입 
+        const nextFolderData = prev.find((item) => item.id === editLink.targetFolder.id);
+        nextFolderData.linkList.push(editLink);
+        nextFolderData.linkList.sort(sortLinkList(existPrevData.sort));
+
+        const next = [...prev];
+        save(LOCAL_STORAGE_KEY.folderList, next);
+
+        const toastMessage = "링크가 수정되었어요!";
+        Toast.show(toastMessage, {
+          ...DEFAULT_LONG_TOAST,
+          hideOnPress: true,
+          onPress: (e) => {
+            navigation.navigate("Folder", {
+              id: targetFolder.id,
+              title: targetFolder.title,
+            });
+          },
+        });
+        if (id) {
+          navigation.navigate("Folder", {
+            id: targetFolder.id,
+            title: targetFolder.title,
+          });
+        } else {
+          navigation.navigate("Main");
+        }
+        return next;
+      }
+
       const submitLink = {
         ...linkAdder,
         id: Number(new Date()) + Math.floor(Math.random() * SALT),
