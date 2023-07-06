@@ -17,7 +17,7 @@ const LinkAdderContainer = (props) => {
   return (
     <View style={styles.container}>
       <Pressable style={{ flex: 1 }} onPress={() => Keyboard.dismiss()}>
-        <LinkAdderContentContainer id={props.route?.params?.id} />
+        <LinkAdderContentContainer params={props.route?.params} />
       </Pressable>
     </View>
   );

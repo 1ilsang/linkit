@@ -19,7 +19,8 @@ import { getOgData } from "../helpers";
 
 const SALT = 1000000;
 
-const LinkAdderContentContainer = ({ id }) => {
+const LinkAdderContentContainer = ({params}) => {
+  const {id, type} = params;
   const navigation = useNavigation();
 
   const [, setMain] = useAtom(mainAtom);
@@ -29,6 +30,8 @@ const LinkAdderContentContainer = ({ id }) => {
 
   const [linkNameError, setLinkNameError] = useState("");
   const [memoError, setMemoError] = useState("");
+
+  const isEdit = type === "edit";
 
   useEffect(() => {
     const target = id
@@ -195,7 +198,7 @@ const LinkAdderContentContainer = ({ id }) => {
         />
       </View>
       <SubmitButton
-        label="저장하기"
+        label={isEdit ? "수정하기" : "저장하기"}
         onPress={handleSubmitPress}
         disabled={!validSubmit}
       />
