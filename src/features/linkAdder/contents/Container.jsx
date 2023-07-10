@@ -94,7 +94,7 @@ const LinkAdderContentContainer = ({params}) => {
   };
   const handleFolderPress = () => {
     Keyboard.dismiss();
-    setMain((prev) => ({ ...prev, folderPickerOpen: true }));
+    setMain((prev) => ({ ...prev, folderPickerOpen: true, folderPickerId: id }));
   };
   const handleSubmitPress = async () => {
     if (!validSubmit) return;

@@ -20,6 +20,7 @@ const MainContainer = () => {
       <BottomSheet ref={adderSheetRef} list={adderSheet} />
       <PickerBottomSheet
         open={main.folderPickerOpen}
+        folderId={main.folderPickerId}
         list={pickerList}
         onDoneClick={handleDoneClick}
         onCancelClick={handleCancelClick}
