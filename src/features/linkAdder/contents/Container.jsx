@@ -19,8 +19,8 @@ import { getOgData } from "../helpers";
 
 const SALT = 1000000;
 
-const LinkAdderContentContainer = ({params}) => {
-  const {id, linkId, type} = params;
+const LinkAdderContentContainer = ({ params = {} }) => {
+  const { id, linkId, type } = params;
   const navigation = useNavigation();
 
   const [, setMain] = useAtom(mainAtom);
@@ -41,10 +41,14 @@ const LinkAdderContentContainer = ({params}) => {
     if (!target) {
       throw new Error("아이디가 존재하지 않습니다");
     }
-    setLinkAdder((prev) => (linkId ? target.linkList.find((item) => item.id === linkId) : {
-      ...prev,
-      targetFolder: { id: target.id, title: target.title },
-    }));
+    setLinkAdder((prev) =>
+      linkId
+        ? target.linkList.find((item) => item.id === linkId)
+        : {
+            ...prev,
+            targetFolder: { id: target.id, title: target.title },
+          }
+    );
     setMain((prev) => ({ ...prev, folderPickerOpen: false }));
   }, [id]);
 
@@ -94,7 +98,11 @@ const LinkAdderContentContainer = ({params}) => {
   };
   const handleFolderPress = () => {
     Keyboard.dismiss();
-    setMain((prev) => ({ ...prev, folderPickerOpen: true, folderPickerId: id }));
+    setMain((prev) => ({
+      ...prev,
+      folderPickerOpen: true,
+      folderPickerId: id,
+    }));
   };
   const handleSubmitPress = async () => {
     if (!validSubmit) return;
@@ -123,22 +131,26 @@ const LinkAdderContentContainer = ({params}) => {
         setClicked(false);
         return prev;
       }
-      
+
       if (isEdit) {
         const editLink = {
           ...linkAdder,
           date: new Date(),
-        }
+        };
         if (editLink.autoLinkName) {
           editLink.linkName = nextAutoLinkName;
         }
         // 원래 폴더에서 삭제
         const prevFolderData = prev.find((item) => item.id === id);
-        const removedPrevData = prevFolderData.linkList.filter((item) => item.id !== linkId)
+        const removedPrevData = prevFolderData.linkList.filter(
+          (item) => item.id !== linkId
+        );
         prevFolderData.linkList = removedPrevData;
 
-        // 새로운 폴더에 삽입 
-        const nextFolderData = prev.find((item) => item.id === editLink.targetFolder.id);
+        // 새로운 폴더에 삽입
+        const nextFolderData = prev.find(
+          (item) => item.id === editLink.targetFolder.id
+        );
         nextFolderData.linkList.push(editLink);
         nextFolderData.linkList.sort(sortLinkList(existPrevData.sort));
 

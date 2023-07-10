@@ -5,7 +5,7 @@ import HeaderLeftButton from "../../../shared/navigation/HeaderLeftButton";
 
 const LinkAdderTitleContainer = (props) => {
   const title =
-    props.route.params.type === "edit" ? "링크 편집" : "링크 추가";
+    props.route.params?.type === "edit" ? "링크 편집" : "링크 추가";
 
   return (
     <CommonTitleContainer>
