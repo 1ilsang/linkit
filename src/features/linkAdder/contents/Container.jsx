@@ -170,8 +170,8 @@ const LinkAdderContentContainer = ({ params = {} }) => {
         });
         if (id) {
           navigation.navigate("Folder", {
-            id: targetFolder.id,
-            title: targetFolder.title,
+            id,
+            title: prevFolderData.title,
           });
         } else {
           navigation.navigate("Main");
