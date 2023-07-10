@@ -53,9 +53,9 @@ const useContentBox = ({
   ];
 
   const handleLinkDeleteClick = () => {
-    setFolderList(async (prev) => {
+    setFolderList((prev) => {
       const next = prev.filter((item) => item.id !== id);
-      await save(LOCAL_STORAGE_KEY.folderList, next);
+      save(LOCAL_STORAGE_KEY.folderList, next);
       return [...next];
     });
     resetFolderDetail();
