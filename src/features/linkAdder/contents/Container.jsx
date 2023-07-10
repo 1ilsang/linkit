@@ -32,6 +32,7 @@ const LinkAdderContentContainer = ({params}) => {
   const [memoError, setMemoError] = useState("");
 
   const isEdit = type === "edit";
+  const [clicked, setClicked] = useState(false);
 
   useEffect(() => {
     const target = id
@@ -97,6 +98,7 @@ const LinkAdderContentContainer = ({params}) => {
   };
   const handleSubmitPress = async () => {
     if (!validSubmit) return;
+    setClicked(true);
 
     let nextAutoLinkName = "";
     if (autoLinkName) {
@@ -110,6 +112,7 @@ const LinkAdderContentContainer = ({params}) => {
           "해당 폴더가 존재하지 않습니다. 에러가 계속해서 발생한다면 고객센터에 문의해주세요.",
           DEFAULT_SHORT_TOAST
         );
+        setClicked(false);
         return prev;
       }
       if (existPrevData.linkList.length === 100) {
@@ -117,6 +120,7 @@ const LinkAdderContentContainer = ({params}) => {
           "폴더 당 최대 100개의 링크를 저장할 수 있어요. 다른 폴더에 저장해 주세요.",
           DEFAULT_SHORT_TOAST
         );
+        setClicked(false);
         return prev;
       }
       
@@ -244,7 +248,7 @@ const LinkAdderContentContainer = ({params}) => {
       <SubmitButton
         label={isEdit ? "수정하기" : "저장하기"}
         onPress={handleSubmitPress}
-        disabled={!validSubmit}
+        disabled={!validSubmit || clicked}
       />
     </View>
   );
