@@ -8,11 +8,12 @@ import * as SplashScreen from "expo-splash-screen";
 
 import MainStack from "./src/features/stackNavigation/MainStack";
 import useApp from "./src/features/app/hooks";
+import OnBoardingContainer from "./src/features/onBoarding/Container";
 
 SplashScreen.preventAutoHideAsync();
 
 const App = () => {
-  const { appIsReady } = useApp();
+  const { appIsReady, appEnv } = useApp();
 
   if (!appIsReady) {
     return null;
@@ -25,7 +26,7 @@ const App = () => {
           <NavigationContainer>
             <Host>
               <StatusBar />
-              <MainStack />
+              {appEnv.onBoarding ? <MainStack /> : <OnBoardingContainer />}
             </Host>
           </NavigationContainer>
         </SafeAreaView>

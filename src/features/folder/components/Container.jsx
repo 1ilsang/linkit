@@ -6,6 +6,7 @@ import {
   StyleSheet,
   View,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import FolderContentContainer from "./contents/Container";
 import BottomSheet from "../../../shared/bottomSheet/BottomSheet";
 import { useAtom } from "jotai";
@@ -18,12 +19,15 @@ import { DEFAULT_SHORT_TOAST } from "../../../shared/constants/toast";
 import WebViewContainer from "../../../shared/WebViewContainer";
 
 const FolderContainer = (props) => {
+  const navigation = useNavigation();
+  const folderId = props.route.params.id;
+  
   const bottomSheetRef = useRef(null);
 
   const [folderDetail, setFolderDetail] = useAtom(folderDetailAtom);
   const [, setFolderList] = useAtom(folderListAtom);
   const { bottomSheetItem, webView } = folderDetail;
-
+  
   useLayoutEffect(() => {
     if (!bottomSheetRef) return;
     setFolderDetail((prev) => ({ ...prev, bottomSheetRef }));
@@ -54,10 +58,10 @@ const FolderContainer = (props) => {
       },
     },
     {
-      name: "링크 편집(미구현)",
+      name: "링크 편집",
       icon: "PencilSimple",
       onPress: () => {
-        // TODO: 편집 창으로 가야함.
+        navigation.push("LinkAdder", {type: "edit", id: folderId, linkId: bottomSheetItem.id });
       },
     },
     {

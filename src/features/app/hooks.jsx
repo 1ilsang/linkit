@@ -7,7 +7,7 @@ import { colorSets } from "../../shared/constants/colors";
 import * as SplashScreen from "expo-splash-screen";
 
 const useApp = () => {
-  const [, setAppEnv] = useAtom(appEnvAtom);
+  const [appEnv, setAppEnv] = useAtom(appEnvAtom);
   const [, setFolderList] = useAtom(folderListAtom);
 
   const [appIsReady, setAppIsReady] = useState(false);
@@ -55,6 +55,7 @@ const useApp = () => {
   }, []);
 
   return {
+    appEnv,
     appIsReady,
   };
 };

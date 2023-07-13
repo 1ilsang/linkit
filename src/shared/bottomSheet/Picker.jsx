@@ -3,10 +3,11 @@ import { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { Portal } from "react-native-portalize";
 
-const PickerBottomSheet = ({ list, open, onDoneClick, onCancelClick }) => {
+const PickerBottomSheet = ({ list, open, onDoneClick, onCancelClick, folderId }) => {
   if (!open) return null;
 
-  const [selectedValue, setSelectedValue] = useState(list[0].value);
+  const [selectedValue, setSelectedValue] = useState(folderId === undefined ?
+    list[0].value : list.find(item => item.value === folderId).value);
 
   const handleDonePress = () => {
     onDoneClick(selectedValue);

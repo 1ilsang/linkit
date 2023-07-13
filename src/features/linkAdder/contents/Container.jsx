@@ -19,7 +19,8 @@ import { getOgData } from "../helpers";
 
 const SALT = 1000000;
 
-const LinkAdderContentContainer = ({ id }) => {
+const LinkAdderContentContainer = ({ params = {} }) => {
+  const { id, linkId, type } = params;
   const navigation = useNavigation();
 
   const [, setMain] = useAtom(mainAtom);
@@ -30,6 +31,9 @@ const LinkAdderContentContainer = ({ id }) => {
   const [linkNameError, setLinkNameError] = useState("");
   const [memoError, setMemoError] = useState("");
 
+  const isEdit = type === "edit";
+  const [clicked, setClicked] = useState(false);
+
   useEffect(() => {
     const target = id
       ? folderList.find((item) => item.id === id)
@@ -37,10 +41,14 @@ const LinkAdderContentContainer = ({ id }) => {
     if (!target) {
       throw new Error("아이디가 존재하지 않습니다");
     }
-    setLinkAdder((prev) => ({
-      ...prev,
-      targetFolder: { id: target.id, title: target.title },
-    }));
+    setLinkAdder((prev) =>
+      linkId
+        ? target.linkList.find((item) => item.id === linkId)
+        : {
+            ...prev,
+            targetFolder: { id: target.id, title: target.title },
+          }
+    );
     setMain((prev) => ({ ...prev, folderPickerOpen: false }));
   }, [id]);
 
@@ -90,10 +98,15 @@ const LinkAdderContentContainer = ({ id }) => {
   };
   const handleFolderPress = () => {
     Keyboard.dismiss();
-    setMain((prev) => ({ ...prev, folderPickerOpen: true }));
+    setMain((prev) => ({
+      ...prev,
+      folderPickerOpen: true,
+      folderPickerId: id,
+    }));
   };
   const handleSubmitPress = async () => {
     if (!validSubmit) return;
+    setClicked(true);
 
     let nextAutoLinkName = "";
     if (autoLinkName) {
@@ -107,6 +120,7 @@ const LinkAdderContentContainer = ({ id }) => {
           "해당 폴더가 존재하지 않습니다. 에러가 계속해서 발생한다면 고객센터에 문의해주세요.",
           DEFAULT_SHORT_TOAST
         );
+        setClicked(false);
         return prev;
       }
       if (existPrevData.linkList.length === 100) {
@@ -114,8 +128,57 @@ const LinkAdderContentContainer = ({ id }) => {
           "폴더 당 최대 100개의 링크를 저장할 수 있어요. 다른 폴더에 저장해 주세요.",
           DEFAULT_SHORT_TOAST
         );
+        setClicked(false);
         return prev;
       }
+
+      if (isEdit) {
+        const editLink = {
+          ...linkAdder,
+          date: new Date(),
+        };
+        if (editLink.autoLinkName) {
+          editLink.linkName = nextAutoLinkName;
+        }
+        // 원래 폴더에서 삭제
+        const prevFolderData = prev.find((item) => item.id === id);
+        const removedPrevData = prevFolderData.linkList.filter(
+          (item) => item.id !== linkId
+        );
+        prevFolderData.linkList = removedPrevData;
+
+        // 새로운 폴더에 삽입
+        const nextFolderData = prev.find(
+          (item) => item.id === editLink.targetFolder.id
+        );
+        nextFolderData.linkList.push(editLink);
+        nextFolderData.linkList.sort(sortLinkList(existPrevData.sort));
+
+        const next = [...prev];
+        save(LOCAL_STORAGE_KEY.folderList, next);
+
+        const toastMessage = "링크가 수정되었어요!";
+        Toast.show(toastMessage, {
+          ...DEFAULT_LONG_TOAST,
+          hideOnPress: true,
+          onPress: (e) => {
+            navigation.navigate("Folder", {
+              id: targetFolder.id,
+              title: targetFolder.title,
+            });
+          },
+        });
+        if (id) {
+          navigation.navigate("Folder", {
+            id,
+            title: prevFolderData.title,
+          });
+        } else {
+          navigation.navigate("Main");
+        }
+        return next;
+      }
+
       const submitLink = {
         ...linkAdder,
         id: Number(new Date()) + Math.floor(Math.random() * SALT),
@@ -195,9 +258,9 @@ const LinkAdderContentContainer = ({ id }) => {
         />
       </View>
       <SubmitButton
-        label="저장하기"
+        label={isEdit ? "수정하기" : "저장하기"}
         onPress={handleSubmitPress}
-        disabled={!validSubmit}
+        disabled={!validSubmit || clicked}
       />
     </View>
   );

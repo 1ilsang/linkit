@@ -57,6 +57,7 @@ const useFolderCreateEditContentContainer = (props) => {
         existPrevData.icon = saveFolderData.icon;
         existPrevData.color = saveFolderData.color;
       } else {
+        saveFolderData.linkList = []
         saveFolderData.id = Number(new Date());
         next.push({ ...saveFolderData });
       }

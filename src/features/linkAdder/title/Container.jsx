@@ -4,10 +4,13 @@ import CommonTitleContainer from "../../../shared/navigation/CommonContainer";
 import HeaderLeftButton from "../../../shared/navigation/HeaderLeftButton";
 
 const LinkAdderTitleContainer = (props) => {
+  const title =
+    props.route.params?.type === "edit" ? "링크 편집" : "링크 추가";
+
   return (
     <CommonTitleContainer>
       <HeaderLeftButton {...props} />
-      <Text style={styles.title}>링크 추가</Text>
+      <Text style={styles.title}>{title}</Text>
     </CommonTitleContainer>
   );
 };
