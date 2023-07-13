@@ -1,13 +1,10 @@
-import { Image, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import EmptySearchImage from "../../../../assets/emptySearch.svg";
 
 const EmptyImage = () => {
   return (
     <View style={styles.container}>
-      <Image
-        style={styles.image}
-        resizeMode="cover"
-        source={require("../../../../assets/pana.png")}
-      />
+      <EmptySearchImage width={114} height={184} />
     </View>
   );
 };
@@ -20,11 +17,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignContent: "center",
     justifyContent: "center",
-  },
-  image: {
-    width: 114,
-    height: 184,
-    resizeMode: "contain",
   },
 });
 

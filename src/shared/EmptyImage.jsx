@@ -1,13 +1,10 @@
-import { Image, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import EmptyFolderImage from "../../assets/emptyFolder.svg";
 
 const EmptyImage = () => {
   return (
     <View style={styles.container}>
-      <Image
-        style={styles.image}
-        resizeMode="cover"
-        source={require("../../assets/empty.png")}
-      />
+      <EmptyFolderImage width={123} height={260} />
     </View>
   );
 };
@@ -20,11 +17,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignContent: "center",
     justifyContent: "center",
-  },
-  image: {
-    width: 114,
-    height: 184,
-    resizeMode: "contain",
   },
 });
 
