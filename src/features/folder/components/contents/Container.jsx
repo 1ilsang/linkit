@@ -69,7 +69,7 @@ const FolderContentContainer = (props) => {
         <>
           <SearchInputBox
             onPressIn={closeModal}
-            placeholder={"링크 제목, URL을 검색해 주세요."}
+            placeholder={"링크 이름, URL을 검색해 주세요."}
             value={folderDetail.search}
             onChangeText={handleSearchChange}
             onClearPress={handleClearPress}
