@@ -11,5 +11,5 @@ export const getSearchedText = (targetText, searchText) => {
 };
 export const handleLinkSearch = (search, { linkName, memo, url }) => {
   const regExp = new RegExp(search, "gi");
-  return regExp.test(linkName) || regExp.test(memo) || regExp.test(url);
+  return regExp.test(linkName) || regExp.test(url);
 };
