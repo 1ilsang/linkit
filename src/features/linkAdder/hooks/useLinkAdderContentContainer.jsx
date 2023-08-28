@@ -24,7 +24,6 @@ const useLinkAdderContentContainer = (id, linkId, type) => {
   const { autoLinkName, linkName, url, targetFolder } = linkAdder;
 
   const [linkNameError, setLinkNameError] = useState("");
-
   const isEdit = type === "edit";
   const [clicked, setClicked] = useState(false);
 
