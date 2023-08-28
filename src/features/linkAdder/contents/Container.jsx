@@ -31,7 +31,6 @@ const LinkAdderContentContainer = ({ params = {} }) => {
       handleFolderPress,
       handleSubmitPress,
     } = useLinkAdderContentContainer(id, linkId, type);
-
   useEffect(() => {
     const target = id
       ? folderList.find((item) => item.id === id)
@@ -70,13 +69,7 @@ const LinkAdderContentContainer = ({ params = {} }) => {
             required
           />
         )}
-        <FormInputBox
-          label="URL"
-          placeholder="링크를 입력해 주세요."
-          onChangeText={handleUrlTextChange}
-          value={url}
-          required
-        />
+        <></>
         <FormInputBox
           label="폴더"
           placeholder="폴더를 선택해 주세요."
