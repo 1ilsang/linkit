@@ -9,7 +9,7 @@ export const getSearchedText = (targetText, searchText) => {
     originText: targetText,
   };
 };
-export const handleLinkSearch = (search, { linkName, url, memo }) => {
+export const handleLinkSearch = (search, { linkName, url }) => {
   const regExp = new RegExp(search, "gi");
   return regExp.test(linkName) || regExp.test(url);
 };
