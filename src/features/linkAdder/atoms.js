@@ -10,7 +10,6 @@ const initialLinkAdder = {
     id: undefined,
     title: "",
   },
-  memo: "",
 };
 
 export const linkAdderAtom = atomWithReset(initialLinkAdder);
