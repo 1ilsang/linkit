@@ -21,10 +21,9 @@ const useLinkAdderContentContainer = (id, linkId, type) => {
   const [, setMain] = useAtom(mainAtom);
   const [, setFolderList] = useAtom(folderListAtom);
   const [linkAdder, setLinkAdder] = useAtom(linkAdderAtom);
-  const { autoLinkName, linkName, url, targetFolder } = linkAdder;
+  const { autoLinkName, linkName, url, targetFolder, memo } = linkAdder;
 
   const [linkNameError, setLinkNameError] = useState("");
-  
 
   const isEdit = type === "edit";
   const [clicked, setClicked] = useState(false);
@@ -58,12 +57,7 @@ const useLinkAdderContentContainer = (id, linkId, type) => {
     }));
     setLinkNameError("");
   };
-  const handleLinkNameChange = (linkName) => {
-    setLinkAdder((prev) => ({ ...prev, linkName }));
-    setLinkNameError(
-      linkName.length > 20 ? "공백 포함 20자까지 입력할 수 있어요." : ""
-    );
-  };
+  // Remove the handleMemoTextChange function
   const handleUrlTextChange = (url) => {
     setLinkAdder((prev) => ({ ...prev, url }));
   };
