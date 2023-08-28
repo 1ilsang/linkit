@@ -18,7 +18,7 @@ const LinkAdderContentContainer = ({ params = {} }) => {
   const [folderList] = useAtom(folderListAtom);
   const [linkAdder, setLinkAdder] = useAtom(linkAdderAtom);
 
-  const { autoLinkName, linkName, url, targetFolder } = linkAdder;
+  const { autoLinkName, linkName, url, targetFolder, memo } = linkAdder;
 
   const {
     linkNameError,
@@ -72,13 +72,7 @@ const LinkAdderContentContainer = ({ params = {} }) => {
             required
           />
         )}
-        <FormInputBox
-          label="URL"
-          placeholder="링크를 입력해 주세요."
-          onChangeText={handleUrlTextChange}
-          value={url}
-          required
-        />
+        // Remove the FormInputBox component for the memo
         <FormInputBox
           label="폴더"
           placeholder="폴더를 선택해 주세요."
