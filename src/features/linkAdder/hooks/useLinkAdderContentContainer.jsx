@@ -181,16 +181,14 @@ const useLinkAdderContentContainer = (id, linkId, type) => {
         navigation.goBack();
       } else {
         navigation.navigate("Main");
-      }
-      return next;
-    });
-  };
-
-  return {
-    linkNameError,
-    isEdit,
-    clicked,
-    validSubmit,
+      import { useState } from "react";
+      ...
+      const [linkNameError, setLinkNameError] = useState("");
+      ...
+      return {
+        linkNameError,
+        ...
+      };
     handleAutoLinkToggle,
     handleLinkNameChange,
     handleUrlTextChange,
