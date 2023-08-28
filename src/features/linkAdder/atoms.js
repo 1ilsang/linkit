@@ -6,10 +6,6 @@ const initialLinkAdder = {
   autoLinkName: true,
   linkName: "",
   url: "",
-  targetFolder: {
-    id: undefined,
-    title: "",
-  },
 };
 
 export const linkAdderAtom = atomWithReset(initialLinkAdder);
