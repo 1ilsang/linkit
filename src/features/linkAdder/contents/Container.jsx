@@ -73,14 +73,6 @@ const LinkAdderContentContainer = ({ params = {} }) => {
           />
         )}
         // Remove the FormInputBox component for the memo
-        <FormInputBox
-          label="폴더"
-          placeholder="폴더를 선택해 주세요."
-          editable={false}
-          value={targetFolder.title || folderList[0].title}
-          onInputPress={handleFolderPress}
-          required
-        />
         
       </View>
       <SubmitButton
