@@ -18,7 +18,7 @@ const LinkAdderContentContainer = ({ params = {} }) => {
   const [folderList] = useAtom(folderListAtom);
   const [linkAdder, setLinkAdder] = useAtom(linkAdderAtom);
 
-  const { autoLinkName, linkName, url, targetFolder, memo } = linkAdder;
+  const { autoLinkName, linkName, url, targetFolder } = linkAdder;
 
   const {
     linkNameError,
@@ -87,13 +87,7 @@ const LinkAdderContentContainer = ({ params = {} }) => {
           onInputPress={handleFolderPress}
           required
         />
-        <FormInputBox
-          label="메모"
-          placeholder="내용을 입력해 주세요. (100자 이하)"
-          onChangeText={handleMemoTextChange}
-          value={memo}
-          error={memoError}
-        />
+        
       </View>
       <SubmitButton
         label={isEdit ? "수정하기" : "저장하기"}
