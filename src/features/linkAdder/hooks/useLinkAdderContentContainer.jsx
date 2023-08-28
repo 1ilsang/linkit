@@ -21,7 +21,7 @@ const useLinkAdderContentContainer = (id, linkId, type) => {
   const [, setMain] = useAtom(mainAtom);
   const [, setFolderList] = useAtom(folderListAtom);
   const [linkAdder, setLinkAdder] = useAtom(linkAdderAtom);
-  const { autoLinkName, linkName, url, targetFolder, memo } = linkAdder;
+  const { autoLinkName, linkName, url, targetFolder } = linkAdder;
 
   const [linkNameError, setLinkNameError] = useState("");
 
@@ -191,8 +191,6 @@ const useLinkAdderContentContainer = (id, linkId, type) => {
     handleUrlTextChange,
     handleMemoTextChange,
     handleFolderPress,
-    handleSubmitPress,
-  };
-};
+    // Remove the handleMemoTextChange function
 
 export default useLinkAdderContentContainer;
