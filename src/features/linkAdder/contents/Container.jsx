@@ -69,7 +69,6 @@ const LinkAdderContentContainer = ({ params = {} }) => {
             required
           />
         )}
-        <></>
         <FormInputBox
           label="폴더"
           placeholder="폴더를 선택해 주세요."
