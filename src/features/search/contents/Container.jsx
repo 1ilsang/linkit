@@ -35,7 +35,7 @@ const SearchContentContainer = () => {
   return (
     <>
       <SearchInputBox
-        placeholder="링크 제목, URL을 검색해 주세요."
+        placeholder="링크 이름, URL을 검색해 주세요."
         value={searchWord}
         onChangeText={handleInputChange}
         delayFocus
