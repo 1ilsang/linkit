@@ -25,9 +25,9 @@ const BottomSheet = forwardRef(({ list }, ref) => {
                 }}
               >
                 <View style={styles.icon}>
-                  <IconFactory icon={icon} />
+                  <IconFactory icon={icon} size={24} />
                 </View>
-                <Text>{name}</Text>
+                <Text style={styles.text}>{name}</Text>
               </Pressable>
             );
           })}
@@ -55,6 +55,11 @@ const styles = StyleSheet.create({
   },
   icon: {
     paddingRight: 20,
+  },
+  text: {
+    fontSize: 16,
+    lineHeight: 23.17,
+    fontWeight: "400",
   },
 });
 
