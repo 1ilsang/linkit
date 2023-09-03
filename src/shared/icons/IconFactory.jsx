@@ -6,6 +6,7 @@ import {
   MagnifyingGlass,
   Check,
   FolderSimplePlus,
+  Plus,
   Link,
   Heart,
   Star,
@@ -44,7 +45,7 @@ import {
   Train,
   Circle,
   CheckedCircle,
-  Share,
+  Export,
   FilmSlate,
   House,
   Gear,
@@ -104,6 +105,8 @@ const IconFactory = ({
           style={style}
         />
       );
+    case "Plus":
+      return <Plus color={color} weight={weight} size={size} style={style} />;
     case "Link":
       return <Link color={color} weight={weight} size={size} style={style} />;
     case "Heart":
@@ -254,8 +257,8 @@ const IconFactory = ({
           style={style}
         />
       );
-    case "Share":
-      return <Share color={color} weight={weight} size={size} style={style} />;
+    case "Export":
+      return <Export color={color} weight={weight} size={size} style={style} />;
     case "House":
       return <House color={color} weight={weight} size={size} style={style} />;
     case "Setting":

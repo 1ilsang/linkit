@@ -1,7 +1,8 @@
-import { Pressable, StyleSheet, Text } from "react-native";
+import { Pressable, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import IconFactory from "./IconFactory";
 
-const LinkAddButton = ({ style = {}, id }) => {
+const LinkAddButton = ({ id }) => {
   const navigation = useNavigation();
 
   const handlePressClick = () => {
@@ -10,7 +11,7 @@ const LinkAddButton = ({ style = {}, id }) => {
 
   return (
     <Pressable onPress={handlePressClick} hitSlop={10}>
-      <Text style={style}>+</Text>
+      <IconFactory icon={"Plus"} size={24} />
     </Pressable>
   );
 };

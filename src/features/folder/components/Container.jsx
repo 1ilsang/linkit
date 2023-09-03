@@ -21,13 +21,13 @@ import WebViewContainer from "../../../shared/WebViewContainer";
 const FolderContainer = (props) => {
   const navigation = useNavigation();
   const folderId = props.route.params.id;
-  
+
   const bottomSheetRef = useRef(null);
 
   const [folderDetail, setFolderDetail] = useAtom(folderDetailAtom);
   const [, setFolderList] = useAtom(folderListAtom);
   const { bottomSheetItem, webView } = folderDetail;
-  
+
   useLayoutEffect(() => {
     if (!bottomSheetRef) return;
     setFolderDetail((prev) => ({ ...prev, bottomSheetRef }));
@@ -50,7 +50,7 @@ const FolderContainer = (props) => {
   const bottomSheetList = [
     {
       name: "링크 공유",
-      icon: "Share",
+      icon: "Export",
       onPress: async () => {
         await Share.share({
           message: bottomSheetItem.url,
@@ -61,7 +61,11 @@ const FolderContainer = (props) => {
       name: "링크 편집",
       icon: "PencilSimple",
       onPress: () => {
-        navigation.push("LinkAdder", {type: "edit", id: folderId, linkId: bottomSheetItem.id });
+        navigation.push("LinkAdder", {
+          type: "edit",
+          id: folderId,
+          linkId: bottomSheetItem.id,
+        });
       },
     },
     {

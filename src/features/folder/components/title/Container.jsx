@@ -27,7 +27,7 @@ const FolderTitleContainer = (props) => {
         <View style={styles.container}>
           <View style={styles.content}>
             <Pressable onPress={handleCancelEditPress} hitSlop={30}>
-              <Text>취소</Text>
+              <Text style={styles.subText}>취소</Text>
             </Pressable>
             <Text style={styles.title}>목록 편집</Text>
             <Pressable
@@ -56,10 +56,7 @@ const FolderTitleContainer = (props) => {
         <View style={styles.content}>
           <View style={styles.titleContainer}>
             <Text style={styles.title}>{title}</Text>
-            <LinkAddButton
-              style={{ ...styles.title, fontWeight: "400" }}
-              id={id}
-            />
+            <LinkAddButton id={id} />
           </View>
           <MoreButton
             style={{ color: "#262424" }}
@@ -96,6 +93,7 @@ const styles = StyleSheet.create({
     width: "90%",
     display: "flex",
     flexDirection: "row",
+    alignItems: "center",
     justifyContent: "space-between",
   },
   title: {
@@ -105,11 +103,22 @@ const styles = StyleSheet.create({
     letterSpacing: 0.374,
     color: "#2D264B",
   },
+  subText: {
+    fontSize: 18,
+    fontWeight: "400",
+    lineHeight: 26.06,
+  },
   delete: {
     color: "#FF5C5D",
+    fontSize: 18,
+    fontWeight: "400",
+    lineHeight: 26.06,
   },
   disabled: {
     color: "#CFCFCF",
+    fontSize: 18,
+    fontWeight: "400",
+    lineHeight: 26.06,
   },
 });
 
