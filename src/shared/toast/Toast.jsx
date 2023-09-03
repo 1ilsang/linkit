@@ -1,3 +1,4 @@
+import { useAtom } from "jotai";
 import {
   forwardRef,
   useCallback,
@@ -6,7 +7,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -14,13 +15,12 @@ import Animated, {
   withSequence,
   runOnJS,
 } from "react-native-reanimated";
+import { toastAtom } from "../atoms";
+import { useResetAtom } from "jotai/utils";
 
 const Toast = forwardRef(({ message, coloredMessage }, ref) => {
-  useEffect(() => {
-    if (!message || !coloredMessage) return;
-    console.log("hit");
-    ref?.current?.show(message);
-  }, [message, ref]);
+  const [toast] = useAtom(toastAtom);
+  const resetToast = useResetAtom(toastAtom);
 
   const [toastMessage, setToastMessage] = useState("");
   const toastOpacity = useSharedValue(0);
@@ -32,10 +32,16 @@ const Toast = forwardRef(({ message, coloredMessage }, ref) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (!toast.message) return;
+    ref?.current?.show(toast.message);
+  }, [toast]);
+
   useImperativeHandle(ref, () => ({ show }));
 
   const turnOnIsShow = useCallback(() => {
     isShowed.current = false;
+    resetToast();
   }, []);
 
   const show = useCallback(
