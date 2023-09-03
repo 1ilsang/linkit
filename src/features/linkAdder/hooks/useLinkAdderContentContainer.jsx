@@ -3,13 +3,8 @@ import { Keyboard } from "react-native";
 import { useAtom } from "jotai";
 import { mainAtom } from "../../main/atoms";
 import { linkAdderAtom } from "../atoms";
-import { folderListAtom } from "../../../shared/atoms";
+import { folderListAtom, toastAtom } from "../../../shared/atoms";
 import { useState } from "react";
-import Toast from "react-native-root-toast";
-import {
-  DEFAULT_LONG_TOAST,
-  DEFAULT_SHORT_TOAST,
-} from "../../../shared/constants/toast";
 import { LOCAL_STORAGE_KEY, save } from "../../../shared/utils/localStorage";
 import { getOgData } from "../helpers";
 import { sortLinkList } from "../../../shared/utils/helpers";
@@ -27,6 +22,8 @@ const useLinkAdderContentContainer = (id, linkId, type) => {
 
   const isEdit = type === "edit";
   const [clicked, setClicked] = useState(false);
+
+  const [, setToast] = useAtom(toastAtom);
 
   const validSubmit = !!(url.length > 0 &&
   targetFolder.title.length > 0 &&
@@ -86,18 +83,18 @@ const useLinkAdderContentContainer = (id, linkId, type) => {
     setFolderList((prev) => {
       const existPrevData = prev.find((item) => item.id === targetFolder.id);
       if (!existPrevData) {
-        Toast.show(
-          "해당 폴더가 존재하지 않습니다. 에러가 계속해서 발생한다면 고객센터에 문의해주세요.",
-          DEFAULT_SHORT_TOAST
-        );
+        setToast({
+          message:
+            "해당 폴더가 존재하지 않습니다. 에러가 계속해서 발생한다면 고객센터에 문의해주세요.",
+        });
         setClicked(false);
         return prev;
       }
       if (existPrevData.linkList.length === 100) {
-        Toast.show(
-          "폴더 당 최대 100개의 링크를 저장할 수 있어요. 다른 폴더에 저장해 주세요.",
-          DEFAULT_SHORT_TOAST
-        );
+        setToast({
+          message:
+            "폴더 당 최대 100개의 링크를 저장할 수 있어요. 다른 폴더에 저장해 주세요.",
+        });
         setClicked(false);
         return prev;
       }
@@ -127,17 +124,14 @@ const useLinkAdderContentContainer = (id, linkId, type) => {
         const next = [...prev];
         save(LOCAL_STORAGE_KEY.folderList, next);
 
-        const toastMessage = "링크가 수정되었어요!";
-        Toast.show(toastMessage, {
-          ...DEFAULT_LONG_TOAST,
-          hideOnPress: true,
-          onPress: (e) => {
-            navigation.navigate("Folder", {
-              id: targetFolder.id,
-              title: targetFolder.title,
-            });
-          },
-        });
+        setToast({ message: "링크가 수정되었어요!" });
+        // TODO: Toast text 클릭 동작 구현
+        // onPress: (e) => {
+        //   navigation.navigate("Folder", {
+        //     id: targetFolder.id,
+        //     title: targetFolder.title,
+        //   });
+        // },
         if (id) {
           navigation.navigate("Folder", {
             id,
@@ -162,19 +156,19 @@ const useLinkAdderContentContainer = (id, linkId, type) => {
       const next = [...prev];
       save(LOCAL_STORAGE_KEY.folderList, next);
 
-      const toastMessage = id
-        ? "링크가 저장되었어요!"
-        : "링크가 저장되었어요!                       저장 폴더로 이동";
-      Toast.show(toastMessage, {
-        ...DEFAULT_LONG_TOAST,
-        hideOnPress: true,
-        onPress: (e) => {
-          navigation.navigate("Folder", {
-            id: targetFolder.id,
-            title: targetFolder.title,
+      id
+        ? setToast({ message: "링크가 저장되었어요!" })
+        : setToast({
+            message: "링크가 저장되었어요!",
+            coloredMessage: "저장 폴더로 이동",
           });
-        },
-      });
+      // TODO: Toast text 클릭 동작 구현
+      // onPress: (e) => {
+      //   navigation.navigate("Folder", {
+      //     id: targetFolder.id,
+      //     title: targetFolder.title,
+      //   });
+      // },
       if (id) {
         navigation.goBack();
       } else {

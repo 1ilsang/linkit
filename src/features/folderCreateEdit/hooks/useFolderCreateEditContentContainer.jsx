@@ -1,10 +1,8 @@
 import { useNavigation } from "@react-navigation/native";
 import { useAtom } from "jotai";
 import { createEditAtom, initialCreateEdit } from "../atoms";
-import { folderListAtom } from "../../../shared/atoms";
+import { folderListAtom, toastAtom } from "../../../shared/atoms";
 import { useState } from "react";
-import Toast from "react-native-root-toast";
-import { DEFAULT_SHORT_TOAST } from "../../../shared/constants/toast";
 import { LOCAL_STORAGE_KEY, save } from "../../../shared/utils/localStorage";
 
 const useFolderCreateEditContentContainer = (props) => {
@@ -14,6 +12,7 @@ const useFolderCreateEditContentContainer = (props) => {
 
   const [titleError, setTitleError] = useState("");
   const [descriptionError, setDescriptionError] = useState("");
+  const [, setToast] = useAtom(toastAtom);
 
   const isEdit = props.route.params.type === "edit";
   const validSubmit = createEdit.color && createEdit.icon && createEdit.title;
@@ -30,7 +29,7 @@ const useFolderCreateEditContentContainer = (props) => {
       error = true;
     }
     if (error) {
-      Toast.show("잘못된 입력이 있어요.", DEFAULT_SHORT_TOAST);
+      setToast({ message: "잘못된 입력이 있어요." });
       return;
     }
 
@@ -39,10 +38,9 @@ const useFolderCreateEditContentContainer = (props) => {
         (item) => item.title === saveFolderData.title
       );
       if (existTitle) {
-        Toast.show(
-          "똑같은 이름의 폴더가 있어요. 다른 이름을 입력해 주세요.",
-          DEFAULT_SHORT_TOAST
-        );
+        setToast({
+          message: "똑같은 이름의 폴더가 있어요. 다른 이름을 입력해 주세요.",
+        });
         return;
       }
     }
@@ -57,7 +55,7 @@ const useFolderCreateEditContentContainer = (props) => {
         existPrevData.icon = saveFolderData.icon;
         existPrevData.color = saveFolderData.color;
       } else {
-        saveFolderData.linkList = []
+        saveFolderData.linkList = [];
         saveFolderData.id = Number(new Date());
         next.push({ ...saveFolderData });
       }
@@ -66,21 +64,24 @@ const useFolderCreateEditContentContainer = (props) => {
     });
 
     navigation.navigate("Main");
-    const toastMessage = isEdit
-      ? "편집한 내용이 저장되었어요."
-      : `폴더가 추가되었어요.              폴더로 이동`;
 
-    // TODO: Toast text 색 및 배치 수정 필요
-    Toast.show(toastMessage, {
-      ...DEFAULT_SHORT_TOAST,
-      hideOnPress: true,
-      onPress: (e) => {
-        navigation.navigate("Folder", {
-          id: saveFolderData.id,
-          title: saveFolderData.title,
+    isEdit
+      ? setToast({
+          message: "편집한 내용이 저장되었어요.",
+        })
+      : setToast({
+          message: "폴더가 추가되었어요.",
+          coloredMessage: "폴더로 이동",
         });
-      },
-    });
+
+    // TODO: Toast text 클릭 동작 구현
+    //   onPress: (e) => {
+    //     navigation.navigate("Folder", {
+    //       id: saveFolderData.id,
+    //       title: saveFolderData.title,
+    //     });
+    //   },
+    // });
   };
 
   const handleTitleChange = (title) => {

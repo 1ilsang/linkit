@@ -1,12 +1,10 @@
 import { useNavigation } from "@react-navigation/native";
 import { useAtom } from "jotai";
 import { mainAtom } from "../atoms";
-import { folderListAtom } from "../../../shared/atoms";
+import { folderListAtom, toastAtom } from "../../../shared/atoms";
 import { useResetAtom } from "jotai/utils";
 import { folderDetailAtom } from "../../folder/atoms";
 import { LOCAL_STORAGE_KEY, save } from "../../../shared/utils/localStorage";
-import Toast from "react-native-root-toast";
-import { DEFAULT_SHORT_TOAST } from "../../../shared/constants/toast";
 import { Alert } from "react-native";
 
 const useContentBox = ({
@@ -23,6 +21,7 @@ const useContentBox = ({
   const [, setFolderList] = useAtom(folderListAtom);
 
   const resetFolderDetail = useResetAtom(folderDetailAtom);
+  const [, setToast] = useAtom(toastAtom);
 
   const { moreOpen } = main;
 
@@ -59,7 +58,7 @@ const useContentBox = ({
       return [...next];
     });
     resetFolderDetail();
-    Toast.show("폴더가 삭제되었어요.", DEFAULT_SHORT_TOAST);
+    setToast({ message: "폴더가 삭제되었어요." });
   };
 
   const handlePressClick = () => {
