@@ -24,7 +24,6 @@ const useLinkAdderContentContainer = (id, linkId, type) => {
   const { autoLinkName, linkName, url, targetFolder } = linkAdder;
 
   const [linkNameError, setLinkNameError] = useState("");
-  const [memoError, setMemoError] = useState("");
 
   const isEdit = type === "edit";
   const [clicked, setClicked] = useState(false);
@@ -66,12 +65,6 @@ const useLinkAdderContentContainer = (id, linkId, type) => {
   };
   const handleUrlTextChange = (url) => {
     setLinkAdder((prev) => ({ ...prev, url }));
-  };
-  const handleMemoTextChange = (memo) => {
-    setLinkAdder((prev) => ({ ...prev, memo }));
-    setMemoError(
-      memo.length > 100 ? "공백 포함 100자까지 입력할 수 있어요." : ""
-    );
   };
   const handleFolderPress = () => {
     Keyboard.dismiss();
@@ -193,14 +186,12 @@ const useLinkAdderContentContainer = (id, linkId, type) => {
 
   return {
     linkNameError,
-    memoError,
     isEdit,
     clicked,
     validSubmit,
     handleAutoLinkToggle,
     handleLinkNameChange,
     handleUrlTextChange,
-    handleMemoTextChange,
     handleFolderPress,
     handleSubmitPress,
   };
