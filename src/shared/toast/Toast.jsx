@@ -49,9 +49,9 @@ const Toast = forwardRef(({ message, coloredMessage }, ref) => {
       setToastMessage(toastMessage);
       isShowed.current = true;
       toastOpacity.value = withSequence(
-        withTiming(0.94, { duration: 300 }),
+        withTiming(0.94, { duration: 600 }),
         withTiming(0.94, { duration: 800 }),
-        withTiming(0, { duration: 300 }, () => {
+        withTiming(0, { duration: 600 }, () => {
           runOnJS(turnOnIsShow)();
         })
       );
