@@ -2,9 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useAtom } from "jotai";
 import { useLayoutEffect } from "react";
 import { useRef } from "react";
-import Toast from "react-native-root-toast";
-import { folderListAtom } from "../../../shared/atoms";
-import { DEFAULT_SHORT_TOAST } from "../../../shared/constants/toast";
+import { folderListAtom, toastAtom } from "../../../shared/atoms";
 import { linkAdderAtom } from "../../linkAdder/atoms";
 import { mainAtom } from "../atoms";
 
@@ -15,6 +13,7 @@ const useMain = () => {
   const [main, setMain] = useAtom(mainAtom);
   const [folderList] = useAtom(folderListAtom);
   const [, setLinkAdder] = useAtom(linkAdderAtom);
+  const [, setToast] = useAtom(toastAtom);
 
   const navigation = useNavigation();
 
@@ -31,10 +30,7 @@ const useMain = () => {
       name: "폴더 생성",
       onPress: () => {
         if (folderList.length === 10) {
-          Toast.show(
-            "폴더는 최대 10개까지 생성할 수 있어요.",
-            DEFAULT_SHORT_TOAST
-          );
+          setToast({ message: "폴더는 최대 10개까지 생성할 수 있어요." });
           return;
         }
         setMain((prev) => ({ ...prev, moreOpen: undefined }));

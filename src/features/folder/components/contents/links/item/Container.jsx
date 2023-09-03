@@ -4,9 +4,11 @@ import {
   Swipeable,
   GestureHandlerRootView,
 } from "react-native-gesture-handler";
-import { appEnvAtom, folderListAtom } from "../../../../../../shared/atoms";
-import Toast from "react-native-root-toast";
-import { DEFAULT_SHORT_TOAST } from "../../../../../../shared/constants/toast";
+import {
+  appEnvAtom,
+  folderListAtom,
+  toastAtom,
+} from "../../../../../../shared/atoms";
 import {
   LOCAL_STORAGE_KEY,
   save,
@@ -24,6 +26,7 @@ const FolderContentItemContainer = (props) => {
   const [folderDetail, setFolderDetail] = useAtom(folderDetailAtom);
   const [, setFolderList] = useAtom(folderListAtom);
   const [appEnv] = useAtom(appEnvAtom);
+  const [, setToast] = useAtom(toastAtom);
 
   const { linkName, url, pin } = props;
   const { search } = folderDetail;
@@ -46,8 +49,9 @@ const FolderContentItemContainer = (props) => {
       save(LOCAL_STORAGE_KEY.folderList, next);
       return next;
     });
-    Toast.show("링크가 삭제되었어요.", DEFAULT_SHORT_TOAST);
+    setToast({ message: "링크가 삭제되었어요." });
   };
+
   const handlePinClick = (linkId) => {
     setFolderList((prev) => {
       const targetFolder = prev.find((item) => item.id === folderDetail.id);
