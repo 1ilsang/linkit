@@ -2,12 +2,6 @@ import OnBoarding1 from "../../../assets/onBoarding1.svg";
 import OnBoarding2 from "../../../assets/onBoarding2.svg";
 import OnBoarding3 from "../../../assets/onBoarding3.svg";
 import OnBoarding4 from "../../../assets/onBoarding4.svg";
-import OnBoardingProgress1 from "../../../assets/onBoardingProgress1.svg";
-import OnBoardingProgress2 from "../../../assets/onBoardingProgress2.svg";
-import OnBoardingProgress3 from "../../../assets/onBoardingProgress3.svg";
-import OnBoardingProgress4 from "../../../assets/onBoardingProgress4.svg";
-
-export const lastIndex = 4;
 
 export const onBoardingList = [
   <OnBoarding1 />,
@@ -32,10 +26,4 @@ export const onBoardingTextBottom = [
   "링크 이름과 썸네일을 자동으로 추출해 줘요.",
   "원하는 링크를 빠르게 찾을 수 있어요.",
   "다른 앱으로 공유할 수 있어요.",
-];
-export const onBoardingProgressList = [
-  <OnBoardingProgress1 />,
-  <OnBoardingProgress2 />,
-  <OnBoardingProgress3 />,
-  <OnBoardingProgress4 />,
 ];

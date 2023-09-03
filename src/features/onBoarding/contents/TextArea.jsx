@@ -35,7 +35,10 @@ const styles = StyleSheet.create({
   },
   normalText: {
     textAlign: "center",
+    color: "#727272",
     fontSize: 14,
+    lineHeight: 20.27,
+    fontWeight: "400",
   },
 });
 
