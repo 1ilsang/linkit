@@ -1,7 +1,12 @@
 import { useAtom } from "jotai";
 import { appEnvAtom, folderListAtom, initialApp } from "../../shared/atoms";
 import { useEffect, useLayoutEffect, useState } from "react";
-import { LOCAL_STORAGE_KEY, load, save } from "../../shared/utils/localStorage";
+import {
+  LOCAL_STORAGE_KEY,
+  load,
+  remove,
+  save,
+} from "../../shared/utils/localStorage";
 import { FOLDER_SORT } from "../../shared/constants/folder";
 import { colorSets } from "../../shared/constants/colors";
 import * as SplashScreen from "expo-splash-screen";
@@ -14,6 +19,7 @@ const useApp = () => {
 
   useLayoutEffect(() => {
     const loadLocalStorage = async () => {
+      // await remove(LOCAL_STORAGE_KEY.appEnv);
       const data = await load(LOCAL_STORAGE_KEY.folderList);
       const appData = await load(LOCAL_STORAGE_KEY.appEnv);
       const selectedIndex = Math.floor((Math.random() * 10) % 7);

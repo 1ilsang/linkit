@@ -4,17 +4,19 @@ import {
   Pressable,
   Share,
   StyleSheet,
+  Text,
   View,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import FolderContentContainer from "./contents/Container";
 import BottomSheet from "../../../shared/bottomSheet/BottomSheet";
+import Toast from "../../../shared/toast/Toast";
 import { useAtom } from "jotai";
 import { folderDetailAtom } from "../atoms";
-import { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef, useState, useEffect } from "react";
 import { folderListAtom } from "../../../shared/atoms";
 import { LOCAL_STORAGE_KEY, save } from "../../../shared/utils/localStorage";
-import Toast from "react-native-root-toast";
+// import Toast from "react-native-root-toast";
 import { DEFAULT_SHORT_TOAST } from "../../../shared/constants/toast";
 import WebViewContainer from "../../../shared/WebViewContainer";
 
@@ -44,7 +46,7 @@ const FolderContainer = (props) => {
       save(LOCAL_STORAGE_KEY.folderList, next);
       return next;
     });
-    Toast.show("링크가 삭제되었어요.", DEFAULT_SHORT_TOAST);
+    // Toast.show("링크가 삭제되었어요.", DEFAULT_SHORT_TOAST);
   };
 
   const bottomSheetList = [
