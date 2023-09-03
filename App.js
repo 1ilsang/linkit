@@ -1,4 +1,4 @@
-import { SafeAreaView } from "react-native";
+import { SafeAreaView, Text } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
@@ -11,12 +11,15 @@ import useApp from "./src/features/app/hooks";
 import OnBoardingContainer from "./src/features/onBoarding/Container";
 import { useRef } from "react";
 import Toast from "./src/shared/toast/Toast";
+import { toastAtom } from "./src/shared/atoms";
+import { useAtom } from "jotai";
 
 SplashScreen.preventAutoHideAsync();
 
 const App = () => {
   const { appIsReady, appEnv } = useApp();
   const ref = useRef(null);
+  const [toast] = useAtom(toastAtom);
 
   if (!appIsReady) {
     return null;
@@ -32,8 +35,8 @@ const App = () => {
               {appEnv.onBoarding ? <MainStack /> : <OnBoardingContainer />}
               <Toast
                 ref={ref}
-                message="f222aef"
-                coloredMessage="Greeeeeeeeen"
+                message={toast.message}
+                coloredMessage={toast.coloredMessage}
               />
             </Host>
           </NavigationContainer>
