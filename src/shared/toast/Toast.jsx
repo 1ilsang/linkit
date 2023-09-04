@@ -62,7 +62,7 @@ const Toast = forwardRef(({ message, coloredMessage }, ref) => {
       toastOpacity.value = withSequence(
         withTiming(0.94, { duration: 500 }),
         withTiming(0.94, { duration: 800 }),
-        withTiming(0, { duration: 500 }, () => {
+        withTiming(0, { duration: 800 }, () => {
           runOnJS(turnOnIsShow)();
         })
       );
@@ -79,7 +79,7 @@ const Toast = forwardRef(({ message, coloredMessage }, ref) => {
       onTouchEnd={onPressNavigate}
       style={[styles.container, animatedStyle]}
     >
-      <Text style={styles.toastMessage}>{toastMessage}</Text>
+      <Text style={styles.text}>{toastMessage}</Text>
       <Text style={styles.coloredText}>{coloredMessage}</Text>
     </Animated.View>
   );
@@ -98,17 +98,17 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     position: "absolute",
-    backgroundColor: "gray",
+    backgroundColor: "#44444C",
     borderRadius: "6px",
   },
   text: {
-    color: "white",
+    color: "#F3F3F3",
     fontWeight: "500",
     fontSize: 17,
     lineHeight: 22,
   },
   coloredText: {
-    color: "lightgreen",
+    color: "#00C258",
     fontWeight: "500",
     fontSize: 17,
     lineHeight: 22,

@@ -18,7 +18,11 @@ const Thumbnail = ({ url }) => {
   return (
     <View style={styles.thumbnail}>
       {ogImageUrl && ogImageUrl.length > 0 ? (
-        <Image source={{ uri: ogImageUrl }} style={{ width: 40, height: 40 }} />
+        <Image
+          source={{ uri: ogImageUrl }}
+          style={{ width: 54, height: 54, borderRadius: 10 }}
+          resizeMode="cover"
+        />
       ) : (
         <IconFactory icon="Image" size={40} color="#CFCFCF" />
       )}

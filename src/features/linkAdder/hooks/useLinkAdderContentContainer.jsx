@@ -126,7 +126,6 @@ const useLinkAdderContentContainer = (id, linkId, type) => {
 
         setToast({
           message: "링크가 수정되었어요!",
-          // FIXME: 링크 수정되었을때 폴더가 수정되면 그 폴더로 이동시켜주는 로직 같은데 서브 메시지가 없나여?
           navigateInfo: {
             path: "Folder",
             id: targetFolder.id,

@@ -18,7 +18,6 @@ const InfoBox = () => {
 const styles = StyleSheet.create({
   toggleBox: {
     height: "100%",
-    paddingTop: 27,
     paddingLeft: 27,
     paddingRight: 27,
     backgroundColor: "#ffffff",
@@ -33,14 +32,6 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     fontSize: 16,
     lineHeight: 23,
-  },
-  boxDescription: {
-    width: "70%",
-    fontWeight: "300",
-    fontSize: 12,
-    lineHeight: 17,
-    color: "#A5A5A5",
-    paddingBottom: 20,
   },
   toggleContainer: {
     width: "100%",

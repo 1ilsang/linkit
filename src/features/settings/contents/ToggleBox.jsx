@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
     paddingLeft: 27,
     paddingRight: 27,
     backgroundColor: "#ffffff",
-    marginBottom: 10,
   },
   boxTitle: {
     fontWeight: "700",

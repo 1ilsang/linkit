@@ -9,7 +9,7 @@ import StartBtnArea from "./contents/StartBtnArea";
 
 const OnBoardingContainer = () => {
   const { handleStartPress } = useOnBoarding();
-  const marginBottom = 110;
+  const marginBottom = "23%";
 
   return (
     <Swiper

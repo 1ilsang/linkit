@@ -17,7 +17,6 @@ const initialData = [];
 
 export const initialApp = {
   defaultBrowser: true,
-  clipboardLinkAutoPaste: true,
   onBoarding: false,
 };
 
