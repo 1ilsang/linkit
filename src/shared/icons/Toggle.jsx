@@ -1,23 +1,53 @@
-import { StyleSheet, View } from "react-native";
+import { useState, useEffect } from "react";
+import { StyleSheet } from "react-native";
+import Animated, { spring } from "react-native-reanimated";
 
 const Toggle = ({ selected }) => {
   const selectedColor = selected ? "#1DB191" : "#C1C7CD";
+  const [switchTranslate] = useState(new Animated.Value(0));
+  useEffect(() => {
+    if (selected) {
+      spring(switchTranslate, {
+        toValue: 24,
+        mass: 0.1,
+        damping: 30,
+        stiffness: 120,
+        overshootClamping: false,
+        restSpeedThreshold: 0.001,
+        restDisplacementThreshold: 0.001,
+      }).start();
+    } else {
+      spring(switchTranslate, {
+        toValue: 0,
+        mass: 0.1,
+        damping: 30,
+        stiffness: 120,
+        overshootClamping: false,
+        restSpeedThreshold: 0.001,
+        restDisplacementThreshold: 0.001,
+      }).start();
+    }
+  }, [selected, switchTranslate]);
 
   return (
-    <View
-      style={{
-        ...styles.container,
-        backgroundColor: selectedColor,
-      }}
+    <Animated.View
+      style={[styles.container, { backgroundColor: selectedColor }]}
     >
-      <View
-        style={{
-          ...styles.circle,
-          left: selected ? "43.75%" : "0%",
-          borderColor: selectedColor,
-        }}
+      <Animated.View
+        style={[
+          styles.circle,
+          { borderColor: selectedColor },
+          {
+            transform: [
+              {
+                translateX: switchTranslate,
+              },
+            ],
+          },
+          styles.shadowValue,
+        ]}
       />
-    </View>
+    </Animated.View>
   );
 };
 
