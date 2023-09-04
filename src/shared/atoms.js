@@ -24,6 +24,11 @@ export const initialApp = {
 const initialToast = {
   message: "",
   coloredMessage: "",
+  navigateInfo: {
+    path: "",
+    id: 0,
+    title: "",
+  },
 };
 
 export const appEnvAtom = atom(initialApp);

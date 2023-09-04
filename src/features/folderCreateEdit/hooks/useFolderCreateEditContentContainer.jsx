@@ -72,16 +72,12 @@ const useFolderCreateEditContentContainer = (props) => {
       : setToast({
           message: "폴더가 추가되었어요.",
           coloredMessage: "폴더로 이동",
+          navigateInfo: {
+            path: "Folder",
+            id: saveFolderData.id,
+            title: saveFolderData.title,
+          },
         });
-
-    // TODO: Toast text 클릭 동작 구현
-    //   onPress: (e) => {
-    //     navigation.navigate("Folder", {
-    //       id: saveFolderData.id,
-    //       title: saveFolderData.title,
-    //     });
-    //   },
-    // });
   };
 
   const handleTitleChange = (title) => {
