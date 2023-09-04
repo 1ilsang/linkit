@@ -20,6 +20,7 @@ const useApp = () => {
   useLayoutEffect(() => {
     const loadLocalStorage = async () => {
       // await remove(LOCAL_STORAGE_KEY.appEnv);
+      // await remove(LOCAL_STORAGE_KEY.folderList);
       const data = await load(LOCAL_STORAGE_KEY.folderList);
       const appData = await load(LOCAL_STORAGE_KEY.appEnv);
       const selectedIndex = Math.floor((Math.random() * 10) % 7);
