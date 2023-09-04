@@ -5,7 +5,6 @@ import { appEnvAtom } from "../../../shared/atoms";
 import { LOCAL_STORAGE_KEY, save } from "../../../shared/utils/localStorage";
 
 const SettingsContentContainer = () => {
-  // TODO: toggleAnimation
   const [appEnv, setAppEnv] = useAtom(appEnvAtom);
   const { defaultBrowser, clipboardLinkAutoPaste } = appEnv;
 
