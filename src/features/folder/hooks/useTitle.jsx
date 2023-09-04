@@ -1,10 +1,8 @@
 import { useNavigation, StackActions } from "@react-navigation/native";
 import { useResetAtom } from "jotai/utils";
-import Toast from "react-native-root-toast";
 import { useAtom } from "jotai";
-import { folderListAtom } from "../../../shared/atoms";
+import { folderListAtom, toastAtom } from "../../../shared/atoms";
 import { LOCAL_STORAGE_KEY, save } from "../../../shared/utils/localStorage";
-import { DEFAULT_SHORT_TOAST } from "../../../shared/constants/toast";
 import { folderDetailAtom } from "../atoms";
 import { MODE } from "../constants";
 import { Alert } from "react-native";
@@ -15,6 +13,7 @@ const useFolderTitle = (props) => {
   const [folderList, setFolderList] = useAtom(folderListAtom);
   const [folderDetail, setFolderDetail] = useAtom(folderDetailAtom);
   const { titleMoreOpen, mode, deleteLinkList } = folderDetail;
+  const [, setToast] = useAtom(toastAtom);
 
   const navigation = useNavigation();
   const resetFolderDetail = useResetAtom(folderDetailAtom);
@@ -33,7 +32,7 @@ const useFolderTitle = (props) => {
       return [...next];
     });
     resetFolderDetail();
-    Toast.show("폴더가 삭제되었어요.", DEFAULT_SHORT_TOAST);
+    setToast({ message: "폴더가 삭제되었어요." });
     navigation.navigate("Main");
   };
   const handleLinkAllDeleteClick = () => {
@@ -48,21 +47,19 @@ const useFolderTitle = (props) => {
       save(LOCAL_STORAGE_KEY.folderList, next);
       return next;
     });
-    Toast.show("링크가 삭제되었어요.", DEFAULT_SHORT_TOAST);
+    setToast({ message: "링크가 삭제되었어요." });
   };
 
   const moreList = [
     {
       name: "목록 편집",
       onPress: () => {
-        const { linkList: searchLinkList } = folderList.find(
-          (item) => item.id === id
-        );
+        const { linkList } = folderList.find((item) => item.id === id);
         setFolderDetail((prev) => ({
           ...prev,
           titleMoreOpen: undefined,
           search: "",
-          searchLinkList,
+          searchLinkList: linkList ?? [],
           mode: MODE.edit,
         }));
       },

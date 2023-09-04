@@ -1,4 +1,5 @@
 import { atom } from "jotai";
+import { atomWithReset } from "jotai/utils";
 
 /**
  * {
@@ -20,5 +21,17 @@ export const initialApp = {
   onBoarding: false,
 };
 
+const initialToast = {
+  message: "",
+  coloredMessage: "",
+  navigateInfo: {
+    path: "",
+    id: 0,
+    title: "",
+  },
+};
+
 export const appEnvAtom = atom(initialApp);
 export const folderListAtom = atom(initialData);
+
+export const toastAtom = atomWithReset(initialToast);

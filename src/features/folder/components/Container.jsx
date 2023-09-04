@@ -12,10 +12,8 @@ import BottomSheet from "../../../shared/bottomSheet/BottomSheet";
 import { useAtom } from "jotai";
 import { folderDetailAtom } from "../atoms";
 import { useLayoutEffect, useRef } from "react";
-import { folderListAtom } from "../../../shared/atoms";
+import { folderListAtom, toastAtom } from "../../../shared/atoms";
 import { LOCAL_STORAGE_KEY, save } from "../../../shared/utils/localStorage";
-import Toast from "react-native-root-toast";
-import { DEFAULT_SHORT_TOAST } from "../../../shared/constants/toast";
 import WebViewContainer from "../../../shared/WebViewContainer";
 
 const FolderContainer = (props) => {
@@ -27,6 +25,7 @@ const FolderContainer = (props) => {
   const [folderDetail, setFolderDetail] = useAtom(folderDetailAtom);
   const [, setFolderList] = useAtom(folderListAtom);
   const { bottomSheetItem, webView } = folderDetail;
+  const [, setToast] = useAtom(toastAtom);
 
   useLayoutEffect(() => {
     if (!bottomSheetRef) return;
@@ -44,7 +43,8 @@ const FolderContainer = (props) => {
       save(LOCAL_STORAGE_KEY.folderList, next);
       return next;
     });
-    Toast.show("링크가 삭제되었어요.", DEFAULT_SHORT_TOAST);
+
+    setToast({ message: "링크가 삭제되었어요." });
   };
 
   const bottomSheetList = [
