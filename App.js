@@ -1,4 +1,4 @@
-import { SafeAreaView, Text } from "react-native";
+import { SafeAreaView } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
