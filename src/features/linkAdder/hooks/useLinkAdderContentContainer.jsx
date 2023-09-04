@@ -131,14 +131,16 @@ const useLinkAdderContentContainer = (id, linkId, type) => {
         const next = [...prev];
         save(LOCAL_STORAGE_KEY.folderList, next);
 
-        setToast({ message: "링크가 수정되었어요!" });
-        // TODO: Toast text 클릭 동작 구현
-        // onPress: (e) => {
-        //   navigation.navigate("Folder", {
-        //     id: targetFolder.id,
-        //     title: targetFolder.title,
-        //   });
-        // },
+        setToast({
+          message: "링크가 수정되었어요!",
+          // FIXME: 링크 수정되었을때 폴더가 수정되면 그 폴더로 이동시켜주는 로직 같은데 서브 메시지가 없나여?
+          navigateInfo: {
+            path: "Folder",
+            id: targetFolder.id,
+            title: targetFolder.title,
+          },
+        });
+
         if (id) {
           navigation.navigate("Folder", {
             id,
@@ -168,14 +170,12 @@ const useLinkAdderContentContainer = (id, linkId, type) => {
         : setToast({
             message: "링크가 저장되었어요!",
             coloredMessage: "저장 폴더로 이동",
+            navigateInfo: {
+              path: "Folder",
+              id: targetFolder.id,
+              title: targetFolder.title,
+            },
           });
-      // TODO: Toast text 클릭 동작 구현
-      // onPress: (e) => {
-      //   navigation.navigate("Folder", {
-      //     id: targetFolder.id,
-      //     title: targetFolder.title,
-      //   });
-      // },
       if (id) {
         navigation.goBack();
       } else {

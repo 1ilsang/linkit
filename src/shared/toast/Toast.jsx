@@ -15,10 +15,12 @@ import Animated, {
   withSequence,
   runOnJS,
 } from "react-native-reanimated";
+import { useNavigation } from "@react-navigation/native";
 import { toastAtom } from "../atoms";
 import { useResetAtom } from "jotai/utils";
 
 const Toast = forwardRef(({ message, coloredMessage }, ref) => {
+  const navigation = useNavigation();
   const [toast] = useAtom(toastAtom);
   const resetToast = useResetAtom(toastAtom);
 
@@ -31,6 +33,15 @@ const Toast = forwardRef(({ message, coloredMessage }, ref) => {
       opacity: toastOpacity.value,
     };
   }, []);
+
+  const onPressNavigate = () => {
+    const info = toast.navigateInfo;
+    if (!info) return;
+    navigation.navigate(info.path, {
+      id: info.id,
+      title: info.title,
+    });
+  };
 
   useEffect(() => {
     if (!toast.message) return;
@@ -49,9 +60,9 @@ const Toast = forwardRef(({ message, coloredMessage }, ref) => {
       setToastMessage(toastMessage);
       isShowed.current = true;
       toastOpacity.value = withSequence(
-        withTiming(0.94, { duration: 600 }),
+        withTiming(0.94, { duration: 500 }),
         withTiming(0.94, { duration: 800 }),
-        withTiming(0, { duration: 600 }, () => {
+        withTiming(0, { duration: 500 }, () => {
           runOnJS(turnOnIsShow)();
         })
       );
@@ -64,7 +75,8 @@ const Toast = forwardRef(({ message, coloredMessage }, ref) => {
 
   return (
     <Animated.View
-      pointerEvents="box-none"
+      pointerEvents={toast.navigateInfo ? "auto" : "box-none"}
+      onTouchEnd={onPressNavigate}
       style={[styles.container, animatedStyle]}
     >
       <Text style={styles.toastMessage}>{toastMessage}</Text>
