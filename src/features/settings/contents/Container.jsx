@@ -18,6 +18,7 @@ const SettingsContentContainer = () => {
       return next;
     });
   };
+  const description = defaultBrowser ? '링킷에 저장된 링크를 기기의 기본 브라우저 앱으로 열 수 있어요.' : '링킷에 저장된 링크를 링킷 앱 내에서 열 수 있어요.'
 
   return (
     <>
@@ -26,8 +27,7 @@ const SettingsContentContainer = () => {
         list={[
           {
             content: "기본 브라우저 앱으로 링크 열기",
-            description:
-              "링킷 앱 내 저장된 링크 터치 시 기본 브라우저 앱으로 링크 열기 또는 링킷 앱 내에서 링크 열기 등 링크를 여는 방법을 설정할 수 있어요.",
+            description,
             onPress: handleDefaultBrowserToggle,
             selected: defaultBrowser,
           },

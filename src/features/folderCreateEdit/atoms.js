@@ -6,7 +6,7 @@ export const initialCreateEdit = {
   title: "",
   description: "",
   defaultFolder: false,
-  icon: undefined,
+  icon: "Heart",
   color: colorSets[0],
   linkList: [],
 };

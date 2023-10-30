@@ -53,6 +53,7 @@ import {
   X,
   Image,
   SlidersHorizontal,
+  PlusCircle
 } from "phosphor-react-native";
 import { View } from "react-native";
 
@@ -278,6 +279,8 @@ const IconFactory = ({
           style={style}
         />
       );
+    case "PlusCircle":
+      return <PlusCircle color={color} weight={weight} size={size} style={style} />;
     default:
       return <View></View>;
   }
