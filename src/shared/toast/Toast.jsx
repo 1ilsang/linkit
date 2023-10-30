@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   container: {
     width: "90%",
     height: 54,
-    bottom: "10%",
+    bottom: 89,
     marginLeft: "5%",
     paddingLeft: "5%",
     paddingRight: "5%",
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     position: "absolute",
-    backgroundColor: "#241E17E5",
+    backgroundColor: "#241E17",
     borderRadius: "6px",
   },
   text: {

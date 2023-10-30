@@ -31,7 +31,7 @@ const useApp = () => {
               {
                 id: Number(new Date()),
                 title: "기본 폴더",
-                description: "기본 폴더에요.",
+                description: "",
                 defaultFolder: true,
                 icon: "Heart",
                 sort: FOLDER_SORT.DATE,

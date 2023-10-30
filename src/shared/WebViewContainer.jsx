@@ -1,4 +1,4 @@
-import { Button, StyleSheet, Dimensions } from "react-native";
+import { Button, StyleSheet, Dimensions, View } from "react-native";
 import { WebView } from "react-native-webview";
 
 const deviceHeight = Dimensions.get('window').height;
