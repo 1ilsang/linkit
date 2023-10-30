@@ -88,7 +88,7 @@ const Toast = forwardRef(({ message, coloredMessage }, ref) => {
 const styles = StyleSheet.create({
   container: {
     width: "90%",
-    height: 40,
+    height: 54,
     bottom: "10%",
     marginLeft: "5%",
     paddingLeft: "5%",
@@ -98,18 +98,18 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     position: "absolute",
-    backgroundColor: "#44444C",
+    backgroundColor: "#241E17E5",
     borderRadius: "6px",
   },
   text: {
     color: "#F3F3F3",
-    fontWeight: "500",
+    fontWeight: "400",
     fontSize: 17,
     lineHeight: 22,
   },
   coloredText: {
-    color: "#00C258",
-    fontWeight: "500",
+    color: "#2EB1A1",
+    fontWeight: "400",
     fontSize: 17,
     lineHeight: 22,
   },
