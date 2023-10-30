@@ -5,6 +5,8 @@ import HeaderLeftButton from "../../../../shared/navigation/HeaderLeftButton";
 import { MODE } from "../../constants";
 import useFolderTitle from "../../hooks/useTitle";
 import LinkAddButton from "../../../../shared/icons/LinkAddButton";
+import { useAtom } from "jotai";
+import { folderDetailAtom } from "../../atoms";
 
 const FolderTitleContainer = (props) => {
   const {
@@ -20,6 +22,7 @@ const FolderTitleContainer = (props) => {
     handleCancelEditPress,
     handleDeleteLinkPress,
   } = useFolderTitle(props);
+  const [{webView}] = useAtom(folderDetailAtom);
 
   if (mode === MODE.edit) {
     return (
@@ -47,6 +50,8 @@ const FolderTitleContainer = (props) => {
         </View>
       </CommonTitleContainer>
     );
+  } else if(webView.url) {
+    return null;
   }
 
   return (

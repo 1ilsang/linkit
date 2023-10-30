@@ -1,28 +1,36 @@
-import { Button, StyleSheet, Dimensions, View } from "react-native";
+import { Button, StyleSheet, Dimensions, SafeAreaView, View } from "react-native";
 import { WebView } from "react-native-webview";
 
-const deviceHeight = Dimensions.get('window').height;
-const deviceWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+const windowWidth = Dimensions.get('window').width;
 
 const WebViewContainer = ({ uri, onClose }) => {
   if (!uri) return null;
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.header} >
+        <Button title="close" onPress={onClose} />
+      </View>
       <WebView source={{ uri }} style={styles.webview} />
-      <Button title="close" onPress={onClose} />
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    alignItems: 'center',
+    height: windowHeight,
+    justifyContent: 'space-between',
+  },
+  header: {
+    backgroundColor: 'white',
+    width: '100%'
   },
   webview: {
     flex: 1,
-    width: deviceWidth,
-    height: deviceHeight,
+    height: windowHeight,
+    width: windowWidth,
   },
 });
 
