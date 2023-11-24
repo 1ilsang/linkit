@@ -28,7 +28,7 @@ const InfoBox = () => {
         </Pressable>
         <View style={styles.infoList}>
           <Text style={styles.boxText}>앱 버전</Text>
-          <Text>{version}</Text>
+          <Text style={styles.boxDescription}>{version}</Text>
         </View>
       </View>
     </View>
@@ -52,6 +52,9 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     fontSize: 16,
     lineHeight: 23,
+  },
+  boxDescription: {
+    color: "#262424",
   },
   infoContainer: {
     width: "100%",
